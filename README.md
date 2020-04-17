@@ -1,7 +1,7 @@
 # java-unidu-spire
 Spire, Distributed Datalog, HySpirit
 
-This is a clone of the [Pire project] (https://www.is.inf.uni-due.de/projects/java-unidu/) with<br/>
+This is a clone of the [Pire project](https://www.is.inf.uni-due.de/projects/java-unidu/) with<br/>
 * Upgrade patches to JDK 1.8
 * Conversion (incomplete) to a Maven project
 
