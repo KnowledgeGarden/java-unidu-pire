@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!ENTITY % common          SYSTEM "common.dtd">
+%common;
+
+<!ELEMENT staffmember         ( name, image?, homepage?, job,
+                                email, contact?, phone?, room?, 
+                                consultationhours?,misc?
+                              )>
+<!ATTLIST staffmember
+          id                  CDATA #REQUIRED
+          %lang;
+>
+
+<!ELEMENT name                (lastname, firstname, degree?) >
+
+<!ELEMENT lastname            (#PCDATA) >
+
+<!ELEMENT firstname           (#PCDATA) >
+
+<!ELEMENT degree              (#PCDATA) >
+
+<!ELEMENT image               (#PCDATA) >
+
+<!ELEMENT homepage            (#PCDATA) >
+<!ATTLIST homepage
+          domain              (ls6 | iug | none) "ls6"
+>
+
+<!ELEMENT job                 (description?) >
+<!ATTLIST job
+          workinggroup        (issi | ir | iug | issiir | iriug) "ir"
+	  position            (hiwi|wimi | sekr | doz)           #REQUIRED
+          status              (alumni | working)                 "working"
+>
+
+<!ELEMENT description         (#PCDATA) >
+
+<!ELEMENT contact            ( email?, phone?, fax?, room?, consultationhours? ) >
+<!ATTLIST contact
+          location            ( du | do ) "do">
+
+<!ELEMENT email               (#PCDATA) >
+<!ATTLIST email
+          domain              (ls6 | du | inf | none ) "none">
+
+<!ELEMENT phone               (#PCDATA) >
+<!ATTLIST phone
+          location            ( du | do ) "do"
+          prefix              CDATA #IMPLIED >
+
+<!ELEMENT fax                 (#PCDATA) >
+<!ATTLIST fax
+          location            ( du | do ) "do"
+          prefix              CDATA #IMPLIED >
+
+<!ELEMENT room                (#PCDATA) >
+<!ATTLIST room
+          location            ( du | do ) "do" >
+
+<!ELEMENT consultationhours   (#PCDATA) >
+
+<!ELEMENT misc                (langtext+)>

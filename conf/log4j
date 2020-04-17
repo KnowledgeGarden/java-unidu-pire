@@ -1,0 +1,47 @@
+#### LOG4J configuration
+
+
+# Default appender
+
+log4j.appender.CONSOLE=org.apache.log4j.ConsoleAppender
+log4j.appender.CONSOLE.layout=org.apache.log4j.PatternLayout
+log4j.appender.CONSOLE.layout.ConversionPattern=%d %-5p %c - %m%n
+
+log4j.appender.ERR=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.ERR.File=~/workspace/java-unidu/logs/error.log
+log4j.appender.ERR.layout=org.apache.log4j.PatternLayout
+log4j.appender.ERR.layout.ConversionPattern=%d %-5p %c - %m%n
+log4j.appender.ERR.DatePattern='.'yyyy-MM-dd
+log4j.appender.ERR.Threshold=ERROR
+
+
+
+# Custom logger/appender
+
+#log4j.logger.unidu.error=ERROR,ERR
+
+log4j.logger.unidu.db=ERROR,CONSOLE
+log4j.appender.DB=org.apache.log4j.FileAppender
+log4j.appender.DB.File=/tmp/db.log
+log4j.appender.DB.layout=org.apache.log4j.PatternLayout
+log4j.appender.DB.layout.ConversionPattern=%d %-5p %c - %m%n
+
+log4j.logger.unidu.pdatalog.rules=ERROR,CONSOLE
+log4j.appender.PDATALOGRULES=org.apache.log4j.FileAppender
+log4j.appender.PDATALOGRULES.File=/tmp/pdatalog-rules.log
+log4j.appender.PDATALOGRULES.layout=org.apache.log4j.PatternLayout
+log4j.appender.PDATALOGRULES.layout.ConversionPattern=%d %-5p %c - %m%n
+
+log4j.logger.unidu.pdatalog.facts=ERROR,CONSOLE
+log4j.appender.PDATALOGFACTS=org.apache.log4j.FileAppender
+log4j.appender.PDATALOGFACTS.File=/tmp/pdatalog-facts.log
+log4j.appender.PDATALOGFACTS.layout=org.apache.log4j.PatternLayout
+log4j.appender.PDATALOGFACTS.layout.ConversionPattern=%d %-5p %c - %m%n
+
+log4j.logger.unidu.learner=ERROR,CONSOLE
+
+
+#log4j.logger.test=DEBUG,TEST
+#log4j.appender.TEST=org.apache.log4j.net.SocketAppender
+#log4j.appender.TEST.Port=4445
+#log4j.appender.TEST.RemoteHost=localhost

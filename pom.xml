@@ -1,0 +1,294 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>de.unidu.is</groupId>
+    <artifactId>java-unidu-pire</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>java-unidu-pire</name>
+    <developers>
+        <developer>
+            <name>Dipl.-Inform. Henrik Nottelmann</name>
+        </developer>
+        <developer>
+            <name>Prof. Dr.-Ing. Norbert Fuhr</name>
+        </developer>
+    </developers>
+    <organization>
+        <name>Universität Duisburg-Essen</name>
+        <url>https://www.is.inf.uni-due.de/projects/pire/</url>
+    </organization>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <github.global.server>github</github.global.server>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+    </properties>
+    <repositories>
+        <repository>
+            <id>snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+                <configuration>
+                    <includes>
+                        <include>**/*.class</include>
+                    </includes>
+                    <excludedGroups>
+                        org.topicquests.ks.IntegrationTest
+                    </excludedGroups>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.18.1</version>
+                <configuration>
+                    <includes>
+                        <include>**/*.class</include>
+                    </includes>
+                    <groups>
+                        org.topicquests.ks.IntegrationTest
+                    </groups>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>verify</id>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>${settings.localRepository}</classpathPrefix>
+                            <classpathLayoutType>repository</classpathLayoutType>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+           
+ 
+            <plugin>
+		<artifactId>maven-assembly-plugin</artifactId>
+		<configuration>
+	  		<archive>
+	    		<manifest>
+	      		<mainClass>org.topicquests.asr.gramolizer.GramolizerEnvironment</mainClass>
+	    		</manifest>
+	  		</archive>
+	  		<descriptorRefs>
+	    		<descriptorRef>jar-with-dependencies</descriptorRef>
+	  		</descriptorRefs>
+		</configuration>
+		<executions>
+	  		<execution>
+	    	<id>make-assembly</id> <!-- this is used for inheritance merges -->
+	    	<phase>package</phase> <!-- bind to the packaging phase -->
+	    	<goals>
+	      	<goal>single</goal>
+	    	</goals>
+	  		</execution>
+		</executions>
+      </plugin>
+        </plugins>
+    </build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.17</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>checkstyle</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
+    <inceptionYear>2005</inceptionYear>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+    <dependencies>
+		<!-- https://mvnrepository.com/artifact/commons-cli/commons-cli -->
+		<dependency>
+		    <groupId>commons-cli</groupId>
+		    <artifactId>commons-cli</artifactId>
+		    <version>1.4</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-collections/commons-collections -->
+		<dependency>
+		    <groupId>commons-collections</groupId>
+		    <artifactId>commons-collections</artifactId>
+		    <version>3.2.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
+		<dependency>
+		    <groupId>commons-dbcp</groupId>
+		    <artifactId>commons-dbcp</artifactId>
+		    <version>1.4</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-pool2 -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-pool2</artifactId>
+		    <version>2.8.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.wutka/dtdparser -->
+		<dependency>
+		    <groupId>com.wutka</groupId>
+		    <artifactId>dtdparser</artifactId>
+		    <version>1.21</version>
+		</dependency>
+		<dependency>
+         	<groupId>antlr</groupId>
+         	<artifactId>antlr</artifactId>
+         	<scope>system</scope>
+         	<version>1.0</version>
+         	<systemPath>${project.basedir}/lib/antlr.jar</systemPath>
+      	</dependency>
+		<dependency>
+         	<groupId>de.izsoz</groupId>
+         	<artifactId>fiola</artifactId>
+         	<scope>system</scope>
+         	<version>1.0</version>
+         	<systemPath>${project.basedir}/lib/fiola.jar</systemPath>
+      	</dependency>
+      	<dependency>
+		    <groupId>hsqldb</groupId>
+		    <artifactId>hsqldb</artifactId>
+		    <version>1.0</version>
+		    <scope>system</scope>
+         	<systemPath>${project.basedir}/lib/hsqldb.jar</systemPath>
+		</dependency>
+      	
+		<dependency>
+         	<groupId>net.sf</groupId>
+         	<artifactId>snowball</artifactId>
+         	<scope>system</scope>
+         	<version>1.0</version>
+         	<systemPath>${project.basedir}/lib/snowball.jar</systemPath>
+      	</dependency>
+		<dependency>
+         	<groupId>resources</groupId>
+         	<artifactId>resources</artifactId>
+         	<scope>system</scope>
+         	<version>1.0</version>
+         	<systemPath>${project.basedir}/lib/resources.jar</systemPath>
+      	</dependency>
+		<!-- https://mvnrepository.com/artifact/net.sf.jtidy/jtidy -->
+		<dependency>
+		    <groupId>net.sf.jtidy</groupId>
+		    <artifactId>jtidy</artifactId>
+		    <version>r938</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/junit/junit-dep -->
+		<dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit-dep</artifactId>
+		    <version>4.10</version>
+		    <scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
+		<dependency>
+		    <groupId>log4j</groupId>
+		    <artifactId>log4j</artifactId>
+		    <version>1.2.17</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>8.0.19</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/xalan/xalan -->
+		<dependency>
+		    <groupId>xalan</groupId>
+		    <artifactId>xalan</artifactId>
+		    <version>2.7.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/xerces/xerces -->
+		<dependency>
+		    <groupId>xerces</groupId>
+		    <artifactId>xerces</artifactId>
+		    <version>2.4.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/xmlrpc/xmlrpc -->
+		<dependency>
+		    <groupId>xmlrpc</groupId>
+		    <artifactId>xmlrpc</artifactId>
+		    <version>2.0</version>
+		</dependency>
+		
+		
+		
+		
+    </dependencies>
+</project>

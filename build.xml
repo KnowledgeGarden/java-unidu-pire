@@ -1,0 +1,184 @@
+<project name="unidu" default="compile" >
+ 
+  <property name="unidu.src" value="${basedir}/src"/>
+  <property name="unidu.destdir" value="${basedir}/classes"/>
+  <property name="unidu.jarhome" value="${basedir}/lib"/>
+  <property name="unidu.dist" value="${basedir}/dist"/>
+  <property name="unidu.pubdist" value="${basedir}/pubdist"/>
+
+  <!-- Ignoriere den $CLASSPATH -->
+  <property name="build.sysclasspath" value="ignore"/>
+  
+
+
+  <path id="project.class.path">
+    <pathelement path="${unidu.destdir}"/>
+    <fileset dir="${unidu.jarhome}">
+      <include name="*.jar"/>
+      <include name="*.zip"/>
+    </fileset>
+    <fileset dir="../java-add">
+      <include name="**/*.jar"/>
+    </fileset>
+  </path> 
+
+    
+  <!-- Initialize and check sources out first time -->
+  <target name="init"> 
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${unidu.destdir}"/>
+  </target>
+
+  <!-- Throw away everything -->
+  <target name="clean"> 
+    <!-- Delete the ${dest} and ${unidu.dist} directory tree -->
+    <delete dir="${unidu.destdir}"/>
+  </target>
+
+  <!-- create files via antlr -->
+  <target name="antlr" depends="init">
+    <property name="pdatalog.dir" value="src/de/unidu/is/pdatalog/parser"/>
+    <java classname="antlr.Tool" fork="yes">
+      <classpath>
+	<pathelement path="../java-add/antlr.jar"/>
+      </classpath>
+      <arg value="-o"/>
+      <arg value="${pdatalog.dir}"/>
+      <arg value="${pdatalog.dir}/pdatalog.g"/>
+    </java>
+  </target>
+
+  <!-- compile everything to lib -->
+  <target name="compile" depends="init,antlr">
+    <javac srcdir="${unidu.src}" destdir="${unidu.destdir}" verbose="false" debug="true">
+      <classpath refid="project.class.path"/>
+    </javac>
+  </target>
+  
+  
+  <!-- create a JAR file and put it to dist -->
+  <target name="jar" depends="compile">
+    <jar destfile="${unidu.dist}/unidu.jar" basedir="${unidu.destdir}" compress="true" defaultexcludes="on">
+      <include name="de/unidu/is/**"/>
+      <fileset dir="${basedir}" includes="conf/**"/>
+    </jar>
+  </target>
+  
+  <!-- creates a dist directory with an unidu.jar and all required java-add JARs -->
+  <target name="dist">
+    <mkdir dir="${unidu.dist}"/>
+   	<copy todir="${unidu.dist}">
+      <fileset dir="${basedir}/../java-add/">
+        <include name="*.jar"/>
+      </fileset>
+      <fileset dir="bin">
+        <include name="*"/>
+      </fileset>
+    </copy>
+	<chmod dir="${unidu.dist}" perm="a+rx" includes="*.sh"/>
+  	<property name="jar" value="${unidu.dist}/unidu.jar"/>
+    <delete  file="${jar}"/>
+    <jar destfile="${jar}" basedir="${unidu.destdir}" compress="true" defaultexcludes="on">
+      <include name="de/unidu/is/**"/>
+      <fileset dir="${basedir}" includes="conf/**"/>
+   	  <manifest >
+        <attribute name="Class-Path" value="antlr.jar commons-cli-1.0.jar commons-collections-3.1.jar commons-dbcp-1.2.1.jar commons-pool-1.2.jar dtdparser121.jar hsqldb.jar jtidy-r8-SNAPSHOT.jar junit.jar log4j-1.2.8.jar mysql-connector-java-3.0.16-ga-bin.jar xerces.jar xalan.jar"/>
+   	  </manifest>  
+    </jar>
+  </target>
+  
+	  <!-- creates the public distribution -->
+	  <target name="pubdist" depends="javadoc">
+	  	<buildnumber/>
+	  	<tstamp>
+	      <format property="jar.time" pattern="yyyy-MM-dd, HH:mm z"/>
+		</tstamp>
+	    <mkdir dir="${unidu.pubdist}"/>
+	  	<property name="ver" value="${DSTAMP}"/>
+	    <property name="pubdist" value="${unidu.pubdist}/dist-${ver}"/>
+	  	<mkdir dir="${pubdist}"/>
+	  		
+	   	<copy todir="${pubdist}">
+	      <fileset dir="${basedir}/../java-add/">
+	        <include name="*.jar"/>
+	      </fileset>
+		      <fileset dir="lib">
+		        <include name="fiola.jar"/>
+		        <include name="resources.jar"/>
+		        <include name="snowball.jar"/>
+		      </fileset>
+	      <fileset dir="bin">
+	        <include name="*"/>
+	      </fileset>
+	    </copy>	   		
+		<chmod dir="${pubdist}" perm="a+rx" includes="*.sh"/>
+
+	  	<property name="jar" value="${pubdist}/unidu-${ver}.jar"/>
+	    <delete  file="${jar}"/>
+	    <jar destfile="${jar}" basedir="${unidu.destdir}" compress="true" defaultexcludes="on">
+	      <include name="de/unidu/is/**"/>
+	      <fileset dir="${basedir}" includes="conf/**"/>
+	   	  <manifest >
+	        <attribute name="Class-Path" value="antlr.jar commons-cli-1.0.jar commons-collections-3.1.jar commons-dbcp-1.2.1.jar commons-pool-1.2.jar dtdparser121.jar hsqldb.jar jtidy-r8-SNAPSHOT.jar junit.jar log4j-1.2.8.jar mysql-connector-java-3.0.16-ga-bin.jar xerces.jar xalan.jar"/>
+			<attribute name="Build-Time" value="${jar.time}"/>
+			<attribute name="Build-Number" value="${build.number}"/>
+	   	  </manifest>  
+	    </jar>
+
+	  	<property name="srcjar" value="${pubdist}/unidu-${ver}-src.jar"/>
+	    <delete  file="${srcjar}"/>
+	    <jar destfile="${srcjar}" basedir="${unidu.src}" compress="true" defaultexcludes="on">
+	      <include name="de/unidu/is/**"/>
+	      <fileset dir="${basedir}" includes="conf/**"/>
+	      <fileset dir="${basedir}" includes="build.xml"/>
+	   	  <manifest >
+			<attribute name="Build-Time" value="${jar.time}"/>
+			<attribute name="Build-Number" value="${build.number}"/>
+	   	  </manifest>  
+	    </jar>
+
+	  	<property name="testjar" value="${pubdist}/unidu-${ver}-test.jar"/>
+	    <delete  file="${testjar}"/>
+	    <jar destfile="${testjar}" basedir="${unidu.src}" compress="true" defaultexcludes="on">
+	      <include name="test/de/unidu/is/**"/>
+	      <fileset dir="${basedir}" includes="conf/**"/>
+	      <fileset dir="${basedir}" includes="build.xml"/>
+	   	  <manifest >
+			<attribute name="Build-Time" value="${jar.time}"/>
+			<attribute name="Build-Number" value="${build.number}"/>
+	   	  </manifest>  
+	    </jar>
+
+	  	<property name="docjar" value="${pubdist}/unidu-${ver}-doc.jar"/>
+	    <delete  file="${docjar}"/>
+	    <jar destfile="${docjar}" basedir="." compress="true" defaultexcludes="on">
+	      <include name="api/**"/>
+	   	  <manifest >
+			<attribute name="Build-Time" value="${jar.time}"/>
+			<attribute name="Build-Number" value="${build.number}"/>
+	   	  </manifest>  
+	    </jar>
+
+	  </target>
+	  
+  <!-- create javadocs -->
+  <target name="javadoc">
+    <mkdir dir="api"/>
+    <javadoc destdir="api" windowtitle="java-unidu" additionalparam="-breakiterator" use="on" verbose="no" doctitle="&lt;h1&gt;java-unidu&lt;/h1&gt;">
+        <classpath refid="project.class.path"/>
+        <packageset dir="src">
+	      <include name="de/unidu/is/**" />
+    	</packageset>
+    </javadoc>
+  </target>
+  
+	  <!-- deploy for daffodil -->
+	  <target name="deploy4daffodil" depends="dist">
+		<exec executable="/usr/bin/rsync">
+			<arg value="-av"/>
+			<arg value="dist/unidu.jar"/>
+			<arg  value="../daffodil/Lib"/>
+		</exec>
+	  </target>
+	  
+</project>

@@ -1,0 +1,5 @@
+# configuration
+gnuplot.bin=/usr/bin/gnuplot
+eps2pdf.bin=/usr/sw/perl/5.6.1/bin/eps2pdf
+tmp.path=/tmp
+de.unidu.is.learning.Learner=de.unidu.is.gnuplot.GnuplotLearner

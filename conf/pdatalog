@@ -1,0 +1,7 @@
+pdatalog.edbcomputed=de.unidu.is.pdatalog.StartsWithRelation
+pdatalog.edbcomputed=de.unidu.is.pdatalog.EqualsRelation
+pdatalog.edbcomputed=de.unidu.is.pdatalog.LessEqualsRelation
+pdatalog.edbcomputed=de.unidu.is.pdatalog.LessThanRelation
+pdatalog.edbcomputed=de.unidu.is.pdatalog.VagueLessThanRelation
+pdatalog.edbcomputed=de.unidu.is.pdatalog.GreaterEqualsRelation
+pdatalog.edbcomputed=de.unidu.is.pdatalog.GreaterThanRelation

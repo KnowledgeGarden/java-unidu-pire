@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<hyrex
+  directory="/services/www/htdocs/bib/index"
+  base="DB"
+  class="bibdb"
+  dtd="/services/www/xml/dtd/bibdb.dtd">
+  
+  <access classname="HyREX::HyPath::Document::Access::Find">
+    <parameter name="expression"  value="$_[0] =~ /\/.*xml/"/>
+    <parameter name="directories" value="/services/www/htdocs/bib/xml"/>
+  </access>
+
+
+  <summary>
+    <xslfile name="/services/www/htdocs/bib/through.xsl"/>
+  </summary>
+  
+  <attribute name="title">
+    <datatype classname="HyREX::HyPath::Datatype::Text::English">
+      <parameter name="indexfilter" value="latin1_tr"/>
+      <parameter name="indexfilter" value="latin1_lc"/>
+      <parameter name="indexfilter" value="split2"/>
+      <parameter name="indexfilter" value="stop"/>
+      <parameter name="filter"      value="latin1_tr"/>
+      <parameter name="filter"      value="latin1_lc"/>
+      <parameter name="filter"      value="split2"/>
+      <parameter name="filter"      value="stop"/>
+      <query query="/doc/title/@value"/>
+      <predicate name="stemen"/>
+    </datatype>
+  </attribute>
+
+  <attribute name="text">
+    <datatype classname="HyREX::HyPath::Datatype::Text::English">
+      <parameter name="indexfilter" value="latin1_tr"/>
+      <parameter name="indexfilter" value="latin1_lc"/>
+      <parameter name="indexfilter" value="split2"/>
+      <parameter name="indexfilter" value="stop"/>
+      <parameter name="filter"      value="latin1_tr"/>
+      <parameter name="filter"      value="latin1_lc"/>
+      <parameter name="filter"      value="split2"/>
+      <parameter name="filter"      value="stop"/>
+      <query query="/doc/text"/>
+      <predicate name="stemen"/>
+    </datatype>
+  </attribute>
+
+
+ <attribute name="author">
+    <datatype classname="HyREX::HyPath::Datatype::Text::English">
+      <parameter name="indexfilter" value="latin1_tr"/>
+      <parameter name="indexfilter" value="latin1_lc"/>
+      <parameter name="indexfilter" value="split2"/>
+      <parameter name="indexfilter" value="stop"/>
+      <parameter name="filter"      value="latin1_tr"/>
+      <parameter name="filter"      value="latin1_lc"/>
+      <parameter name="filter"      value="split2"/>
+      <parameter name="filter"      value="stop"/>
+      <query query="/doc/metadata/author/text()"/>
+      <predicate name="stemen"/>
+    </datatype>
+  </attribute>
+
+
+ <attribute name="year">
+    <datatype classname="HyREX::HyPath::Datatype::Text::English">
+      <query query="/doc/metadata/py/text()"/>
+    </datatype>
+  </attribute>
+
+  <xstructure classname="HyREX::HyPath::Structure::Path"/>
+  <xstructure classname="HyREX::HyPath::Structure::NoStruct"/>
+
+</hyrex>
