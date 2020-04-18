@@ -92,13 +92,13 @@ public class BasicToolTest extends TestCase implements EventReciever {
 	}
    /**
     * Testet, ob der ToolView etwas anzeigt, wenn man ein neues List Modell 
-    * über den Dispatcher broadcastet. Das BasicTool lauscht auf solche Events 
-    * und wenn einer eintrifft, öffnet es seinen View und reicht das LIst Modell 
+    * ?ber den Dispatcher broadcastet. Das BasicTool lauscht auf solche Events 
+    * und wenn einer eintrifft, ?ffnet es seinen View und reicht das LIst Modell 
     * daran weiter. Man kann noch dahingehend verbessern, dass man die 
-    * Weitergabe an den View auch über Events und loses koppeln 
-    * (etwa über allgemeine PropertyChanged Events) weitergibt. 
-    * Durch die Enge Kopplung waren public setters (setModel) für den 
-    * View und das eingebettete Panel nötig. 
+    * Weitergabe an den View auch ?ber Events und loses koppeln 
+    * (etwa ?ber allgemeine PropertyChanged Events) weitergibt. 
+    * Durch die Enge Kopplung waren public setters (setModel) f?r den 
+    * View und das eingebettete Panel n?tig. 
     *
     */
 	public void testToolDisplays() {

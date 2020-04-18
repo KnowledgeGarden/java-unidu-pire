@@ -103,19 +103,19 @@ public class HTMLFilter extends AbstractSingleItemFilter {
 							if (text.equals("amp"))
 								replace = "&";
 							if (text.equals("auml"))
-								replace = "ä";
+								replace = "?";
 							if (text.equals("ouml"))
-								replace = "ö";
+								replace = "?";
 							if (text.equals("uuml"))
-								replace = "ü";
+								replace = "?";
 							if (text.equals("Auml"))
-								replace = "Ä";
+								replace = "?";
 							if (text.equals("Ouml"))
-								replace = "Ö";
+								replace = "?";
 							if (text.equals("Uuml"))
-								replace = "Ü";
+								replace = "?";
 							if (text.equals("szlig"))
-								replace = "ß";
+								replace = "?";
 							if (text.equals("#10"))
 								replace = "\n";
 							if (text.equals("#13"))

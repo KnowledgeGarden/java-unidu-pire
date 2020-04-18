@@ -24,7 +24,7 @@ import de.izsoz.fiola.wob.desktop.Tool;
 /**
  * A Basic view to show the structure. Clone this for own Classes.
  * Creation date: (20.09.2000 16:03:21)
- * @author: André Schaefer
+ * @author: Andr? Schaefer
  * @version $Revision: 1.7 $, $Date: 2005/02/21 17:29:19 $
  */
 public class BasicView extends InternalView {

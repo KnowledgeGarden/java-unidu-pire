@@ -14,8 +14,8 @@
  */
 
 // $Id: SubSet.java,v 1.4 2005/02/28 22:27:55 nottelma Exp $
-// Achtung: Die Kommentare sind teilweise veraltet, für die Korrektheit wird
-// daher keine "Garantie" übernommen!
+// Achtung: Die Kommentare sind teilweise veraltet, f?r die Korrektheit wird
+// daher keine "Garantie" ?bernommen!
 // Bei Fragen oder Bugs bitte Email an nottelma@ls6.cs.uni-dortmund.de.
 
 package de.unidu.is.pdatalog.ds;
