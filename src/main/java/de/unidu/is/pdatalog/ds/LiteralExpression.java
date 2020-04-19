@@ -13,7 +13,7 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: LiteralExpression.java,v 1.6 2005/02/28 22:27:55 nottelma Exp $
 package de.unidu.is.pdatalog.ds;
 
@@ -22,40 +22,40 @@ import de.unidu.is.expressions.AbstractExpression;
 
 /**
  * An expression holding a literal, used for aggregation operators.
- * 
+ *
  * @author Henrik Nottelmann
  * @version $Revision: 1.6 $, $Date: 2005/02/28 22:27:55 $
  */
 public class LiteralExpression extends AbstractExpression {
 
-	/**
-	 * The literal.
-	 */
-	protected Literal literal;
+    /**
+     * The literal.
+     */
+    protected final Literal literal;
 
-	/**
-	 * Creates a new object.
-	 *
-	 * @param literal literal to be used
-	 */
-	public LiteralExpression(Literal literal) {
-		this.literal = literal;
-	}
+    /**
+     * Creates a new object.
+     *
+     * @param literal literal to be used
+     */
+    public LiteralExpression(Literal literal) {
+        this.literal = literal;
+    }
 
-	/**
-	 * Returns the literal.
-	 * 
-	 * @return literal
-	 */
-	public Literal getLiteral() {
-		return literal;
-	}
+    /**
+     * Returns the literal.
+     *
+     * @return literal
+     */
+    public Literal getLiteral() {
+        return literal;
+    }
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	public String toString() {
-		return "{" + literal + "}";
-	}
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    public String toString() {
+        return "{" + literal + "}";
+    }
 
 }

@@ -20,22 +20,20 @@ import de.unidu.is.sql.DBColumnExpression;
 
 /**
  * An expression representing an argument column in a relational table.
- * 
+ *
  * @author Henrik Nottelmann
  * @version $Revision: 1.5 $, $Date: 2005/02/28 22:27:55 $
  */
 public class DBColExpression extends DBColumnExpression {
 
-	/**
-	 * Creates a new object.
-	 * 
-	 * @param table
-	 *                   table name
-	 * @param col
-	 *                   column name
-	 */
-	public DBColExpression(String table, int col) {
-		super(table, "arg" + col);
-	}
+    /**
+     * Creates a new object.
+     *
+     * @param table table name
+     * @param col   column name
+     */
+    public DBColExpression(String table, int col) {
+        super(table, "arg" + col);
+    }
 
 }

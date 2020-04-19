@@ -16,45 +16,40 @@
 // $Id: Example.java,v 1.7 2005/03/01 09:21:33 nottelma Exp $
 package de.unidu.is.retrieval.pire.examples;
 
-import de.unidu.is.retrieval.DocumentMismatchException;
-import de.unidu.is.retrieval.DocumentNotFoundException;
-import de.unidu.is.retrieval.DocumentNotStorableException;
-import de.unidu.is.retrieval.IR;
-import de.unidu.is.retrieval.IndexException;
-import de.unidu.is.retrieval.UnsupportedQueryException;
+import de.unidu.is.retrieval.*;
 import de.unidu.is.util.StopWatch;
 
 /**
  * A simple example for the PIRE IR interface.
- * 
+ *
  * @author Henrik Nottelmann
  * @version $Revision: 1.7 $, $Date: 2005/03/01 09:21:33 $
  */
 public class Example {
 
-	public static void main(String[] args) throws UnsupportedQueryException,
-			DocumentNotFoundException, DocumentNotStorableException,
-			IndexException, DocumentMismatchException {
-		// init index
-		IR ir = PIREExampleUtils.createIR();
-		PIREExampleUtils.indexXMLDocuments(ir);
+    public static void main(String[] args) throws UnsupportedQueryException,
+            DocumentNotFoundException, DocumentNotStorableException,
+            IndexException, DocumentMismatchException {
+        // init index
+        IR ir = PIREExampleUtils.createIR();
+        PIREExampleUtils.indexXMLDocuments(ir);
 
-		// test weighted sum query
-		StopWatch watch = new StopWatch();
-		watch.start();
-		PIREExampleUtils.retrieveAndPrint(ir, PIREExampleUtils.getWSumQuery());
-		watch.stop();
-		System.out.println(watch);
+        // test weighted sum query
+        StopWatch watch = new StopWatch();
+        watch.start();
+        PIREExampleUtils.retrieveAndPrint(ir, PIREExampleUtils.getWSumQuery());
+        watch.stop();
+        System.out.println(watch);
 
-		// test Boolean-style query
-		watch.reset();
-		watch.start();
-		PIREExampleUtils.retrieveAndPrint(ir, PIREExampleUtils.getBooleanQuery());
-		watch.stop();
-		System.out.println(watch);
+        // test Boolean-style query
+        watch.reset();
+        watch.start();
+        PIREExampleUtils.retrieveAndPrint(ir, PIREExampleUtils.getBooleanQuery());
+        watch.stop();
+        System.out.println(watch);
 
-		ir.close();
-		System.exit(0);
-	}
+        ir.close();
+        System.exit(0);
+    }
 
 }

@@ -13,7 +13,7 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: URLISOReader.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
 package de.unidu.is.util;
 
@@ -23,23 +23,23 @@ import java.net.URL;
 
 /**
  * A URL reader using using the ISO-8859-1 encoding.
- * 
+ *
  * @author Henrik Nottelmann
- * @since 2004-01-30
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:29 $
+ * @since 2004-01-30
  */
 public class URLISOReader extends ISOReader {
 
-	/**
-	 * Creates a new reader for the given URL using the ISO-8859-1 encoding.
-	 * 
-	 * @param url URL
-	 * @throws java.io.UnsupportedEncodingException
-	 * @throws java.io.IOException
-	 */
-	public URLISOReader(URL url)
-		throws UnsupportedEncodingException, IOException {
-		super(url.openStream());
-	}
+    /**
+     * Creates a new reader for the given URL using the ISO-8859-1 encoding.
+     *
+     * @param url URL
+     * @throws java.io.UnsupportedEncodingException
+     * @throws java.io.IOException
+     */
+    public URLISOReader(URL url)
+            throws UnsupportedEncodingException, IOException {
+        super(url.openStream());
+    }
 
 }

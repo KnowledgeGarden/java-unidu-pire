@@ -23,176 +23,168 @@ import java.util.TimeZone;
 
 /**
  * A simple stop watch.
- * 
+ *
  * @author Henrik Nottelmann
- * @since 2003-10-15
  * @version $Revision: 1.7 $, $Date: 2005/03/02 09:20:51 $
+ * @since 2003-10-15
  */
 public class StopWatch {
 
-	/**
-	 * Name of this stop watch.
-	 *  
-	 */
-	private String name;
+    /**
+     * Name of this stop watch.
+     */
+    private final String name;
+    /**
+     * Formatter for time difference.
+     */
+    private final SimpleDateFormat sdf;
+    /**
+     * Formatter for time difference in minutes.
+     */
+    private final SimpleDateFormat minuteSDF;
+    private final DecimalFormat form2 = new DecimalFormat("00");
+    private final DecimalFormat form4 = new DecimalFormat("0000");
+    /**
+     * Time difference (in millis) betweens starts and stops.
+     */
+    private long diffs;
+    /**
+     * Time (in millis) of the last start event.
+     */
+    private long start;
+    /**
+     * Number of start event.
+     */
+    private int nums;
 
-	/**
-	 * Time difference (in millis) betweens starts and stops.
-	 */
-	private long diffs;
+    /**
+     * Creates a new stop watch.
+     */
+    public StopWatch() {
+        this("StopWatch");
+    }
 
-	/**
-	 * Time (in millis) of the last start event.
-	 */
-	private long start;
+    /**
+     * Creates a new stop watch.
+     *
+     * @param name name of the stop watch
+     */
+    public StopWatch(String name) {
+        this.name = name;
+        sdf = new SimpleDateFormat("DD 'days', HH:mm:ss,SSS");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        minuteSDF = new SimpleDateFormat("mm:ss,SSS");
+        minuteSDF.setTimeZone(TimeZone.getTimeZone("UTC"));
+        reset();
+    }
 
-	/**
-	 * Number of start event.
-	 */
-	private int nums;
+    /**
+     * Starts the watch.
+     */
+    public void start() {
+        start = System.currentTimeMillis();
+        nums++;
+    }
 
-	/**
-	 * Formatter for time difference.
-	 */
-	private SimpleDateFormat sdf;
+    /**
+     * Stops the watch.
+     */
+    public void stop() {
+        long end = System.currentTimeMillis();
+        diffs += (end - start);
+    }
 
-	/**
-	 * Formatter for time difference in minutes.
-	 */
-	private SimpleDateFormat minuteSDF;
+    /**
+     * Resets the watch. The time difference, the start time and the number of
+     * start events are set to zero.
+     */
+    public void reset() {
+        diffs = 0;
+        start = 0;
+        nums = 0;
+    }
 
-	private DecimalFormat form2 = new DecimalFormat("00");
-	private DecimalFormat form4 = new DecimalFormat("0000");
+    /**
+     * Returns the total (accumulated) time difference in millis.
+     *
+     * @return total time difference in millis
+     */
+    public long getTotalMillis() {
+        return diffs / nums;
+    }
 
-	/**
-	 * Creates a new stop watch.
-	 */
-	public StopWatch() {
-		this("StopWatch");
-	}
+    /**
+     * Returns the average time difference in millis.
+     *
+     * @return average time difference in millis
+     */
+    public long getAverageMillis() {
+        return diffs / nums;
+    }
 
-	/**
-	 * Creates a new stop watch.
-	 * 
-	 * @param name
-	 *                   name of the stop watch
-	 */
-	public StopWatch(String name) {
-		this.name = name;
-		sdf = new SimpleDateFormat("DD 'days', HH:mm:ss,SSS");
-		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-		minuteSDF = new SimpleDateFormat("mm:ss,SSS");
-		minuteSDF.setTimeZone(TimeZone.getTimeZone("UTC"));
-		reset();
-	}
+    /**
+     * Returns a string representation of the time difference (in minutes).
+     *
+     * @return string representation of the time difference (in minutes)
+     */
+    public String toString() {
+        long rest = diffs;
+        int millis = (int) rest % 1000;
+        rest /= 1000;
+        int secs = (int) rest % 60;
+        rest /= 60;
+        int minutes = (int) rest % 60;
+        rest /= 60;
+        int hours = (int) rest % 24;
+        rest /= 24;
+        int days = (int) rest;
+        return name + ": " + days + " days, " + hours + " hours, "
+                + form2.format(minutes) + ":" + form2.format(secs) + ","
+                + form4.format(millis) + " min";
+    }
 
-	/**
-	 * Starts the watch.
-	 */
-	public void start() {
-		start = System.currentTimeMillis();
-		nums++;
-	}
+    /**
+     * Returns a string representation of the time difference.
+     *
+     * @return string representation of the time difference
+     * @deprecated Use toString() instead
+     */
+    public String asComplete() {
+        return name + ": " + sdf.format(new Date(diffs)) + " min";
+    }
 
-	/**
-	 * Stops the watch.
-	 */
-	public void stop() {
-		long end = System.currentTimeMillis();
-		diffs += (end - start);
-	}
+    /**
+     * Returns a string representation of the time difference (in minutes).
+     *
+     * @return string representation of the time difference (in minutes)
+     */
+    public String asMins() {
+        long rest = diffs;
+        int millis = (int) rest % 1000;
+        rest /= 1000;
+        int secs = (int) rest % 60;
+        rest /= 60;
+        int minutes = (int) rest % 60;
+        return name + ": " + minutes + ":" + form2.format(secs) + ","
+                + form4.format(millis) + " min";
+    }
 
-	/**
-	 * Resets the watch. The time difference, the start time and the number of
-	 * start events are set to zero.
-	 */
-	public void reset() {
-		diffs = 0;
-		start = 0;
-		nums = 0;
-	}
+    /**
+     * Returns a string representation of the time difference (in seconds).
+     *
+     * @return string representation of the time difference (in seconds)
+     */
+    public String asSecs() {
+        return name + ": " + (diffs / 1000.0) + " sec";
+    }
 
-	/**
-	 * Returns the total (accumulated) time difference in millis.
-	 * 
-	 * @return total time difference in millis
-	 */
-	public long getTotalMillis() {
-		return diffs / nums;
-	}
-
-	/**
-	 * Returns the average time difference in millis.
-	 * 
-	 * @return average time difference in millis
-	 */
-	public long getAverageMillis() {
-		return diffs / nums;
-	}
-
-	/**
-	 * Returns a string representation of the time difference (in minutes).
-	 * 
-	 * @return string representation of the time difference (in minutes)
-	 */
-	public String toString() {
-		long rest = diffs;
-		int millis = (int) rest % 1000;
-		rest /= 1000;
-		int secs = (int) rest % 60;
-		rest /= 60;
-		int minutes = (int) rest % 60;
-		rest /= 60;
-		int hours = (int) rest % 24;
-		rest /= 24;
-		int days = (int) rest;
-		return name + ": " + days + " days, " + hours + " hours, "
-				+ form2.format(minutes) + ":" + form2.format(secs) + ","
-				+ form4.format(millis) + " min";
-	}
-
-	/**
-	 * Returns a string representation of the time difference.
-	 * 
-	 * @return string representation of the time difference
-	 * @deprecated Use toString() instead
-	 */
-	public String asComplete() {
-		return name + ": " + sdf.format(new Date(diffs)) + " min";
-	}
-
-	/**
-	 * Returns a string representation of the time difference (in minutes).
-	 * 
-	 * @return string representation of the time difference (in minutes)
-	 */
-	public String asMins() {
-		long rest = diffs;
-		int millis = (int) rest % 1000;
-		rest /= 1000;
-		int secs = (int) rest % 60;
-		rest /= 60;
-		int minutes = (int) rest % 60;
-		return name + ": " + minutes + ":" + form2.format(secs) + ","
-				+ form4.format(millis) + " min";
-	}
-
-	/**
-	 * Returns a string representation of the time difference (in seconds).
-	 * 
-	 * @return string representation of the time difference (in seconds)
-	 */
-	public String asSecs() {
-		return name + ": " + (diffs / 1000.0) + " sec";
-	}
-
-	/**
-	 * Returns a string representation of the time difference (in millis).
-	 * 
-	 * @return string representation of the time difference (in millis)
-	 */
-	public String asMillis() {
-		return name + ": " + diffs + " msec";
-	}
+    /**
+     * Returns a string representation of the time difference (in millis).
+     *
+     * @return string representation of the time difference (in millis)
+     */
+    public String asMillis() {
+        return name + ": " + diffs + " msec";
+    }
 
 }

@@ -23,86 +23,86 @@ import java.io.PrintWriter;
  * An abtract implementation of the interface for connecting to the HySpirit
  * inference engine for pDatalog built by our group (the version implemented in
  * the Beta object-oriented programming language).<p>
- * 
+ * <p>
  * Sub-classes have to set up the reader and the writer.
- * 
+ *
  * @author Henrik Nottelmann
  * @version $Revision: 1.8 $, $Date: 2005/03/14 17:33:13 $
  */
 
 public abstract class HySpiritAbstractClient implements HySpirit {
 
-	/**
-	 * Reader from HySpirit, has to be initialised in a sub-class.
-	 */
-	protected BufferedReader in;
+    /**
+     * Reader from HySpirit, has to be initialised in a sub-class.
+     */
+    protected BufferedReader in;
 
-	/**
-	 * Writer to HySpirit, has to be initialised in a sub-class.
-	 */
-	protected PrintWriter out;
+    /**
+     * Writer to HySpirit, has to be initialised in a sub-class.
+     */
+    protected PrintWriter out;
 
-	/**
-	 * Sends text (facts, rules, queries etc.) to HySpirit, and receives the result.
-	 * 
-	 * @param text text to be sent to HySpirit
-	 * @return HySpirit answer
-	 */
-	public String send(String text) {
-		try {
-			if (!text.endsWith("\n"))
-				text += "\n";
-			text += "~t BREAK\n";
-			out.print(text);
-			out.flush();
-			String ret = "";
-			String currentLine;
-			while (true) {
-				currentLine = getLine();
-				if (currentLine.equals("(* BREAK *)\n"))
-					break;
-				ret += currentLine;
-			}
-			return ret;
-		} catch (Exception ex) {
-			de.unidu.is.util.Log.error(ex);
-		}
-		return null;
-	}
+    /**
+     * Sends text (facts, rules, queries etc.) to HySpirit, and receives the result.
+     *
+     * @param text text to be sent to HySpirit
+     * @return HySpirit answer
+     */
+    public String send(String text) {
+        try {
+            if (!text.endsWith("\n"))
+                text += "\n";
+            text += "~t BREAK\n";
+            out.print(text);
+            out.flush();
+            StringBuilder ret = new StringBuilder();
+            String currentLine;
+            while (true) {
+                currentLine = getLine();
+                if (currentLine.equals("(* BREAK *)\n"))
+                    break;
+                ret.append(currentLine);
+            }
+            return ret.toString();
+        } catch (Exception ex) {
+            de.unidu.is.util.Log.error(ex);
+        }
+        return null;
+    }
 
-	/**
-	 * Reads in a line, and returns it.
-	 * 
-	 * @return line from HySpirit
-	 */
-	protected String getLine() {
-		String ret = "";
-		try {
-			while (true) {
-				int ci = in.read();
-				if (ci == -1)
-					continue;
-				char c = (char) ci;
-				ret += c;
-				if (ci == 10)
-					break;
-			}
-		} catch (Exception ex) {
-			de.unidu.is.util.Log.error(ex);
-		}
-		return ret;
-	}
+    /**
+     * Reads in a line, and returns it.
+     *
+     * @return line from HySpirit
+     */
+    protected String getLine() {
+        StringBuilder ret = new StringBuilder();
+        try {
+            while (true) {
+                int ci = in.read();
+                if (ci == -1)
+                    continue;
+                char c = (char) ci;
+                ret.append(c);
+                if (ci == 10)
+                    break;
+            }
+        } catch (Exception ex) {
+            de.unidu.is.util.Log.error(ex);
+        }
+        return ret.toString();
+    }
 
-	/**
-	 * Closes tje client.
-	 */
-	public void close() {
-		try {
-			in.close();
-			out.close();
-		} catch (Exception ex) {
-			de.unidu.is.util.Log.error(ex);
-		}
-	}
+    /**
+     * Closes tje client.
+     */
+    public void close() {
+        try {
+            in.close();
+            out.close();
+        } catch (Exception ex) {
+            de.unidu.is.util.Log.error(ex);
+        }
+    }
 
 }

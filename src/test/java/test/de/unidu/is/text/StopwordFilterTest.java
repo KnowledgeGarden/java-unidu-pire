@@ -13,51 +13,52 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: StopwordFilterTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
 package test.de.unidu.is.text;
 
-import junit.framework.TestCase;
 import de.unidu.is.text.StopwordFilter;
+import junit.framework.TestCase;
 
 /**
  * @author nottelma
- * @since Jul 8, 2003
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:29 $
+ * @since Jul 8, 2003
  */
 public class StopwordFilterTest extends TestCase {
 
-	private StopwordFilter filter;
-	
-	/**
-	 * Constructor for SoundexFilterTest.
-	 * @param arg0
-	 */
-	public StopwordFilterTest(String arg0) {
-		super(arg0);
-	}
+    private StopwordFilter filter;
 
-	/*
-	 * @see TestCase#setUp()
-	 */
-	protected void setUp() throws Exception {
-		filter = new StopwordFilter(null);
-	}
+    /**
+     * Constructor for SoundexFilterTest.
+     *
+     * @param arg0
+     */
+    public StopwordFilterTest(String arg0) {
+        super(arg0);
+    }
 
-	public void testRunThe() {
-		assertNull(filter.run("the"));
-	}
+    /*
+     * @see TestCase#setUp()
+     */
+    protected void setUp() {
+        filter = new StopwordFilter(null);
+    }
 
-	public void testRunUppercase() {
-		assertEquals(filter.run("The"),"The");
-	}
+    public void testRunThe() {
+        assertNull(filter.run("the"));
+    }
 
-	public void testRunThere() {
-		assertNull(filter.run("there"));
-	}
+    public void testRunUppercase() {
+        assertEquals(filter.run("The"), "The");
+    }
 
-	public void testRunNoStopword() {
-		assertEquals(filter.run("fox"),"fox");
-	}
+    public void testRunThere() {
+        assertNull(filter.run("there"));
+    }
+
+    public void testRunNoStopword() {
+        assertEquals(filter.run("fox"), "fox");
+    }
 
 }

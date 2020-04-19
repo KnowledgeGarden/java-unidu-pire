@@ -21,29 +21,29 @@ import de.unidu.is.statistics.Moments;
 
 /**
  * An example for computing moments with PIRE.
- * 
+ *
  * @author Henrik Nottelmann
- * @since 01-Mar-2005
  * @version $Revision: 1.2 $, $Date: 2005/03/19 16:12:57 $
+ * @since 01-Mar-2005
  */
 public class MomentsPIREExample {
 
-	public static void main(String[] args) {
-		PIRE ir = PIREExampleUtils.createPIRE();
-		PIREExampleUtils.indexDocuments(ir);
-		ir.computeMoments();
-		
-		String QUERYID = "m42";
-		ir.initQuery(QUERYID);
-		ir.addMomentsCondition(QUERYID, "ti", "stemen", 0.7, "quick");
-		ir.addMomentsCondition(QUERYID, "ti", "stemen", 0.3, "fox");
-		Moments moments = ir.getMoments(QUERYID);
-		System.out.println("expectation=" + moments.getExpectation());
-		System.out.println("variance=" + moments.getVariance());
-		ir.closeQuery(QUERYID);
+    public static void main(String[] args) {
+        PIRE ir = PIREExampleUtils.createPIRE();
+        PIREExampleUtils.indexDocuments(ir);
+        ir.computeMoments();
 
-		ir.removeIndex();
-		System.exit(0);
-	}
+        String QUERYID = "m42";
+        ir.initQuery(QUERYID);
+        ir.addMomentsCondition(QUERYID, "ti", "stemen", 0.7, "quick");
+        ir.addMomentsCondition(QUERYID, "ti", "stemen", 0.3, "fox");
+        Moments moments = ir.getMoments(QUERYID);
+        System.out.println("expectation=" + moments.getExpectation());
+        System.out.println("variance=" + moments.getVariance());
+        ir.closeQuery(QUERYID);
+
+        ir.removeIndex();
+        System.exit(0);
+    }
 
 }

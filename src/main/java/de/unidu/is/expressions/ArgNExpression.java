@@ -13,98 +13,89 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: ArgNExpression.java,v 1.4 2005/02/21 17:29:18 huesselbeck Exp $
 package de.unidu.is.expressions;
 
+import de.unidu.is.util.StringUtilities;
+
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import de.unidu.is.util.StringUtilities;
-
 /**
- * An expression with an operator and a list of arguments, e.g. the sum of 
+ * An expression with an operator and a list of arguments, e.g. the sum of
  * expressions.
- * 
+ *
  * @author Henrik Nottelmann
- * @since 2003-10-27
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:18 $
+ * @since 2003-10-27
  */
 
 public class ArgNExpression extends AbstractExpression {
 
-	/**
-	 * Expression operator.
-	 * 
-	 */
-	protected String op;
+    /**
+     * Expression operator.
+     */
+    protected final String op;
 
-	/**
-	 * List of arguments of this expression.
-	 * 
-	 */
-	protected List args;
+    /**
+     * List of arguments of this expression.
+     */
+    protected final List args;
 
-	/**
-	 * Creates a new expression object.
-	 * 
-	 * @param op expression operator
-	 * @param args list of arguments of this expression
-	 */
-	public ArgNExpression(String op, List args) {
-		this.op = op;
-		this.args = args;
-	}
+    /**
+     * Creates a new expression object.
+     *
+     * @param op   expression operator
+     * @param args list of arguments of this expression
+     */
+    public ArgNExpression(String op, List args) {
+        this.op = op;
+        this.args = args;
+    }
 
-	/**
-	 * Performs an substitution for variables, e.g. for each key 
-	 * <code>variable</code> in the specified binding, all occurences of 
-	 * <code>${key}</code> are replaced by the corresponding value in the 
-	 * map.<p>
-	 * 
-	 * Only the arguments are substituted.
-	 * 
-	 * @param binding variable binding
-	 * @return expression after substitution
-	 */
-	public Expression substitute(Map binding) {
-		List newArgs = new ArrayList();
-		boolean isNew = false;
-		for (Iterator it = newArgs.iterator(); it.hasNext();) {
-			Expression arg = (Expression) it.next();
-			Expression newArg = arg.substitute(binding);
-			isNew |= arg != newArg;
-			newArgs.add(newArg);
-		}
-		if (isNew)
-			return new ArgNExpression(op, newArgs);
-		return this;
-	}
+    /**
+     * Performs an substitution for variables, e.g. for each key
+     * <code>variable</code> in the specified binding, all occurences of
+     * <code>${key}</code> are replaced by the corresponding value in the
+     * map.<p>
+     * <p>
+     * Only the arguments are substituted.
+     *
+     * @param binding variable binding
+     * @return expression after substitution
+     */
+    public Expression substitute(Map binding) {
+        List newArgs = new ArrayList();
+        boolean isNew = false;
+        if (isNew)
+            return new ArgNExpression(op, newArgs);
+        return this;
+    }
 
-	/**
-	 * Returns the expression in infix notation, embedded in round brackets.
-	 * 
-	 * @return expression as a string
-	 */
-	public String toString() {
-		return "(" + StringUtilities.implode(args, op) + ")";
-	}
+    /**
+     * Returns the expression in infix notation, embedded in round brackets.
+     *
+     * @return expression as a string
+     */
+    public String toString() {
+        return "(" + StringUtilities.implode(args, op) + ")";
+    }
 
-	/**
-	 * Returns a string representation for this expression which can be 
-	 * used as a template in an SQL statement.
-	 * 
-	 * @return template for SQL statements
-	 */
-	public String getSQLTemplate() {
-		List ll = new ArrayList();
-		for (Iterator it = args.iterator(); it.hasNext();) {
-			Expression arg = (Expression) it.next();
-			ll.add(arg.getSQLTemplate());
-		}
-		return "(" + StringUtilities.implode(ll, op) + ")";
-	}
+    /**
+     * Returns a string representation for this expression which can be
+     * used as a template in an SQL statement.
+     *
+     * @return template for SQL statements
+     */
+    public String getSQLTemplate() {
+        List ll = new ArrayList();
+        for (Object o : args) {
+            Expression arg = (Expression) o;
+            ll.add(arg.getSQLTemplate());
+        }
+        return "(" + StringUtilities.implode(ll, op) + ")";
+    }
 
 }

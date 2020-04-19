@@ -13,15 +13,15 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: StringUtilitiesTest.java,v 1.5 2005/02/21 17:29:29 huesselbeck Exp $
 package test.de.unidu.is.util;
 
-import java.util.List;
-
-import junit.framework.TestCase;
 import de.unidu.is.util.CollectionUtilities;
 import de.unidu.is.util.StringUtilities;
+import junit.framework.TestCase;
+
+import java.util.List;
 
 /**
  * @author nottelma
@@ -30,26 +30,27 @@ import de.unidu.is.util.StringUtilities;
  */
 public class StringUtilitiesTest extends TestCase {
 
-	/**
-	 * Constructor for StringUtilitiesTest.
-	 * @param arg0
-	 */
-	public StringUtilitiesTest(String arg0) {
-		super(arg0);
-	}
+    /**
+     * Constructor for StringUtilitiesTest.
+     *
+     * @param arg0
+     */
+    public StringUtilitiesTest(String arg0) {
+        super(arg0);
+    }
 
-	public void testParseText() {
-		List list =
-			CollectionUtilities.toList(
-				StringUtilities.parseText("The quick brown Fox jumps"));
-		assertEquals(list.size(),4);
-		assertEquals(list.get(0),"quick");
-		assertEquals(list.get(1),"brown");
-		assertEquals(list.get(2),"fox");
-		assertEquals(list.get(3),"jump");
-		
-		assertTrue(StringUtilities.isStopword("the"));
-		assertFalse(StringUtilities.isStopword("fox"));
-	}
+    public void testParseText() {
+        List list =
+                CollectionUtilities.toList(
+                        StringUtilities.parseText("The quick brown Fox jumps"));
+        assertEquals(list.size(), 4);
+        assertEquals(list.get(0), "quick");
+        assertEquals(list.get(1), "brown");
+        assertEquals(list.get(2), "fox");
+        assertEquals(list.get(3), "jump");
+
+        assertTrue(StringUtilities.isStopword("the"));
+        assertFalse(StringUtilities.isStopword("fox"));
+    }
 
 }

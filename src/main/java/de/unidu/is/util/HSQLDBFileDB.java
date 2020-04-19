@@ -22,30 +22,30 @@ import java.io.File;
  * This class encapsulates a HSQLDB 1.7.1 RDBMS (using JDBC) which saves data
  * into files, where connections are managed by a connection pool.
  * <p>
- * 
+ * <p>
  * For HSQLDB 1.7.2, the DB URI prefix must be "jdbc:hsqldb:file:".
  * <p>
- * 
+ * <p>
  * This class uses the logger "unidu.db" by default.
- * 
+ *
  * @author Henrik Nottelmann
- * @since 2005-02-25
  * @version $Revision: 1.1 $, $Date: 2005/02/25 12:50:35 $
+ * @since 2005-02-25
  */
 public class HSQLDBFileDB extends DB {
 
-	/**
-	 * Creates a new instance.
-	 */
-	public HSQLDBFileDB(String filename) {
-		super("jdbc:hsqldb:" + filename, "org.hsqldb.jdbcDriver", "sa", "");
-	}
+    /**
+     * Creates a new instance.
+     */
+    public HSQLDBFileDB(String filename) {
+        super("jdbc:hsqldb:" + filename, "org.hsqldb.jdbcDriver", "sa", "");
+    }
 
-	/**
-	 * Creates a new instance.
-	 */
-	public HSQLDBFileDB(File file) {
-		super("jdbc:hsqldb:" + file, "org.hsqldb.jdbcDriver", "sa", "");
-	}
+    /**
+     * Creates a new instance.
+     */
+    public HSQLDBFileDB(File file) {
+        super("jdbc:hsqldb:" + file, "org.hsqldb.jdbcDriver", "sa", "");
+    }
 
 }

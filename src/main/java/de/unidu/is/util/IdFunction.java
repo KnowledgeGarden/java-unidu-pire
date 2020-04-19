@@ -13,39 +13,39 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: IdFunction.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
 package de.unidu.is.util;
 
 /**
  * The identity function.
- * 
+ *
  * @author Henrik Nottelmann
- * @since 2004-06-21
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:29 $
+ * @since 2004-06-21
  */
-public class IdFunction extends LearnableFunction{
+public class IdFunction extends LearnableFunction {
 
-	/* (non-Javadoc)
-	 * @see de.unidu.is.util.Function#apply(double)
-	 */
-	public double apply(double x) {
-		return x;
-	}
+    /* (non-Javadoc)
+     * @see de.unidu.is.util.Function#apply(double)
+     */
+    public double apply(double x) {
+        return x;
+    }
 
-	/* (non-Javadoc)
-	 * @see de.unidu.is.util.Function#getParameterNames()
-	 */
-	public String[] getParameterNames() {
-		return new String[0];
-	}
-	
-	/* (non-Javadoc)
-	 * @see de.unidu.is.util.LearnableFunction#getFunction()
-	 */
-	public String getFunction() {
-		return "f(x)=x";
-	}
+    /* (non-Javadoc)
+     * @see de.unidu.is.util.Function#getParameterNames()
+     */
+    public String[] getParameterNames() {
+        return new String[0];
+    }
+
+    /* (non-Javadoc)
+     * @see de.unidu.is.util.LearnableFunction#getFunction()
+     */
+    public String getFunction() {
+        return "f(x)=x";
+    }
 
 
 }

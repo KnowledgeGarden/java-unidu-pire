@@ -13,55 +13,56 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: AbstractSingleItemFilterTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
 package test.de.unidu.is.text;
 
-import java.util.List;
-
-import junit.framework.TestCase;
 import de.unidu.is.text.AbstractSingleItemFilter;
 import de.unidu.is.util.CollectionUtilities;
+import junit.framework.TestCase;
+
+import java.util.List;
 
 /**
  * @author nottelma
- * @since Jul 8, 2003
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:29 $
+ * @since Jul 8, 2003
  */
 public class AbstractSingleItemFilterTest extends TestCase {
 
-	private AbstractSingleItemFilter filter;
-	
-	/**
-	 * Constructor for AbstractSingleItemFilterTest.
-	 * @param arg0
-	 */
-	public AbstractSingleItemFilterTest(String arg0) {
-		super(arg0);
-	}
+    private AbstractSingleItemFilter filter;
 
-	/*
-	 * @see TestCase#setUp()
-	 */
-	protected void setUp() throws Exception {
-		filter = new AbstractSingleItemFilter(null) {
-			public Object run(Object value) {
-				if(value.equals("NULL"))
-					return null;
-				return "-" + value + "-";
-			}
-		};
-	}
+    /**
+     * Constructor for AbstractSingleItemFilterTest.
+     *
+     * @param arg0
+     */
+    public AbstractSingleItemFilterTest(String arg0) {
+        super(arg0);
+    }
 
-	public void testFilter() {
-		List list = CollectionUtilities.toList(filter.apply("xyz"));
-		assertEquals(list.size(), 1);
-		assertEquals(list.get(0), "-xyz-");
-	}
+    /*
+     * @see TestCase#setUp()
+     */
+    protected void setUp() {
+        filter = new AbstractSingleItemFilter(null) {
+            public Object run(Object value) {
+                if (value.equals("NULL"))
+                    return null;
+                return "-" + value + "-";
+            }
+        };
+    }
 
-	public void testFilterNull() {
-		List list = CollectionUtilities.toList(filter.apply("NULL"));
-		assertEquals(list.size(), 0);
-	}
+    public void testFilter() {
+        List list = CollectionUtilities.toList(filter.apply("xyz"));
+        assertEquals(list.size(), 1);
+        assertEquals(list.get(0), "-xyz-");
+    }
+
+    public void testFilterNull() {
+        List list = CollectionUtilities.toList(filter.apply("NULL"));
+        assertEquals(list.size(), 0);
+    }
 
 }

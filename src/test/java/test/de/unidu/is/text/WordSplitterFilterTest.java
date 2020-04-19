@@ -13,48 +13,49 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: WordSplitterFilterTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
 package test.de.unidu.is.text;
 
-import java.util.List;
-
-import junit.framework.TestCase;
 import de.unidu.is.text.WordSplitterFilter;
 import de.unidu.is.util.CollectionUtilities;
+import junit.framework.TestCase;
+
+import java.util.List;
 
 /**
  * @author nottelma
- * @since Jul 8, 2003
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:29 $
+ * @since Jul 8, 2003
  */
 public class WordSplitterFilterTest extends TestCase {
 
-	private WordSplitterFilter filter;
-	
-	/**
-	 * Constructor for SoundexFilterTest.
-	 * @param arg0
-	 */
-	public WordSplitterFilterTest(String arg0) {
-		super(arg0);
-	}
+    private WordSplitterFilter filter;
 
-	/*
-	 * @see TestCase#setUp()
-	 */
-	protected void setUp() throws Exception {
-		filter = new WordSplitterFilter(null);
-	}
+    /**
+     * Constructor for SoundexFilterTest.
+     *
+     * @param arg0
+     */
+    public WordSplitterFilterTest(String arg0) {
+        super(arg0);
+    }
 
-	public void testRun() {
-		List list = CollectionUtilities.toList(filter.apply("The quick brown Fox jumps xy"));
-		assertEquals(list.size(),5);
-		assertEquals(list.get(0),"The");
-		assertEquals(list.get(1),"quick");
-		assertEquals(list.get(2),"brown");
-		assertEquals(list.get(3),"Fox");
-		assertEquals(list.get(4),"jumps");
-	}
+    /*
+     * @see TestCase#setUp()
+     */
+    protected void setUp() {
+        filter = new WordSplitterFilter(null);
+    }
+
+    public void testRun() {
+        List list = CollectionUtilities.toList(filter.apply("The quick brown Fox jumps xy"));
+        assertEquals(list.size(), 5);
+        assertEquals(list.get(0), "The");
+        assertEquals(list.get(1), "quick");
+        assertEquals(list.get(2), "brown");
+        assertEquals(list.get(3), "Fox");
+        assertEquals(list.get(4), "jumps");
+    }
 
 }

@@ -13,28 +13,28 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: EqualsExpression.java,v 1.4 2005/02/21 17:29:18 huesselbeck Exp $
 package de.unidu.is.expressions;
 
 
 /**
  * An expression for the testing if two arguments are equal, eg. arg1=arg2.
- * 
+ *
  * @author Henrik Nottelmann
- * @since 2003-11-08
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:18 $
+ * @since 2003-11-08
  */
 public class EqualsExpression extends Arg2Expression {
 
-	/**
-	 * Creates a new expression object.
-	 * 
-	 * @param arg1 first argument of this expression
-	 * @param arg2 second argument of this expression
-	 */
-	public EqualsExpression(Expression arg1, Expression arg2) {
-		super("=",arg1,arg2);
-	}
-	
+    /**
+     * Creates a new expression object.
+     *
+     * @param arg1 first argument of this expression
+     * @param arg2 second argument of this expression
+     */
+    public EqualsExpression(Expression arg1, Expression arg2) {
+        super("=", arg1, arg2);
+    }
+
 }

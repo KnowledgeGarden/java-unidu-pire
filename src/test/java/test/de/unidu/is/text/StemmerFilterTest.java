@@ -13,47 +13,48 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: StemmerFilterTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
 package test.de.unidu.is.text;
 
-import junit.framework.TestCase;
 import de.unidu.is.text.StemmerFilter;
+import junit.framework.TestCase;
 
 /**
  * @author nottelma
- * @since Jul 8, 2003
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:29 $
+ * @since Jul 8, 2003
  */
 public class StemmerFilterTest extends TestCase {
 
-	private StemmerFilter filter;
-	
-	/**
-	 * Constructor for SoundexFilterTest.
-	 * @param arg0
-	 */
-	public StemmerFilterTest(String arg0) {
-		super(arg0);
-	}
+    private StemmerFilter filter;
 
-	/*
-	 * @see TestCase#setUp()
-	 */
-	protected void setUp() throws Exception {
-		filter = new StemmerFilter(null);
-	}
+    /**
+     * Constructor for SoundexFilterTest.
+     *
+     * @param arg0
+     */
+    public StemmerFilterTest(String arg0) {
+        super(arg0);
+    }
 
-	public void testRun() {
-		assertEquals(filter.run("jumps"),filter.run("jump"));
-	}
+    /*
+     * @see TestCase#setUp()
+     */
+    protected void setUp() {
+        filter = new StemmerFilter(null);
+    }
 
-	public void testRunIdemPotency() {
-		assertEquals(filter.run("jump"),filter.run("jump"));
-	}
+    public void testRun() {
+        assertEquals(filter.run("jumps"), filter.run("jump"));
+    }
 
-	public void testRunNotSame() {
-		assertNotSame(filter.run("hello"),filter.run("world"));
-	}
+    public void testRunIdemPotency() {
+        assertEquals(filter.run("jump"), filter.run("jump"));
+    }
+
+    public void testRunNotSame() {
+        assertNotSame(filter.run("hello"), filter.run("world"));
+    }
 
 }

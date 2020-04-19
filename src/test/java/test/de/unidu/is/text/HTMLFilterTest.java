@@ -13,59 +13,63 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: HTMLFilterTest.java,v 1.5 2005/03/09 09:00:05 nottelma Exp $
 package test.de.unidu.is.text;
 
-import junit.framework.TestCase;
 import de.unidu.is.text.HTMLFilter;
+import junit.framework.TestCase;
 
 /**
  * @author nottelma
- * @since Jul 8, 2003
  * @version $Revision: 1.5 $, $Date: 2005/03/09 09:00:05 $
+ * @since Jul 8, 2003
  */
 public class HTMLFilterTest extends TestCase {
 
-	private HTMLFilter filter;
-	
-	/**
-	 * Constructor for SoundexFilterTest.
-	 * @param arg0
-	 */
-	public HTMLFilterTest(String arg0) {
-		super(arg0);
-	}
+    private HTMLFilter filter;
 
-	/*
-	 * @see TestCase#setUp()
-	 */
-	protected void setUp() throws Exception {
-		filter = new HTMLFilter(null);
-	}
+    /**
+     * Constructor for SoundexFilterTest.
+     *
+     * @param arg0
+     */
+    public HTMLFilterTest(String arg0) {
+        super(arg0);
+    }
 
-	public void testRun() {
-		assertEquals(filter.run("<font><b>Hello</b> world</font>"),"Hello world");
-	}
+    /*
+     * @see TestCase#setUp()
+     */
+    protected void setUp() {
+        filter = new HTMLFilter(null);
+    }
 
-	public void testRunComment() {
-		assertEquals(filter.run("<!--<b>Hello</b> -->world"),"world");
-	}
+    public void testRun() {
+        assertEquals(filter.run("<font><b>Hello</b> world</font>"), "Hello world");
+    }
 
-	public void testRunScript() {
-		assertEquals(filter.run("<script><b>Hello</b></script> world"),"world");
-	}
+    public void testRunComment() {
+        assertEquals(filter.run("<!--<b>Hello</b> -->world"), "world");
+    }
 
-	public void testRunP() {
-		assertEquals(filter.run("<p>Hello</p>"),"\n\nHello");
-	}
+    public void testRunScript() {
+        assertEquals(filter.run("<script><b>Hello</b></script> world"), "world");
+    }
 
-	public void testRunBR() {
-		assertEquals(filter.run("Hello<br>"),"Hello\n\n");
-	}
+    public void testRunP() {
+        assertEquals(filter.run("<p>Hello</p>"), "\n\nHello");
+    }
 
-	public void testRunEntities() {
-		assertEquals(filter.run("&auml;&nbsp;&Ouml;&#13;&#10;&#9;"),"ä Ö\r\n\t");
-	}
+    public void testRunBR() {
+        assertEquals(filter.run("Hello<br>"), "Hello\n\n");
+    }
+
+    public void testRunEntities() {
+        assertEquals(filter.run("&auml;&nbsp;&Ouml;&#13;&#10;&#9;"),
+                "? ?\r\n\t"
+                //		"ï¿½ ï¿½\r\n\t"
+        );
+    }
 
 }

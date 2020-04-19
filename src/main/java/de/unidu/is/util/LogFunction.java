@@ -13,39 +13,39 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: LogFunction.java,v 1.4 2005/02/28 22:27:55 nottelma Exp $
 package de.unidu.is.util;
 
 /**
  * The logarithm function.
- * 
+ *
  * @author Henrik Nottelmann
- * @since 2004-10-25
  * @version $Revision: 1.4 $, $Date: 2005/02/28 22:27:55 $
+ * @since 2004-10-25
  */
-public class LogFunction extends LearnableFunction{
+public class LogFunction extends LearnableFunction {
 
-	/* (non-Javadoc)
-	 * @see de.unidu.is.util.Function#apply(double)
-	 */
-	public double apply(double x) {
-		return Math.log(x);
-	}
+    /* (non-Javadoc)
+     * @see de.unidu.is.util.Function#apply(double)
+     */
+    public double apply(double x) {
+        return Math.log(x);
+    }
 
-	/* (non-Javadoc)
-	 * @see de.unidu.is.util.Function#getParameterNames()
-	 */
-	public String[] getParameterNames() {
-		return new String[0];
-	}
-	
-	/* (non-Javadoc)
-	 * @see de.unidu.is.util.LearnableFunction#getFunction()
-	 */
-	public String getFunction() {
-		return "f(x)=log(x)";
-	}
+    /* (non-Javadoc)
+     * @see de.unidu.is.util.Function#getParameterNames()
+     */
+    public String[] getParameterNames() {
+        return new String[0];
+    }
+
+    /* (non-Javadoc)
+     * @see de.unidu.is.util.LearnableFunction#getFunction()
+     */
+    public String getFunction() {
+        return "f(x)=log(x)";
+    }
 
 
 }

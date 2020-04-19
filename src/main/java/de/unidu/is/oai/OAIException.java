@@ -13,7 +13,7 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: OAIException.java,v 1.5 2005/02/21 17:29:20 huesselbeck Exp $
 
 /*
@@ -47,22 +47,21 @@ import java.io.IOException;
 /**
  * @author fischer
  * @version $Revision: 1.5 $
- *
  */
 public class OAIException extends IOException {
 
-	/**
-	 * 
-	 */
-	public OAIException() {
-		super();
-	}
+    /**
+     *
+     */
+    public OAIException() {
+        super();
+    }
 
-	/**
-	 * @param s
-	 */
-	public OAIException(String s) {
-		super(s);
-	}
+    /**
+     * @param s
+     */
+    public OAIException(String s) {
+        super(s);
+    }
 
 }

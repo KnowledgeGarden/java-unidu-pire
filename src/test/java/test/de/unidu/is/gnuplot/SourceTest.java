@@ -13,62 +13,63 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: SourceTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
 package test.de.unidu.is.gnuplot;
 
-import junit.framework.TestCase;
 import de.unidu.is.gnuplot.Source;
+import junit.framework.TestCase;
 
 /**
  * @author Henrik Nottelmann
- * @since 2003-08-02
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:29 $
+ * @since 2003-08-02
  */
 public class SourceTest extends TestCase {
 
-	protected Source source;
-	private final double VALUE1 = 10;
-	private final double VALUE2 = 1;
-	protected final double EPS = 0.00001;
-	protected final String TITLE = "NT";
+    protected final double EPS = 0.00001;
+    protected final String TITLE = "NT";
+    private final double VALUE1 = 10;
+    private final double VALUE2 = 1;
+    protected Source source;
 
-	/**
-	 * Constructor for SourceTest.
-	 * @param arg0
-	 */
-	public SourceTest(String arg0) {
-		super(arg0);
-	}
+    /**
+     * Constructor for SourceTest.
+     *
+     * @param arg0
+     */
+    public SourceTest(String arg0) {
+        super(arg0);
+    }
 
-	/*
-	 * @see TestCase#setUp()
-	 */
-	protected void setUp() throws Exception {
-		source = new Source(TITLE) {
-			public String getCommand() {
-				return null;
-			}
-		};
-	}
+    /*
+     * @see TestCase#setUp()
+     */
+    protected void setUp() {
+        source = new Source(TITLE) {
+            public String getCommand() {
+                return null;
+            }
+        };
+    }
 
-	public void testSetGetMin() {
-		source.setMin(VALUE1);
-		assertEquals(source.getMin(),VALUE1,EPS);
-		source.setMin(VALUE2);
-		assertEquals(source.getMin(),VALUE2,EPS);
-	}
+    public void testSetGetMin() {
+        source.setMin(VALUE1);
+        assertEquals(source.getMin(), VALUE1, EPS);
+        source.setMin(VALUE2);
+        assertEquals(source.getMin(), VALUE2, EPS);
+    }
 
-	public void testSetGetMax() {
-		source.setMax(VALUE1);
-		assertEquals(source.getMax(),VALUE1,EPS);
-		source.setMax(VALUE2);
-		assertEquals(source.getMax(),VALUE2,EPS);
-	}
+    public void testSetGetMax() {
+        source.setMax(VALUE1);
+        assertEquals(source.getMax(), VALUE1, EPS);
+        source.setMax(VALUE2);
+        assertEquals(source.getMax(), VALUE2, EPS);
+    }
 
-	public void testGetTitle() {
-		assertEquals(source.getTitle(), TITLE);
-	}
+    public void testGetTitle() {
+        assertEquals(source.getTitle(), TITLE);
+    }
 
 
 }

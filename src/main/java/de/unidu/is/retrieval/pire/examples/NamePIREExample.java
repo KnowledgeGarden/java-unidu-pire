@@ -21,29 +21,29 @@ import de.unidu.is.retrieval.pire.dt.NameDT;
 
 /**
  * An example for using names in PIRE.
- * 
+ *
  * @author Henrik Nottelmann
  * @version $Revision: 1.6 $, $Date: 2005/03/01 09:21:33 $
  */
 public class NamePIREExample {
 
-	public static void main(String[] args) {
-		PIRE ir = PIREExampleUtils.createPIRE();
+    public static void main(String[] args) {
+        PIRE ir = PIREExampleUtils.createPIRE();
 
-		ir.initIndex();
-		ir.addToIndex("doc1");
-		ir.addToIndex("doc1", "name", "nottelmann henrik nottelmann henrik");
-		ir.computeIndex();
+        ir.initIndex();
+        ir.addToIndex("doc1");
+        ir.addToIndex("doc1", "name", "nottelmann henrik nottelmann henrik");
+        ir.computeIndex();
 
-		final String QUERYID = "42";
-		ir.initQuery(QUERYID);
-		ir.addCondition(QUERYID, "name", NameDT.PLAINNAME, 1, "nottelmann");
-		ir.computeProbs(QUERYID);
-		System.out.println(ir.getResult(QUERYID, 10));
-		ir.closeQuery(QUERYID);
-		
-		ir.removeIndex();
-		System.exit(0);
-	}
+        final String QUERYID = "42";
+        ir.initQuery(QUERYID);
+        ir.addCondition(QUERYID, "name", NameDT.PLAINNAME, 1, "nottelmann");
+        ir.computeProbs(QUERYID);
+        System.out.println(ir.getResult(QUERYID, 10));
+        ir.closeQuery(QUERYID);
+
+        ir.removeIndex();
+        System.exit(0);
+    }
 
 }

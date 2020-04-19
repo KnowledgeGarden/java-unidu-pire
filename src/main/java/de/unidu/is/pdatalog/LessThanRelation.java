@@ -13,58 +13,60 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: LessThanRelation.java,v 1.6 2005/03/14 17:33:13 nottelma Exp $
 package de.unidu.is.pdatalog;
 
-import java.util.List;
+import de.unidu.is.expressions.Arg2Expression;
+import de.unidu.is.expressions.Expression;
+import de.unidu.is.expressions.Str2NumFunctionExpression;
+import de.unidu.is.pdatalog.ds.Literal;
 
-import de.unidu.is.expressions.*;
-import de.unidu.is.pdatalog.ds.*;
+import java.util.List;
 
 /**
  * A class for the pDatalog++ less-than relation which is computed on demand.
- * 
+ *
  * @author Henrik Nottelmann
- * @since 2003-10-07
  * @version $Revision: 1.6 $, $Date: 2005/03/14 17:33:13 $
+ * @since 2003-10-07
  */
 public class LessThanRelation extends EDBComputedRelation {
 
-	/**
-	 * Constructs a new relation, and automatically adds it to the 
-	 * relation base.
-	 * 
-	 * @param base corresponding relation base
-	 */
-	public LessThanRelation(RelationBase base) {
-		super(base, "lt", 2);
-	}
+    /**
+     * Constructs a new relation, and automatically adds it to the
+     * relation base.
+     *
+     * @param base corresponding relation base
+     */
+    public LessThanRelation(RelationBase base) {
+        super(base, "lt", 2);
+    }
 
-	/**
-	 * Adds arguments for computing a probability for the literal to the 
-	 * specified list. 
-	 * 
-	 * @param literal literal to be handled
-	 * @param prob list of arguments for computing a probability
-	 */
-	public void addProb(Literal literal, List prob) {
-	}
+    /**
+     * Adds arguments for computing a probability for the literal to the
+     * specified list.
+     *
+     * @param literal literal to be handled
+     * @param prob    list of arguments for computing a probability
+     */
+    public void addProb(Literal literal, List prob) {
+    }
 
-	/**
-	 * Adds arguments for filtering for the literal to the specified list. 
-	 * 
-	 * @param literal literal to be handled
-	 * @param where list of arguments for filtering
-	 */
-	public void addWhere(Literal literal, List where) {
-		Expression arg0 = literal.getArgument(0);
-		Expression arg1 = literal.getArgument(1);
-		where.add(
-			new Arg2Expression(
-				"<",
-				new Str2NumFunctionExpression(arg0),
-				new Str2NumFunctionExpression(arg1)));
-	}
+    /**
+     * Adds arguments for filtering for the literal to the specified list.
+     *
+     * @param literal literal to be handled
+     * @param where   list of arguments for filtering
+     */
+    public void addWhere(Literal literal, List where) {
+        Expression arg0 = literal.getArgument(0);
+        Expression arg1 = literal.getArgument(1);
+        where.add(
+                new Arg2Expression(
+                        "<",
+                        new Str2NumFunctionExpression(arg0),
+                        new Str2NumFunctionExpression(arg1)));
+    }
 
 }

@@ -13,7 +13,7 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: SequenceIterator.java,v 1.6 2005/02/28 22:27:55 nottelma Exp $
 package de.unidu.is.util;
 
@@ -22,110 +22,105 @@ import java.util.NoSuchElementException;
 
 /**
  * A iterator that is a sequence of several iterators. <p>
-
+ * <p>
  * The sequence iterator has an iterator returning objects which can deliver
  * iterators. The delivered iterators are traversed one after another by this
- * iterator. 
+ * iterator.
  *
  * @author Henrik Nottelmann
- * @since 2001-06-29
  * @version $Revision: 1.6 $, $Date: 2005/02/28 22:27:55 $
+ * @since 2001-06-29
  */
 public abstract class SequenceIterator implements Iterator {
 
-	/**
-	 * The iterator returning objects which can deliver iterators.
-	 * 
-	 */
-	protected Iterator iterator;
+    /**
+     * The iterator returning objects which can deliver iterators.
+     */
+    protected final Iterator iterator;
 
-	/**
-	 * The current iterator producing items which are returned by this class.
-	 * 
-	 */
-	protected Iterator currentIterator;
+    /**
+     * The current iterator producing items which are returned by this class.
+     */
+    protected Iterator currentIterator;
 
-	/**
-	 * The next object to be returned.
-	 * 
-	 */
-	protected Object next;
+    /**
+     * The next object to be returned.
+     */
+    protected Object next;
 
-	/**
-	 * Indicates if next() has ever been called. This is needed for 
-	 * initialisation outside the constructor (because that does not work!).
-	 *
-	 */
-	protected boolean called;
+    /**
+     * Indicates if next() has ever been called. This is needed for
+     * initialisation outside the constructor (because that does not work!).
+     */
+    protected boolean called;
 
-	/**
-	 * Creates a new sequence iterator.
-	 * 
-	 * @param iterator iterator returning objects which can deliver iterators
-	 */
-	public SequenceIterator(Iterator iterator) {
-		this.iterator = iterator;
-	}
+    /**
+     * Creates a new sequence iterator.
+     *
+     * @param iterator iterator returning objects which can deliver iterators
+     */
+    public SequenceIterator(Iterator iterator) {
+        this.iterator = iterator;
+    }
 
-	/**
-	 * Returns true if this iterator has more elements.
-	 *
-	 * @return true if the iterator has more elements
-	 */
-	public boolean hasNext() {
-		if (!called) {
-			called = true;
-			calcNext();
-		}
-		return next != null;
-	}
+    /**
+     * Returns true if this iterator has more elements.
+     *
+     * @return true if the iterator has more elements
+     */
+    public boolean hasNext() {
+        if (!called) {
+            called = true;
+            calcNext();
+        }
+        return next != null;
+    }
 
-	/**
-	 * Returns the next object.
-	 * 
-	 * @return next object
-	 * @throws NoSuchElementException if there is no object available
-	 */
-	public Object next() {
-		if (!called) {
-			called = true;
-			calcNext();
-		}
-		if (next == null)
-			throw new NoSuchElementException();
-		Object ret = next;
-		next = null;
-		calcNext();
-		return ret;
-	}
+    /**
+     * Returns the next object.
+     *
+     * @return next object
+     * @throws NoSuchElementException if there is no object available
+     */
+    public Object next() {
+        if (!called) {
+            called = true;
+            calcNext();
+        }
+        if (next == null)
+            throw new NoSuchElementException();
+        Object ret = next;
+        next = null;
+        calcNext();
+        return ret;
+    }
 
-	/**
-	 * Calculates the next object to be returned.
-	 * 
-	 */
-	protected void calcNext() {
-		while (currentIterator == null || !currentIterator.hasNext())
-			if (iterator.hasNext())
-				currentIterator = createIterator(iterator.next());
-			else
-				return;
-		next = currentIterator.next();
-	}
+    /**
+     * Calculates the next object to be returned.
+     */
+    protected void calcNext() {
+        while (currentIterator == null || !currentIterator.hasNext())
+            if (iterator.hasNext())
+                currentIterator = createIterator(iterator.next());
+            else
+                return;
+        next = currentIterator.next();
+    }
 
-	/**
-	 * Calls the speicified object to create an iterator.
-	 * This method has to be overridden!
-	 * 
-	 * @param object object which should create an iterator
-	 * @return iterator
-	 */
-	public abstract Iterator createIterator(Object object);
+    /**
+     * Calls the speicified object to create an iterator.
+     * This method has to be overridden!
+     *
+     * @param object object which should create an iterator
+     * @return iterator
+     */
+    public abstract Iterator createIterator(Object object);
 
-	/**
-	 * <b>Removing objects is unsupported!</B>
-	 */
-	public void remove() {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * <b>Removing objects is unsupported!</B>
+     */
+    public void remove() {
+        throw new UnsupportedOperationException();
+    }
 
 }

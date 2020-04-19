@@ -21,87 +21,87 @@ import de.unidu.is.util.StopWatch;
 
 /**
  * An example for using PIRE.
- * 
+ *
  * @author Henrik Nottelmann
  * @version $Revision: 1.6 $, $Date: 2005/03/01 09:21:33 $
  */
 public class PIREExample {
 
-	public static void main(String[] args) {
-		StopWatch watch = new StopWatch();
-		watch.start();
-		PIRE ir = PIREExampleUtils.createPIRE();
-		PIREExampleUtils.indexDocuments(ir);
-		watch.stop();
-		System.out.println("Indexing: " + watch);
-		System.out.println();
-		String QUERYID = null;
+    public static void main(String[] args) {
+        StopWatch watch = new StopWatch();
+        watch.start();
+        PIRE ir = PIREExampleUtils.createPIRE();
+        PIREExampleUtils.indexDocuments(ir);
+        watch.stop();
+        System.out.println("Indexing: " + watch);
+        System.out.println();
+        String QUERYID;
 
-		// query #1
-		watch.reset();
-		watch.start();
-		QUERYID = "1";
-		ir.initQuery(QUERYID);
-		ir.addCondition(QUERYID, "ti", "stemen", 0.7, "quick");
-		ir.addCondition(QUERYID, "au", "plainname", 0.3, "nottelmann");
-		ir.computeProbs(QUERYID);
-		System.out.println(QUERYID + ":");
-		System.out.println(ir.getResult(QUERYID, 10));
-		ir.closeQuery(QUERYID);
-		watch.stop();
-		System.out.println(watch);
-		System.out.println();
+        // query #1
+        watch.reset();
+        watch.start();
+        QUERYID = "1";
+        ir.initQuery(QUERYID);
+        ir.addCondition(QUERYID, "ti", "stemen", 0.7, "quick");
+        ir.addCondition(QUERYID, "au", "plainname", 0.3, "nottelmann");
+        ir.computeProbs(QUERYID);
+        System.out.println(QUERYID + ":");
+        System.out.println(ir.getResult(QUERYID, 10));
+        ir.closeQuery(QUERYID);
+        watch.stop();
+        System.out.println(watch);
+        System.out.println();
 
-		// query #2
-		watch.reset();
-		watch.start();
-		QUERYID = "2";
-		ir.initQuery(QUERYID);
-		ir.addCondition(QUERYID, "ti", "stemen", 0.5, "quick");
-		ir.addCondition(QUERYID, "ti", "containsNoStem", 0.3, "fence");
-		ir.addCondition(QUERYID, "py", "lt", 0.2, "1999");
-		ir.computeProbs(QUERYID);
-		System.out.println(QUERYID + ":");
-		System.out.println(ir.getResult(QUERYID, 10));
-		ir.closeQuery(QUERYID);
-		watch.stop();
-		System.out.println(watch);
-		System.out.println();
+        // query #2
+        watch.reset();
+        watch.start();
+        QUERYID = "2";
+        ir.initQuery(QUERYID);
+        ir.addCondition(QUERYID, "ti", "stemen", 0.5, "quick");
+        ir.addCondition(QUERYID, "ti", "containsNoStem", 0.3, "fence");
+        ir.addCondition(QUERYID, "py", "lt", 0.2, "1999");
+        ir.computeProbs(QUERYID);
+        System.out.println(QUERYID + ":");
+        System.out.println(ir.getResult(QUERYID, 10));
+        ir.closeQuery(QUERYID);
+        watch.stop();
+        System.out.println(watch);
+        System.out.println();
 
-		// query #3
-		watch.reset();
-		watch.start();
-		QUERYID = "3";
-		ir.initQuery(QUERYID);
-		ir.addCondition(QUERYID, "ti", "stemen", 0.5, "quick");
-		ir.addCondition(QUERYID, "ti", "stemen", 0.2, "fox");
-		ir.addCondition(QUERYID, "ti", "nostem", 0.3, "fence");
-		ir.computeProbs(QUERYID);
-		System.out.println(QUERYID + ":");
-		System.out.println(ir.getResult(QUERYID, 10));
-		ir.closeQuery(QUERYID);
-		watch.stop();
-		System.out.println(watch);
-		System.out.println();
+        // query #3
+        watch.reset();
+        watch.start();
+        QUERYID = "3";
+        ir.initQuery(QUERYID);
+        ir.addCondition(QUERYID, "ti", "stemen", 0.5, "quick");
+        ir.addCondition(QUERYID, "ti", "stemen", 0.2, "fox");
+        ir.addCondition(QUERYID, "ti", "nostem", 0.3, "fence");
+        ir.computeProbs(QUERYID);
+        System.out.println(QUERYID + ":");
+        System.out.println(ir.getResult(QUERYID, 10));
+        ir.closeQuery(QUERYID);
+        watch.stop();
+        System.out.println(watch);
+        System.out.println();
 
-		// vague operators do not work yet
-		//		// query #4
-		//		watch.reset();
-		//		watch.start();
-		//		QUERYID = "4";
-		//		ir.initQuery(QUERYID);
-		//		ir.addCondition(QUERYID, "py", "vgt", 1, "2002");
-		//		ir.computeProbs(QUERYID);
-		//		System.out.println(QUERYID + ":");
-		//		System.out.println(ir.getResult(QUERYID, 10));
-		//		ir.closeQuery(QUERYID);
-		//		watch.stop();
-		//		System.out.println(watch);
-		//		System.out.println();
+        // vague operators do not work yet
+        //		// query #4
+        //		watch.reset();
+        //		watch.start();
+        //		QUERYID = "4";
+        //		ir.initQuery(QUERYID);
+        //		ir.addCondition(QUERYID, "py", "vgt", 1, "2002");
+        //		ir.computeProbs(QUERYID);
+        //		System.out.println(QUERYID + ":");
+        //		System.out.println(ir.getResult(QUERYID, 10));
+        //		ir.closeQuery(QUERYID);
+        //		watch.stop();
+        //		System.out.println(watch);
+        //		System.out.println();
 
-		ir.removeIndex();
-		System.exit(0);
+        ir.removeIndex();
+        System.exit(0);
 
-	}
+    }
 
 }

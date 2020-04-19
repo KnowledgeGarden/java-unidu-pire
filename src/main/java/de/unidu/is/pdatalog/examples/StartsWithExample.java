@@ -9,23 +9,23 @@ import de.unidu.is.util.HSQLDBEmbeddedDB;
 
 /**
  * A simple example.
- * 
+ *
  * @author nottelma
- * @since 19-Oct-2004
  * @version $Revision: 1.2 $, $Date: 2005/03/18 09:54:49 $
+ * @since 19-Oct-2004
  */
 public class StartsWithExample {
 
-	public static void main(String[] args) {
-		DB db = new HSQLDBEmbeddedDB();
-		RelationBase base = new RelationBase(db);
-		
-		new EDBRelation(base,"s",1,true);
-		base.add(Parser.parseFact("s(abc)."));
-		base.add(Parser.parseFact("s(ab)."));
-		base.add(Parser.parseFact("s(xabc)."));
-		base.add(Parser.parseFact("s(abd)."));
+    public static void main(String[] args) {
+        DB db = new HSQLDBEmbeddedDB();
+        RelationBase base = new RelationBase(db);
 
-		System.out.println(base.query("?- s(X) & startswith(X,ab)."));
-	}
+        new EDBRelation(base, "s", 1, true);
+        base.add(Parser.parseFact("s(abc)."));
+        base.add(Parser.parseFact("s(ab)."));
+        base.add(Parser.parseFact("s(xabc)."));
+        base.add(Parser.parseFact("s(abd)."));
+
+        System.out.println(base.query("?- s(X) & startswith(X,ab)."));
+    }
 }

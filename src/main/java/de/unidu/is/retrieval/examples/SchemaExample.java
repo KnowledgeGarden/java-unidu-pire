@@ -13,47 +13,47 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: SchemaExample.java,v 1.1 2005/02/25 14:33:29 nottelma Exp $
 package de.unidu.is.retrieval.examples;
-
-import java.util.Collections;
 
 import de.unidu.is.retrieval.Schema;
 import de.unidu.is.retrieval.SchemaElement;
 
+import java.util.Collections;
+
 /**
  * A schema example.
- * 
+ *
  * @author Henrik Nottelmann
- * @since 2005-02-25
  * @version $Revision: 1.1 $, $Date: 2005/02/25 14:33:29 $
+ * @since 2005-02-25
  */
 public class SchemaExample {
 
-	public static void main(String[] args) {
-		SchemaElement a = new SchemaElement("a");
-		SchemaElement b = new SchemaElement("b");
-		SchemaElement c = new SchemaElement("c");
-		SchemaElement x = new SchemaElement("@x", "Name", Collections
-				.singletonList("plainname"));
-		SchemaElement t1 = new SchemaElement("text()", "Text", Collections
-				.singletonList("stemen"));
-		SchemaElement t2 = new SchemaElement("text()", "Name", Collections
-				.singletonList("plainname"));
-		a.add(b);
-		a.add(c);
-		b.add(c);
-		b.add(t1);
-		c.add(t2);
-		c.add(x);
+    public static void main(String[] args) {
+        SchemaElement a = new SchemaElement("a");
+        SchemaElement b = new SchemaElement("b");
+        SchemaElement c = new SchemaElement("c");
+        SchemaElement x = new SchemaElement("@x", "Name", Collections
+                .singletonList("plainname"));
+        SchemaElement t1 = new SchemaElement("text()", "Text", Collections
+                .singletonList("stemen"));
+        SchemaElement t2 = new SchemaElement("text()", "Name", Collections
+                .singletonList("plainname"));
+        a.add(b);
+        a.add(c);
+        b.add(c);
+        b.add(t1);
+        c.add(t2);
+        c.add(x);
 
-		Schema schema = new Schema("S");
-		schema.setRootElement(a);
-		System.out.println(a);
+        Schema schema = new Schema("S");
+        schema.setRootElement(a);
+        System.out.println(a);
 
-		System.out.println(a.getXPaths());
-		System.out.println(a.getElement("/a/c/text()"));
-	}
+        System.out.println(a.getXPaths());
+        System.out.println(a.getElement("/a/c/text()"));
+    }
 
 }

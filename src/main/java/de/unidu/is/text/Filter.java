@@ -13,39 +13,39 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: Filter.java,v 1.6 2005/02/21 17:29:28 huesselbeck Exp $
 package de.unidu.is.text;
 
 import java.util.Iterator;
 
 /**
- * A filter is used to modify objects (in most cases, objects) in a uniform 
- * way.  The filter converts an object into a list of other objects, 
- * represented by an iterator. In addition, a filter can be called with an 
+ * A filter is used to modify objects (in most cases, objects) in a uniform
+ * way.  The filter converts an object into a list of other objects,
+ * represented by an iterator. In addition, a filter can be called with an
  * iterator; then, the filter is applied on each object returned by the
- * filter.  
- *   
+ * filter.
+ *
  * @author Henrik Nottelmann
- * @since 2003-07-03
  * @version $Revision: 1.6 $, $Date: 2005/02/21 17:29:28 $
+ * @since 2003-07-03
  */
 public interface Filter {
 
-	/**
-	 * Applies this filter on the specified single object.
-	 * 
-	 * @param seed object on which the filter is applied
-	 * @return iterator over the resulting objects
-	 */
-	public abstract Iterator apply(Object seed);
+    /**
+     * Applies this filter on the specified single object.
+     *
+     * @param seed object on which the filter is applied
+     * @return iterator over the resulting objects
+     */
+    Iterator apply(Object seed);
 
-	/**
-	 * Applies this filter on each object returned by the specified iterator.
-	 * 
-	 * @param iterator iterator over objects on which the filter is applied
-	 * @return iterator over the resulting objects
-	 */
-	public abstract Iterator apply(Iterator iterator);
+    /**
+     * Applies this filter on each object returned by the specified iterator.
+     *
+     * @param iterator iterator over objects on which the filter is applied
+     * @return iterator over the resulting objects
+     */
+    Iterator apply(Iterator iterator);
 
 }

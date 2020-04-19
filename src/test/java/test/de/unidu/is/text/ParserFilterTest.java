@@ -13,47 +13,48 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: ParserFilterTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
 package test.de.unidu.is.text;
 
-import java.util.List;
-
-import junit.framework.TestCase;
 import de.unidu.is.text.ParserFilter;
 import de.unidu.is.util.CollectionUtilities;
+import junit.framework.TestCase;
+
+import java.util.List;
 
 /**
  * @author nottelma
- * @since Jul 8, 2003
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:29 $
+ * @since Jul 8, 2003
  */
 public class ParserFilterTest extends TestCase {
 
-	private ParserFilter filter;
-	
-	/**
-	 * Constructor for SoundexFilterTest.
-	 * @param arg0
-	 */
-	public ParserFilterTest(String arg0) {
-		super(arg0);
-	}
+    private ParserFilter filter;
 
-	/*
-	 * @see TestCase#setUp()
-	 */
-	protected void setUp() throws Exception {
-		filter = new ParserFilter();
-	}
+    /**
+     * Constructor for SoundexFilterTest.
+     *
+     * @param arg0
+     */
+    public ParserFilterTest(String arg0) {
+        super(arg0);
+    }
 
-	public void testRun() {
-		List list = CollectionUtilities.toList(filter.apply("The quick brown Fox jumps xy"));
-		assertEquals(list.size(),4);
-		assertEquals(list.get(0),"quick");
-		assertEquals(list.get(1),"brown");
-		assertEquals(list.get(2),"fox");
-		assertEquals(list.get(3),"jump");
-	}
+    /*
+     * @see TestCase#setUp()
+     */
+    protected void setUp() {
+        filter = new ParserFilter();
+    }
+
+    public void testRun() {
+        List list = CollectionUtilities.toList(filter.apply("The quick brown Fox jumps xy"));
+        assertEquals(4, list.size());
+        assertEquals(list.get(0), "quick");
+        assertEquals(list.get(1), "brown");
+        assertEquals(list.get(2), "fox");
+        assertEquals(list.get(3), "jump");
+    }
 
 }

@@ -16,48 +16,47 @@
 // $Id: LearnableFunction.java,v 1.5 2005/02/28 22:27:55 nottelma Exp $
 package de.unidu.is.util;
 
-import java.io.File;
-
 import de.unidu.is.learning.Learner;
 import de.unidu.is.learning.LearnerFactory;
 
+import java.io.File;
+
 /**
  * A function whose parameters can be learned via regression.
- * 
+ *
  * @author Henrik Nottelmann
- * @since 2004-06-21
  * @version $Revision: 1.5 $, $Date: 2005/02/28 22:27:55 $
+ * @since 2004-06-21
  */
 public abstract class LearnableFunction extends Function {
 
-	/**
-	 * Uses the specified file for learning parameters. The file should contain
-	 * x and y values, separated by a space. The parameter names are specified
-	 * by <code>getParameterNames()</code>, the textual serialisation of this
-	 * function by <code>getFunction()</code> (including the function name),
-	 * and the result overwrites the current parameters.
-	 * 
-	 * @param learnfile
-	 *                   file used for learning
-	 */
-	public void learn(File learnfile) {
-		Learner parameterLearner = LearnerFactory.newLearner();
-		parameters = new DelegatedPropertyMap(parameterLearner.learn(learnfile
-				.toString(), " ", getFunction(), getParameterNames()));
-	}
+    /**
+     * Uses the specified file for learning parameters. The file should contain
+     * x and y values, separated by a space. The parameter names are specified
+     * by <code>getParameterNames()</code>, the textual serialisation of this
+     * function by <code>getFunction()</code> (including the function name),
+     * and the result overwrites the current parameters.
+     *
+     * @param learnfile file used for learning
+     */
+    public void learn(File learnfile) {
+        Learner parameterLearner = LearnerFactory.newLearner();
+        parameters = new DelegatedPropertyMap(parameterLearner.learn(learnfile
+                .toString(), " ", getFunction(), getParameterNames()));
+    }
 
-	/**
-	 * Returns the function in its textual representation.
-	 * 
-	 * @return textual representation of this function
-	 */
-	public abstract String getFunction();
+    /**
+     * Returns the function in its textual representation.
+     *
+     * @return textual representation of this function
+     */
+    public abstract String getFunction();
 
-	/**
-	 * Returns the parameter names which can be learned.
-	 * 
-	 * @return parameter names
-	 */
-	public abstract String[] getParameterNames();
+    /**
+     * Returns the parameter names which can be learned.
+     *
+     * @return parameter names
+     */
+    public abstract String[] getParameterNames();
 
 }

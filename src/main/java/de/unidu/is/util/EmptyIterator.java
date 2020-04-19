@@ -13,7 +13,7 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: EmptyIterator.java,v 1.5 2005/02/21 17:29:29 huesselbeck Exp $
 package de.unidu.is.util;
 
@@ -24,37 +24,36 @@ import java.util.NoSuchElementException;
  * A iterator over an empty set.
  *
  * @author Henrik Nottelmann
- * @since 2003-07-05
  * @version $Revision: 1.5 $, $Date: 2005/02/21 17:29:29 $
+ * @since 2003-07-05
  */
 public class EmptyIterator implements Iterator {
 
 
-	/**
-	 * Returns always <code>false</code>.
-	 *
-	 * @return always false
-	 */
-	public boolean hasNext() {
-		return false;
-	}
+    /**
+     * Returns always <code>false</code>.
+     *
+     * @return always false
+     */
+    public boolean hasNext() {
+        return false;
+    }
 
-	/**
-	 * Always throws a <code>NoSuchElementException</code>.
-	 * 
-	 * @return nothing (an exception will be thrown)
-	 * @throws NoSuchElementException 
-	 */
-	public Object next() {
-			throw new NoSuchElementException();
-	}
+    /**
+     * Always throws a <code>NoSuchElementException</code>.
+     *
+     * @return nothing (an exception will be thrown)
+     * @throws NoSuchElementException
+     */
+    public Object next() {
+        throw new NoSuchElementException();
+    }
 
-	/**
-	 * <b>Removing objects is unsupported!</B>
-	 * 
-	 */
-	public void remove() {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * <b>Removing objects is unsupported!</B>
+     */
+    public void remove() {
+        throw new UnsupportedOperationException();
+    }
 
 }

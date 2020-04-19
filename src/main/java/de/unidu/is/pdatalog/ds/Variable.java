@@ -20,20 +20,19 @@ import de.unidu.is.expressions.VariableExpression;
 
 /**
  * A pDatalog++ variable.
- * 
+ *
  * @author Henrik Nottelmann
  * @version $Revision: 1.5 $, $Date: 2005/02/28 22:27:55 $
  */
 public class Variable extends VariableExpression {
 
-	/**
-	 * Creates a new object.
-	 * 
-	 * @param arg
-	 *                   variable name
-	 */
-	public Variable(String arg) {
-		super(arg);
-	}
+    /**
+     * Creates a new object.
+     *
+     * @param arg variable name
+     */
+    public Variable(String arg) {
+        super(arg);
+    }
 
 }

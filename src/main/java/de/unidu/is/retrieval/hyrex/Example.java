@@ -13,59 +13,51 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: Example.java,v 1.9 2005/02/28 22:27:56 nottelma Exp $
 package de.unidu.is.retrieval.hyrex;
 
-import java.util.Iterator;
-import java.util.List;
-
-import org.w3c.dom.Document;
-
-import de.unidu.is.retrieval.DocumentNotFoundException;
-import de.unidu.is.retrieval.IndexException;
-import de.unidu.is.retrieval.ProbDoc;
-import de.unidu.is.retrieval.Retriever;
-import de.unidu.is.retrieval.UnsupportedQueryException;
-import de.unidu.is.retrieval.XIRQLQuery;
-import de.unidu.is.retrieval.XIRQLStringQuery;
+import de.unidu.is.retrieval.*;
 import de.unidu.is.util.StopWatch;
 import de.unidu.is.util.XMLUtilities;
+import org.w3c.dom.Document;
+
+import java.util.List;
 
 /**
- * A simple example for the HyREX IR interface. It uses the BIBDB HyREX 
+ * A simple example for the HyREX IR interface. It uses the BIBDB HyREX
  * server used by our web server.
- * 
+ *
  * @author Henrik Nottelmann
- * @since 2004-01-04
  * @version $Revision: 1.9 $, $Date: 2005/02/28 22:27:56 $
+ * @since 2004-01-04
  */
 public class Example {
 
-	public static void main(String[] args) throws UnsupportedQueryException, IndexException, DocumentNotFoundException {
-		StopWatch watch = new StopWatch();
-		Retriever ir =
-			new HyREXRetriever(
-				"www.is.informatik.uni-duisburg.de",
-				10099,
-				"DB",
-				"bibdb");
-		watch.start();
-		XIRQLQuery query =
-			new XIRQLStringQuery("42", "/#PCDATA $author:plainname$ \"Nottelmann\"", 22);
-		List result = ir.getResult(query);
-		System.out.println(result);
-		for (Iterator it = result.iterator(); it.hasNext();) {
-			ProbDoc doc = (ProbDoc) it.next();
-			Document document = ir.getDocument(doc);
-			System.out.println(XMLUtilities.toString(document));
-		}
-		System.out.println(result.size() + " results");
-		System.out.println(ir.getDocuments(result));
-		watch.stop();
-		System.out.println(watch);
-		ir.close();
-		System.exit(0);
-	}
+    public static void main(String[] args) throws UnsupportedQueryException, IndexException, DocumentNotFoundException {
+        StopWatch watch = new StopWatch();
+        Retriever ir =
+                new HyREXRetriever(
+                        "www.is.informatik.uni-duisburg.de",
+                        10099,
+                        "DB",
+                        "bibdb");
+        watch.start();
+        XIRQLQuery query =
+                new XIRQLStringQuery("42", "/#PCDATA $author:plainname$ \"Nottelmann\"", 22);
+        List result = ir.getResult(query);
+        System.out.println(result);
+        for (Object o : result) {
+            ProbDoc doc = (ProbDoc) o;
+            Document document = ir.getDocument(doc);
+            System.out.println(XMLUtilities.toString(document));
+        }
+        System.out.println(result.size() + " results");
+        System.out.println(ir.getDocuments(result));
+        watch.stop();
+        System.out.println(watch);
+        ir.close();
+        System.exit(0);
+    }
 
 }

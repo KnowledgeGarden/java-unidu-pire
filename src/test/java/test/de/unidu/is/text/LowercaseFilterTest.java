@@ -13,7 +13,7 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: LowercaseFilterTest.java,v 1.5 2005/02/21 17:29:29 huesselbeck Exp $
 
 /*
@@ -24,47 +24,48 @@ specific language governing permissions and limitations under the License.
  */
 package test.de.unidu.is.text;
 
-import java.util.List;
-
-import junit.framework.TestCase;
 import de.unidu.is.text.LowercaseFilter;
 import de.unidu.is.util.CollectionUtilities;
+import junit.framework.TestCase;
+
+import java.util.List;
 
 /**
  * @author nottelma
  * @version $Revision: 1.5 $, $Date: 2005/02/21 17:29:29 $
- *
+ * <p>
  * To change the template for this generated type comment go to
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 public class LowercaseFilterTest extends TestCase {
 
-	protected LowercaseFilter filter;
-	
-	/**
-	 * Constructor for LowercaseFilterTest.
-	 * @param arg0
-	 */
-	public LowercaseFilterTest(String arg0) {
-		super(arg0);
-	}
+    protected LowercaseFilter filter;
 
-	/*
-	 * @see TestCase#setUp()
-	 */
-	protected void setUp() throws Exception {
-		filter = new LowercaseFilter(null);
-	}
+    /**
+     * Constructor for LowercaseFilterTest.
+     *
+     * @param arg0
+     */
+    public LowercaseFilterTest(String arg0) {
+        super(arg0);
+    }
 
-	private void test(Object str,String exp) {
-		List list = CollectionUtilities.toList(filter.apply(str));
-		assertTrue(list.size()==1);
-		assertEquals(list.get(0),exp);
-	}
+    /*
+     * @see TestCase#setUp()
+     */
+    protected void setUp() {
+        filter = new LowercaseFilter(null);
+    }
 
-	public void testFilter() {
-		test(new Integer(1),"1");
-		test("The brown Fox","the brown fox");
-	}
+    private void test(Object str, String exp) {
+        List list = CollectionUtilities.toList(filter.apply(str));
+        assertEquals(1, list.size());
+        assertEquals(list.get(0), exp);
+    }
+
+    public void testFilter() {
+        test(1, "1");
+        test("The brown Fox", "the brown fox");
+    }
 
 }

@@ -13,7 +13,7 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: ISOWriter.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
 package de.unidu.is.util;
 
@@ -23,21 +23,21 @@ import java.io.UnsupportedEncodingException;
 
 /**
  * A writer using using the ISO-8859-1 encoding.
- * 
+ *
  * @author Henrik Nottelmann
- * @since 2004-01-30
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:29 $
+ * @since 2004-01-30
  */
 public class ISOWriter extends OutputStreamWriter {
 
-	/**
-	 * Creates a new writer using the ISO-8859-1 encoding.
-	 * 
-	 * @param out output stream
-	 * @throws java.io.UnsupportedEncodingException 
-	 */
-	public ISOWriter(OutputStream out) throws UnsupportedEncodingException {
-		super(out, ISOReader.ISO88591);
-	}
+    /**
+     * Creates a new writer using the ISO-8859-1 encoding.
+     *
+     * @param out output stream
+     * @throws java.io.UnsupportedEncodingException
+     */
+    public ISOWriter(OutputStream out) throws UnsupportedEncodingException {
+        super(out, ISOReader.ISO88591);
+    }
 
 }

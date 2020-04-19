@@ -13,7 +13,7 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: Schema.java,v 1.6 2005/02/21 17:29:21 huesselbeck Exp $
 
 package de.unidu.is.oai;
@@ -24,66 +24,69 @@ package de.unidu.is.oai;
  */
 
 public class Schema implements Comparable {
-    
-    /** Constants */
-    protected static String oaiPrefix="oai:";
-    protected static int oaiDelimiter=':';
-    
-    
+
+    /**
+     * Constants
+     */
+    protected static String oaiPrefix = "oai:";
+    protected static int oaiDelimiter = ':';
+
+
     /***************************************************
      * Members
      ***************************************************/
 
-    protected String prefix=null;
-    
-    /** The url of a DTD or XSD for this schema
+    protected final String prefix;
+
+    /**
+     * The url of a DTD or XSD for this schema
      */
-    protected String url=null;
-    
-     /** The url of a namespace for this schema
+    protected final String url;
+
+    /**
+     * The url of a namespace for this schema
      */
-    protected String namespace="";
-        
+    protected final String namespace;
+
     /***************************************************
      * Constructors
      ***************************************************/
-    public Schema(String prefix, String url, String namespace)
-    {
-    	this.prefix=prefix;
-        this.url=url;
-        this.namespace=namespace;
+    public Schema(String prefix, String url, String namespace) {
+        this.prefix = prefix;
+        this.url = url;
+        this.namespace = namespace;
     }
- 
+
     /***************************************************
      * protected methods
      ***************************************************/
-    
+
     /***************************************************
      * public methods
      ***************************************************/
-        
+
     public String getUrl() // url
     {
         return url;
     }
-    
+
     public String getNamespace() // namespace
     {
         return namespace;
     }
-    
+
     public String getPrefix() {
-    	return prefix;
+        return prefix;
     }
-    
+
     public boolean equals(Object o) {
-        return ((o!=null) && (o instanceof Schema) &&
+        return ((o instanceof Schema) &&
                 (this.getPrefix().equals(((Schema) o).getPrefix())));
     }
 
     public int compareTo(Object o) {
-        Schema s=(Schema) o; // this throws a ClassCastException, if o is not a Schema
+        Schema s = (Schema) o; // this throws a ClassCastException, if o is not a Schema
         return this.getPrefix().compareTo(s.getPrefix());
     }
-    
+
 }

@@ -13,47 +13,48 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: UntagFilterTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
 package test.de.unidu.is.text;
 
-import junit.framework.TestCase;
 import de.unidu.is.text.UntagFilter;
+import junit.framework.TestCase;
 
 /**
  * @author nottelma
- * @since Jul 8, 2003
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:29 $
+ * @since Jul 8, 2003
  */
 public class UntagFilterTest extends TestCase {
 
-	private UntagFilter filter;
-	
-	/**
-	 * Constructor for SoundexFilterTest.
-	 * @param arg0
-	 */
-	public UntagFilterTest(String arg0) {
-		super(arg0);
-	}
+    private UntagFilter filter;
 
-	/*
-	 * @see TestCase#setUp()
-	 */
-	protected void setUp() throws Exception {
-		filter = new UntagFilter(null);
-	}
+    /**
+     * Constructor for SoundexFilterTest.
+     *
+     * @param arg0
+     */
+    public UntagFilterTest(String arg0) {
+        super(arg0);
+    }
 
-	public void testRunPlain() {
-		assertEquals(filter.run("The quick brown fox"),"The quick brown fox");
-	}
+    /*
+     * @see TestCase#setUp()
+     */
+    protected void setUp() {
+        filter = new UntagFilter(null);
+    }
 
-	public void testRunB() {
-		assertEquals(filter.run("The quick <b>brown</b> fox"),"The quick brown fox");
-	}
+    public void testRunPlain() {
+        assertEquals(filter.run("The quick brown fox"), "The quick brown fox");
+    }
 
-	public void testRunAttribute() {
-		assertEquals(filter.run("The quick <a b=\"hallo\">brown</a> fox<br>"),"The quick brown fox");
-	}
+    public void testRunB() {
+        assertEquals(filter.run("The quick <b>brown</b> fox"), "The quick brown fox");
+    }
+
+    public void testRunAttribute() {
+        assertEquals(filter.run("The quick <a b=\"hallo\">brown</a> fox<br>"), "The quick brown fox");
+    }
 
 }

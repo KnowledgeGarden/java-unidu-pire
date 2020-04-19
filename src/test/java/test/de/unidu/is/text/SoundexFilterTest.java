@@ -13,43 +13,44 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: SoundexFilterTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
 package test.de.unidu.is.text;
 
-import junit.framework.TestCase;
 import de.unidu.is.text.SoundexFilter;
+import junit.framework.TestCase;
 
 /**
  * @author nottelma
- * @since Jul 8, 2003
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:29 $
+ * @since Jul 8, 2003
  */
 public class SoundexFilterTest extends TestCase {
 
-	private SoundexFilter filter;
-	
-	/**
-	 * Constructor for SoundexFilterTest.
-	 * @param arg0
-	 */
-	public SoundexFilterTest(String arg0) {
-		super(arg0);
-	}
+    private SoundexFilter filter;
 
-	/*
-	 * @see TestCase#setUp()
-	 */
-	protected void setUp() throws Exception {
-		filter = new SoundexFilter(null);
-	}
+    /**
+     * Constructor for SoundexFilterTest.
+     *
+     * @param arg0
+     */
+    public SoundexFilterTest(String arg0) {
+        super(arg0);
+    }
 
-	public void testRunHello() {
-		assertEquals(filter.run("HELLO"),filter.run("hallo"));
-	}
+    /*
+     * @see TestCase#setUp()
+     */
+    protected void setUp() {
+        filter = new SoundexFilter(null);
+    }
 
-	public void testRunNotSame() {
-		assertNotSame(filter.run("hello"),filter.run("world"));
-	}
+    public void testRunHello() {
+        assertEquals(filter.run("HELLO"), filter.run("hallo"));
+    }
+
+    public void testRunNotSame() {
+        assertNotSame(filter.run("hello"), filter.run("world"));
+    }
 
 }

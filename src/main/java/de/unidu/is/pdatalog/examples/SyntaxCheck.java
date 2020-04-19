@@ -13,7 +13,7 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: SyntaxCheck.java,v 1.1 2005/02/28 22:27:55 nottelma Exp $
 
 package de.unidu.is.pdatalog.examples;
@@ -23,22 +23,21 @@ import de.unidu.is.pdatalog.parser.Parser;
 
 /**
  * A simple class for testing the syntax.
- * 
+ *
  * @author Henrik Nottelmann
- * @since 2003-10-21
  * @version $Revision: 1.1 $, $Date: 2005/02/28 22:27:55 $
+ * @since 2003-10-21
  */
 public class SyntaxCheck {
 
-	public static void main(String[] args) {
-		String str =
-			"a(b,\"z\") :- !aa(bb,\"zz\") & aaa(bbb,\"zzz\",ccc) | (((2*PROB)+(3*bb))+(-5*a)).";
+    public static void main(String[] args) {
+        String str;
 
-		str = "dl(D,DL) :- docid(D) & sum(DL,TF,{tf(D,X,TF)}).";
-		
-		Rule rule = Parser.parseRule(str);
-		System.out.println(str);
-		System.out.println(rule);
-	}
+        str = "dl(D,DL) :- docid(D) & sum(DL,TF,{tf(D,X,TF)}).";
+
+        Rule rule = Parser.parseRule(str);
+        System.out.println(str);
+        System.out.println(rule);
+    }
 
 }

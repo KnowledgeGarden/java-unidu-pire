@@ -13,53 +13,52 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: UnsupportedQueryException.java,v 1.4 2005/02/21 17:29:23 huesselbeck Exp $
 package de.unidu.is.retrieval;
 
 /**
  * Signals that the query type is not supported.
- * 
+ *
  * @author Henrik Nottelmann
- * @since 2004-03-17
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:23 $
+ * @since 2004-03-17
  */
 public class UnsupportedQueryException extends Exception {
 
-	/**
-	 * Creates a new instance.
-	 *  
-	 */
-	public UnsupportedQueryException() {
-		super();
-	}
+    /**
+     * Creates a new instance.
+     */
+    public UnsupportedQueryException() {
+        super();
+    }
 
-	/**
-	 * Creates a new instance.
-	 *  
-	 * @param message further message
-	 */
-	public UnsupportedQueryException(String message) {
-		super(message);
-	}
+    /**
+     * Creates a new instance.
+     *
+     * @param message further message
+     */
+    public UnsupportedQueryException(String message) {
+        super(message);
+    }
 
-	/**
-	 * Creates a new instance.
-	 *  
-	 * @param message further message
-	 * @param cause the cause for this exception
-	 */
-	public UnsupportedQueryException(String message, Throwable cause) {
-		super(message, cause);
-	}
+    /**
+     * Creates a new instance.
+     *
+     * @param message further message
+     * @param cause   the cause for this exception
+     */
+    public UnsupportedQueryException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
-	/**
-	 * Creates a new instance.
-	 *  
-	 * @param cause the cause for this exception
-	 */
-	public UnsupportedQueryException(Throwable cause) {
-		super(cause);
-	}
+    /**
+     * Creates a new instance.
+     *
+     * @param cause the cause for this exception
+     */
+    public UnsupportedQueryException(Throwable cause) {
+        super(cause);
+    }
 
 }

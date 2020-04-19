@@ -13,7 +13,7 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: ListSets.java,v 1.5 2005/03/14 17:33:13 nottelma Exp $
 
 /*
@@ -45,18 +45,13 @@ specific language governing permissions and limitations under the License.
  */
 package de.unidu.is.oai;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.log4j.Category;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
+
+import java.util.*;
 
 /**
  * @author fischer
@@ -64,146 +59,146 @@ import org.w3c.dom.Text;
  */
 public class ListSets extends OAIListRequest {
 
-	private static Category logger =
-		Category.getInstance(ListSets.class.getName());
-		
-	private Map sets=new HashMap();
-	
-	/**
-	 * @param url
-	 * @param userAgent
-	 * @param fromEmail
-	 */
-	public ListSets(
-		String url,
-		String userAgent,
-		String fromEmail) throws OAIException {
-		super(url, userAgent, fromEmail, "ListSets");
-		doRequest();
-		doListSets();
-	}
+    private static final Category logger =
+            Category.getInstance(ListSets.class.getName());
 
-	/**
-	 * @param url
-	 * @param userAgent
-	 * @param fromEmail
-	 * @param resumptionToken
-	 */
-	public ListSets(
-		String url,
-		String userAgent,
-		String fromEmail,
-		String resumptionToken) throws OAIException {
-		super(url, userAgent, fromEmail, "ListSets", resumptionToken);
-		doRequest();
-		doListSets();
-	}
+    private final Map sets = new HashMap();
 
-	protected void doListSets() throws OAIException {
-		Element root = getRelevantElement("ListSets");
-		Collection s = extractSets(root);
-		Iterator i = s.iterator();
-		logger.info("Sets:");
-		while (i.hasNext()) {
-			Set set = (Set) i.next();
-			logger.info(set.getId());
-			this.addSet(set);
-		}
-	}
-	
-	protected void addSet(Set set) {
-		if (!(sets.containsKey(set.getSetSpec()))) {
-			sets.put(set.getSetSpec(),set);
-		}
-	}
-	
-	public Set getSet(String setSpec) {
-		return (Set) sets.get(setSpec);
-	}
+    /**
+     * @param url
+     * @param userAgent
+     * @param fromEmail
+     */
+    public ListSets(
+            String url,
+            String userAgent,
+            String fromEmail) throws OAIException {
+        super(url, userAgent, fromEmail, "ListSets");
+        doRequest();
+        doListSets();
+    }
 
-	protected Collection extractSets(Element root) throws OAIException {
-		List result = new LinkedList();
-		NodeList setList = root.getElementsByTagName("set");
-		if (setList.getLength() > 0) {
-			for (int i = 0; i < setList.getLength(); i++) {
-				if (setList.item(i) instanceof Element) {
-					String setSpec = "";
-					String setName = "";
-					Element s = (Element) setList.item(i);
+    /**
+     * @param url
+     * @param userAgent
+     * @param fromEmail
+     * @param resumptionToken
+     */
+    public ListSets(
+            String url,
+            String userAgent,
+            String fromEmail,
+            String resumptionToken) throws OAIException {
+        super(url, userAgent, fromEmail, "ListSets", resumptionToken);
+        doRequest();
+        doListSets();
+    }
 
-					NodeList specList =
-						s.getElementsByTagName("setSpec");
-					if ((specList.getLength() > 0)
-						&& (specList.item(0) instanceof Element)) {
-						Element p = (Element) specList.item(0);
-						Node c = p.getFirstChild();
-						if (c instanceof Text) {
-							setSpec = ((Text) c).getNodeValue();
-						} else {
-							logger.warn(
-								"Warning: "
-									+ getUrl()
-									+ " - setSpec element is not of type text");
-						}
-					} else {
-						logger.warn(
-							"Warning: "
-								+ getUrl()
-								+ " - setSpec element missing");
-					}
-					NodeList nameList = s.getElementsByTagName("setName");
-					if ((nameList.getLength() > 0)
-						&& (nameList.item(0) instanceof Element)) {
-						Element p = (Element) nameList.item(0);
-						Node c = p.getFirstChild();
-						if (c instanceof Text) {
-							setName = ((Text) c).getNodeValue();
-						} else {
-							logger.warn(
-								"Warning: "
-									+ getUrl()
-									+ " - setName element is not of type text");
-						}
-					} else {
-						logger.warn(
-							"Warning: "
-								+ getUrl()
-								+ " - setName element missing");
-					}
-					if ((!(setSpec.equals(""))) && (!(setName.equals("")))) {
-						Set newSet =
-							new Set(setSpec,setName);
-						result.add(newSet);
-						//this.addset(prefix);
-					}
-				} else {
-					logger.warn(
-						"Warning: "
-							+ getUrl()
-							+ " - illegal set: "
-							+ setList.item(i).toString());
-				}
-			}
-		} else {
-			throw new OAIException(getUrl() + ": no sets found");
-		}
-		return result;
-	}
+    protected void doListSets() throws OAIException {
+        Element root = getRelevantElement("ListSets");
+        Collection s = extractSets(root);
+        Iterator i = s.iterator();
+        logger.info("Sets:");
+        while (i.hasNext()) {
+            Set set = (Set) i.next();
+            logger.info(set.getId());
+            this.addSet(set);
+        }
+    }
 
-	public Collection getSets() {
-		return sets.values();
-	}
+    protected void addSet(Set set) {
+        if (!(sets.containsKey(set.getSetSpec()))) {
+            sets.put(set.getSetSpec(), set);
+        }
+    }
 
-	public Iterator getSetsIterator() {
-		return sets.values().iterator();
-	}
-	
-	public Collection getSetSpecs() {
-		return sets.keySet();
-	}
-	
-	public Iterator getSetSpecsIterator() {
-		return sets.keySet().iterator();
-	}
+    public Set getSet(String setSpec) {
+        return (Set) sets.get(setSpec);
+    }
+
+    protected Collection extractSets(Element root) throws OAIException {
+        List result = new LinkedList();
+        NodeList setList = root.getElementsByTagName("set");
+        if (setList.getLength() > 0) {
+            for (int i = 0; i < setList.getLength(); i++) {
+                if (setList.item(i) instanceof Element) {
+                    String setSpec = "";
+                    String setName = "";
+                    Element s = (Element) setList.item(i);
+
+                    NodeList specList =
+                            s.getElementsByTagName("setSpec");
+                    if ((specList.getLength() > 0)
+                            && (specList.item(0) instanceof Element)) {
+                        Element p = (Element) specList.item(0);
+                        Node c = p.getFirstChild();
+                        if (c instanceof Text) {
+                            setSpec = c.getNodeValue();
+                        } else {
+                            logger.warn(
+                                    "Warning: "
+                                            + getUrl()
+                                            + " - setSpec element is not of type text");
+                        }
+                    } else {
+                        logger.warn(
+                                "Warning: "
+                                        + getUrl()
+                                        + " - setSpec element missing");
+                    }
+                    NodeList nameList = s.getElementsByTagName("setName");
+                    if ((nameList.getLength() > 0)
+                            && (nameList.item(0) instanceof Element)) {
+                        Element p = (Element) nameList.item(0);
+                        Node c = p.getFirstChild();
+                        if (c instanceof Text) {
+                            setName = c.getNodeValue();
+                        } else {
+                            logger.warn(
+                                    "Warning: "
+                                            + getUrl()
+                                            + " - setName element is not of type text");
+                        }
+                    } else {
+                        logger.warn(
+                                "Warning: "
+                                        + getUrl()
+                                        + " - setName element missing");
+                    }
+                    if ((!(setSpec.isEmpty())) && (!(setName.isEmpty()))) {
+                        Set newSet =
+                                new Set(setSpec, setName);
+                        result.add(newSet);
+                        //this.addset(prefix);
+                    }
+                } else {
+                    logger.warn(
+                            "Warning: "
+                                    + getUrl()
+                                    + " - illegal set: "
+                                    + setList.item(i).toString());
+                }
+            }
+        } else {
+            throw new OAIException(getUrl() + ": no sets found");
+        }
+        return result;
+    }
+
+    public Collection getSets() {
+        return sets.values();
+    }
+
+    public Iterator getSetsIterator() {
+        return sets.values().iterator();
+    }
+
+    public Collection getSetSpecs() {
+        return sets.keySet();
+    }
+
+    public Iterator getSetSpecsIterator() {
+        return sets.keySet().iterator();
+    }
 
 }
