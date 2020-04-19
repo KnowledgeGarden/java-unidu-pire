@@ -48,22 +48,6 @@ public class SystemUtilities {
         return SystemUtilities.class.getResourceAsStream("/" + relativePath);
     }
 
-    /**
-     * Returns a URL for the first file with the given name
-     * (prefixed with <code>conf/</conf>).<p>
-     * <p>
-     * This method scans the classpath. For each JAR, the file must be
-     * located in the beginning (<code>jar:file://...!/file</code>). For
-     * each directory, the file must be located in that directoy or in its
-     *
-     * @param relativePath relative path, without "conf" prefix
-     * @return corresponding URL
-     */
-    public static URL getConfURL(String relativePath) {
-        String sep = System.getProperty("file.separator");
-        System.out.println("System.Utils.getconf " + relativePath);
-        return getResourceURL("conf" + sep + relativePath);
-    }
 
     /**
      * Returns an array of URLs for all files with the given name

@@ -64,7 +64,7 @@ public class SQLFormatterImplementation implements SQLFormatter {
         String uri = db.getDbURI();
         int h1 = uri.indexOf(':');
         int h2 = uri.indexOf(':', h1 + 1);
-        config = new FilePropertyMap(new URL[]{SystemUtilities.getConfURL("db/"
+        config = new FilePropertyMap(new URL[]{SystemUtilities.getResourceURL("db/"
                 + uri.substring(h1 + 1, h2) + ".conf")});
         System.out.println("SQLFomatterImpl " + uri + " | " + config + " | " + uri.substring(h1 + 1, h2));
     }

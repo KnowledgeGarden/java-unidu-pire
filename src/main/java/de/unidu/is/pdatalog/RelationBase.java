@@ -76,7 +76,7 @@ public class RelationBase {
     public RelationBase(DB db) {
         relations = new HashMap();
         formatter = new PDatalogSQLFormatter(db);
-        config = new FilePropertyMap(SystemUtilities.getConfURL("pdatalog"),
+        config = new FilePropertyMap(SystemUtilities.getResourceURL("pdatalog"),
                 true);
         Class[] constructorTypes = new Class[]{getClass()};
         Object[] constructorObjects = new Object[]{this};

@@ -40,4 +40,7 @@ public class DoubleParser {
             return 0;
         return Double.parseDouble(o);
     }
+    public static double parseDouble(double o) {
+        return o;
+    }
 }
