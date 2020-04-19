@@ -20,54 +20,54 @@ import java.util.Iterator;
 
 /**
  * A node in a query representation, as the root of a subtree.
- * 
+ *
  * @author Henrik Nottelmann
- * @since 2004-07-16
  * @version $Revision: 1.6 $, $Date: 2005/02/28 22:27:55 $
+ * @since 2004-07-16
  */
 public interface QueryNode {
 
-	/**
-	 * Converts the node and its subtree into disjunctive form.
-	 * 
-	 * @return node in disjunctive form (or this node, if no simplication is
-	 *               required)
-	 */
-	QueryNode toDF();
+    /**
+     * Converts the node and its subtree into disjunctive form.
+     *
+     * @return node in disjunctive form (or this node, if no simplication is
+     * required)
+     */
+    QueryNode toDF();
 
-	/**
-	 * Returns true iff the node is in disjunctive form.
-	 * 
-	 * @return true iff the node is in disjunctive form
-	 */
-	boolean isDF();
+    /**
+     * Returns true iff the node is in disjunctive form.
+     *
+     * @return true iff the node is in disjunctive form
+     */
+    boolean isDF();
 
-	/**
-	 *  Returns the node in prefix notation.
-	 * 
-	 * @return  node in prefix notation
-	 */
-	String toPrefix();
+    /**
+     * Returns the node in prefix notation.
+     *
+     * @return node in prefix notation
+     */
+    String toPrefix();
 
-	/**
-	 * Simplifies this node.
-	 * 
-	 * @return simplified node (or this node, if no simplication is required)
-	 */
-	QueryNode simplifiedNode();
+    /**
+     * Simplifies this node.
+     *
+     * @return simplified node (or this node, if no simplication is required)
+     */
+    QueryNode simplifiedNode();
 
-	/**
-	 * Clones this node.
-	 * 
-	 * @return cloned node
-	 */
-	QueryNode cloneNode();
+    /**
+     * Clones this node.
+     *
+     * @return cloned node
+     */
+    QueryNode cloneNode();
 
-	/**
-	 * Returns an iterator over the children of this node.
-	 * 
-	 * @return iterator over children nodes
-	 */
-	Iterator iterator();
+    /**
+     * Returns an iterator over the children of this node.
+     *
+     * @return iterator over children nodes
+     */
+    Iterator iterator();
 
 }

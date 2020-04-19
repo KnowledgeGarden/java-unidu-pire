@@ -13,78 +13,78 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: IDBRelation.java,v 1.7 2005/03/14 17:33:13 nottelma Exp $
 package de.unidu.is.pdatalog;
 
-import java.util.Collection;
-
 import de.unidu.is.pdatalog.ds.Rule;
 
+import java.util.Collection;
+
 /**
- * A class for pDatalog++ relation derived by rules (corresponding to an 
+ * A class for pDatalog++ relation derived by rules (corresponding to an
  * intensional predicate).
- * 
+ *
  * @author Henrik Nottelmann
- * @since 2003-10-07
  * @version $Revision: 1.7 $, $Date: 2005/03/14 17:33:13 $
+ * @since 2003-10-07
  */
 public class IDBRelation extends Relation {
 
-	/**
-	 * Constructs a new relation, and automatically adds it to the 
-	 * relation base.
-	 * 
-	 * @param base corresponding relation base
-	 * @param name relatio n name
-	 * @param arity arity of the relation
-	 */
-	public IDBRelation(RelationBase base,String name,int arity) {
-		super(base,name, arity);
-	}
+    /**
+     * Constructs a new relation, and automatically adds it to the
+     * relation base.
+     *
+     * @param base  corresponding relation base
+     * @param name  relatio n name
+     * @param arity arity of the relation
+     */
+    public IDBRelation(RelationBase base, String name, int arity) {
+        super(base, name, arity);
+    }
 
-	/**
-	 * Constructs a new relation, and automatically adds it to the 
-	 * relation base.
-	 * 
-	 * @param base corresponding relation base
-	 * @param name relatio n name
-	 * @param arity arity of the relation
-	 * @param create if true, the relation is physically created
-	 */
-	public IDBRelation(RelationBase base, String name, int arity,boolean create) {
-		super(base, name, arity,create);
-	}
+    /**
+     * Constructs a new relation, and automatically adds it to the
+     * relation base.
+     *
+     * @param base   corresponding relation base
+     * @param name   relatio n name
+     * @param arity  arity of the relation
+     * @param create if true, the relation is physically created
+     */
+    public IDBRelation(RelationBase base, String name, int arity, boolean create) {
+        super(base, name, arity, create);
+    }
 
-	/**
-	 * Computes the result of the specified rule.
-	 * 
-	 * @param rule single rulefor this relation
-	 */
-	public void compute(Rule rule) {
+    /**
+     * Computes the result of the specified rule.
+     *
+     * @param rule single rulefor this relation
+     */
+    public void compute(Rule rule) {
 		/*List rules = new ArrayList();
 		rules.add(rule);
 		base.computeDisjoint(this,rules);*/
-		base.compute(this,rule);
-	}
+        base.compute(this, rule);
+    }
 
-	/**
-	 * Computes the result of the specified rules.
-	 * 
-	 * @param rules collection of rules for this relation
-	 */
-	public void compute(Collection rules) {
-		base.compute(this,rules);
-	}
+    /**
+     * Computes the result of the specified rules.
+     *
+     * @param rules collection of rules for this relation
+     */
+    public void compute(Collection rules) {
+        base.compute(this, rules);
+    }
 
-	/**
-	 * Computes the result of the specified rules. The results from the 
-	 * single rules are considered to be disjoint.
-	 * 
-	 * @param rules collection of rules for this relation
-	 */
-	public void computeDisjoint(Collection rules) {
-		base.computeDisjoint(this,rules);
-	}
+    /**
+     * Computes the result of the specified rules. The results from the
+     * single rules are considered to be disjoint.
+     *
+     * @param rules collection of rules for this relation
+     */
+    public void computeDisjoint(Collection rules) {
+        base.computeDisjoint(this, rules);
+    }
 
 }

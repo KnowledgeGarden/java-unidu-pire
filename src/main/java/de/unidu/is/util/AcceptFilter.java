@@ -13,7 +13,7 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: AcceptFilter.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
 package de.unidu.is.util;
 
@@ -22,17 +22,17 @@ package de.unidu.is.util;
  * A filter which can accept or reject values.
  *
  * @author Henrik Nottelmann
- * @since 2003-09-23
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:29 $
+ * @since 2003-09-23
  */
 public interface AcceptFilter {
 
-	/**
-	 * Returns true if the specified object is accepted.
-	 * 
-	 * @param object object to be testet
-	 * @return true if the specified object is accepted
-	 */
-	public abstract boolean accept(Object object);
+    /**
+     * Returns true if the specified object is accepted.
+     *
+     * @param object object to be testet
+     * @return true if the specified object is accepted
+     */
+    boolean accept(Object object);
 
 }

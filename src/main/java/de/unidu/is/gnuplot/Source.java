@@ -13,7 +13,7 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: Source.java,v 1.4 2005/02/21 17:29:19 huesselbeck Exp $
 package de.unidu.is.gnuplot;
 
@@ -22,107 +22,103 @@ package de.unidu.is.gnuplot;
  * gnuplot expression defining the function or data file for the
  * gnuplot <code>plot</code> command has to be specified as well as
  * the "title" of the curve.<p>
- *
+ * <p>
  * Furthermore, the minimum and maximum value for the x-axis of this curve
  * can be specified (for the <code>mind.evalution.gnuplot.GnuPlot</code>
  * instance). By default, both values are <code>0</code>, thus they are
  * ignored.<p>
- *
+ * <p>
  * This class has to be subclassed for specific application areas.
  *
  * @author Henrik Nottelmann
- * @since 2002-04-10
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:19 $
+ * @since 2002-04-10
  */
 public abstract class Source {
 
-	/**
-	 * The minimum value for the x-axis (default is <code>0</code>).
-	 *
-	 */
-	protected double min;
+    /**
+     * The minimum value for the x-axis (default is <code>0</code>).
+     */
+    protected double min;
 
-	/**
-	 * The maximum value for the x-axis (default is <code>0</code>).
-	 *
-	 */
-	protected double max;
+    /**
+     * The maximum value for the x-axis (default is <code>0</code>).
+     */
+    protected double max;
 
-	/**
-	 * The title of this curve.
-	 *
-	 */
-	protected String title;
+    /**
+     * The title of this curve.
+     */
+    protected String title;
 
-	/**
-	 * Creates a new, empty instance.
-	 * 
-	 */
-	public Source() {
-	}
+    /**
+     * Creates a new, empty instance.
+     */
+    public Source() {
+    }
 
-	/**
-	 * Creates a new, empty instance and sets the title.
-	 * 
-	 * @param title title of this plot
-	 */
-	public Source(String title) {
-		this.title=title;
-	}
+    /**
+     * Creates a new, empty instance and sets the title.
+     *
+     * @param title title of this plot
+     */
+    public Source(String title) {
+        this.title = title;
+    }
 
-	/**
-	 * Returns a gnuplot expression defining the function or data file
-	 * for the gnuplot <code>plot</code> command.
-	 *
-	 * This method has to be overridden in subclasses.
-	 *
-	 * @return gnuplot expression defining the function or data file
-	 */
-	public abstract String getCommand();
+    /**
+     * Returns a gnuplot expression defining the function or data file
+     * for the gnuplot <code>plot</code> command.
+     * <p>
+     * This method has to be overridden in subclasses.
+     *
+     * @return gnuplot expression defining the function or data file
+     */
+    public abstract String getCommand();
 
-	/**
-	 * Returns the title of the curve. 
-	 *
-	 * @return title of the curve
-	 */
-	public String getTitle() {
-		return title;
-	}
+    /**
+     * Returns the title of the curve.
+     *
+     * @return title of the curve
+     */
+    public String getTitle() {
+        return title;
+    }
 
-	/**
-	 * Sets the minimum value for the x-axis.
-	 *
-	 * @param min minimum value for the x-axis
-	 */
-	public void setMin(double min) {
-		this.min = min;
-	}
+    /**
+     * Returns the minimum value for the x-axis.
+     *
+     * @return minimum value for the x-axis
+     */
+    public double getMin() {
+        return min;
+    }
 
-	/**
-	 * Returns the minimum value for the x-axis.
-	 *
-	 * @return minimum value for the x-axis
-	 */
-	public double getMin() {
-		return min;
-	}
+    /**
+     * Sets the minimum value for the x-axis.
+     *
+     * @param min minimum value for the x-axis
+     */
+    public void setMin(double min) {
+        this.min = min;
+    }
 
-	/**
-	 * Sets the maximum value for the x-axis.
-	 *
-	 * @param max maximum value for the x-axis
-	 */
-	public void setMax(double max) {
-		this.max = max;
-	}
+    /**
+     * Returns the maximum value for the x-axis.
+     *
+     * @return maximum value for the x-axis
+     */
+    public double getMax() {
+        return max;
+    }
 
-	/**
-	 * Returns the maximum value for the x-axis.
-	 *
-	 * @return maximum value for the x-axis
-	 */
-	public double getMax() {
-		return max;
-	}
+    /**
+     * Sets the maximum value for the x-axis.
+     *
+     * @param max maximum value for the x-axis
+     */
+    public void setMax(double max) {
+        this.max = max;
+    }
 
 }

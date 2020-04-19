@@ -23,76 +23,70 @@ import de.unidu.is.pdatalog.ds.Literal;
 /**
  * A fact whose string representation matches the one of HySpirit (thus, it is
  * pDatalog and not pDatalog++).
- * 
+ *
  * @author Henrik Nottelmann
- * @since 2004-07-17
  * @version $Revision: 1.6 $, $Date: 2005/02/28 22:27:55 $
+ * @since 2004-07-17
  */
 public class HySpiritFact extends Fact {
 
-	/**
-	 * Creates a new object.
-	 * 
-	 * @param head
-	 *                   literal used for creating this fact
-	 * @param mapping
-	 *                   mapping for computing the probability of this fact
-	 */
-	public HySpiritFact(Literal head, Expression mapping) {
-		super(head, mapping);
-	}
+    /**
+     * Creates a new object.
+     *
+     * @param head    literal used for creating this fact
+     * @param mapping mapping for computing the probability of this fact
+     */
+    public HySpiritFact(Literal head, Expression mapping) {
+        super(head, mapping);
+    }
 
-	/**
-	 * Creates a new object.
-	 * 
-	 * @param head
-	 *                   literal used for creating this fact
-	 */
-	public HySpiritFact(Literal head) {
-		super(head);
-	}
+    /**
+     * Creates a new object.
+     *
+     * @param head literal used for creating this fact
+     */
+    public HySpiritFact(Literal head) {
+        super(head);
+    }
 
-	/**
-	 * Creates a new object.
-	 * 
-	 * @param prob
-	 *                   probability of the fact
-	 * @param head
-	 *                   literal used for creating this fact
-	 */
-	public HySpiritFact(double prob, Literal head) {
-		super(prob, head);
-	}
+    /**
+     * Creates a new object.
+     *
+     * @param prob probability of the fact
+     * @param head literal used for creating this fact
+     */
+    public HySpiritFact(double prob, Literal head) {
+        super(prob, head);
+    }
 
-	/**
-	 * Creates a new object.
-	 * 
-	 * @param fact
-	 *                   original fact.
-	 */
-	public HySpiritFact(Fact fact) {
-		super(fact);
-	}
+    /**
+     * Creates a new object.
+     *
+     * @param fact original fact.
+     */
+    public HySpiritFact(Fact fact) {
+        super(fact);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.unidu.is.pdatalog.ds.Rule#toString()
-	 */
-	public String toString() {
-		String temp;
-		int j = 0;
-		temp = super.toString();
-		char[] retarr = new char[temp.length()];
-		for (int i = 0; i < temp.length(); i++) {
-			if ((temp.charAt(i) != '\'') & (temp.charAt(i) != '|'))
-				retarr[j++] = temp.charAt(i);
-			else if (temp.charAt(i) == '|') {
-				retarr[j++] = '.';
-				i = temp.length();
-			}
-		}
-		return new String(retarr).trim();
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see de.unidu.is.pdatalog.ds.Rule#toString()
+     */
+    public String toString() {
+        String temp;
+        int j = 0;
+        temp = super.toString();
+        char[] retarr = new char[temp.length()];
+        for (int i = 0; i < temp.length(); i++) {
+            if ((temp.charAt(i) != '\'') & (temp.charAt(i) != '|'))
+                retarr[j++] = temp.charAt(i);
+            else if (temp.charAt(i) == '|') {
+                retarr[j++] = '.';
+                i = temp.length();
+            }
+        }
+        return new String(retarr).trim();
+    }
 
 }

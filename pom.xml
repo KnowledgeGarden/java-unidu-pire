@@ -19,29 +19,29 @@
     </organization>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
+        <java.version>1.9</java.version>
         <github.global.server>github</github.global.server>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>
-    <repositories>
-        <repository>
-            <id>snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
+<!--    <repositories>-->
+<!--        <repository>-->
+<!--            <id>snapshots</id>-->
+<!--            <url>https://oss.sonatype.org/content/repositories/snapshots</url>-->
+<!--            <releases>-->
+<!--                <enabled>false</enabled>-->
+<!--            </releases>-->
+<!--            <snapshots>-->
+<!--                <enabled>true</enabled>-->
+<!--            </snapshots>-->
+<!--        </repository>-->
+<!--    </repositories>-->
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.18.1</version>
+                <version>3.0.0-M4</version>
                 <configuration>
                     <includes>
                         <include>**/*.class</include>
@@ -78,21 +78,21 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.7</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.sonatype.plugins</groupId>-->
+<!--                <artifactId>nexus-staging-maven-plugin</artifactId>-->
+<!--                <version>1.6.7</version>-->
+<!--                <extensions>true</extensions>-->
+<!--                <configuration>-->
+<!--                    <serverId>ossrh</serverId>-->
+<!--                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>-->
+<!--                    <autoReleaseAfterClose>true</autoReleaseAfterClose>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>2.2.1</version>
+                <version>3.1.0</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -105,16 +105,16 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.0.2</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>${settings.localRepository}</classpathPrefix>
-                            <classpathLayoutType>repository</classpathLayoutType>
-                        </manifest>
-                    </archive>
-                </configuration>
+                <version>3.1.2</version>
+<!--                <configuration>-->
+<!--                    <archive>-->
+<!--                        <manifest>-->
+<!--                            <addClasspath>true</addClasspath>-->
+<!--                            <classpathPrefix>${settings.localRepository}</classpathPrefix>-->
+<!--                            <classpathLayoutType>repository</classpathLayoutType>-->
+<!--                        </manifest>-->
+<!--                    </archive>-->
+<!--                </configuration>-->
             </plugin>
            
  
@@ -147,7 +147,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.17</version>
+                <version>3.1.0</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -183,13 +183,14 @@
 		    <artifactId>commons-cli</artifactId>
 		    <version>1.4</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/commons-collections/commons-collections -->
-		<dependency>
-		    <groupId>commons-collections</groupId>
-		    <artifactId>commons-collections</artifactId>
-		    <version>3.2.2</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.4</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
 		<dependency>
 		    <groupId>commons-dbcp</groupId>
 		    <artifactId>commons-dbcp</artifactId>
@@ -222,14 +223,16 @@
 <!--         	<version>1.0</version>-->
 <!--         	<systemPath>${project.basedir}/lib/fiola.jar</systemPath>-->
 <!--      	</dependency>-->
-<!--      	<dependency>-->
-<!--		    <groupId>hsqldb</groupId>-->
-<!--		    <artifactId>hsqldb</artifactId>-->
-<!--		    <version>1.0</version>-->
-<!--		    <scope>system</scope>-->
-<!--         	<systemPath>${project.basedir}/lib/hsqldb.jar</systemPath>-->
-<!--		</dependency>-->
-<!--      	-->
+
+        <!-- https://mvnrepository.com/artifact/org.hsqldb/hsqldb -->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.5.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--      	-->
 <!--		<dependency>-->
 <!--         	<groupId>net.sf</groupId>-->
 <!--         	<artifactId>snowball</artifactId>-->
@@ -250,14 +253,15 @@
 		    <artifactId>jtidy</artifactId>
 		    <version>r938</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/junit/junit-dep -->
-		<dependency>
-		    <groupId>junit</groupId>
-		    <artifactId>junit-dep</artifactId>
-		    <version>4.10</version>
-		    <scope>test</scope>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/log4j/log4j -->
 		<dependency>
 		    <groupId>log4j</groupId>
 		    <artifactId>log4j</artifactId>
@@ -275,19 +279,20 @@
 		    <artifactId>xalan</artifactId>
 		    <version>2.7.2</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/xerces/xerces -->
-		<dependency>
-		    <groupId>xerces</groupId>
-		    <artifactId>xerces</artifactId>
-		    <version>2.4.0</version>
-		</dependency>
+        <!-- https://mvnrepository.com/artifact/xerces/xercesImpl -->
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>2.12.0</version>
+        </dependency>
+
 		<!-- https://mvnrepository.com/artifact/xmlrpc/xmlrpc -->
 		<dependency>
 		    <groupId>xmlrpc</groupId>
 		    <artifactId>xmlrpc</artifactId>
 		    <version>2.0</version>
 		</dependency>
-		
+
 		
 		
 		

@@ -13,77 +13,78 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: XIRQLStringQuery.java,v 1.4 2005/02/21 17:29:23 huesselbeck Exp $
 package de.unidu.is.retrieval;
 
 
 /**
  * A XIRQL query defined by a string.
- * 
+ *
  * @author Henrik Nottelmann
- * @since 2005-01-03
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:23 $
+ * @since 2005-01-03
  */
 public class XIRQLStringQuery extends XIRQLQuery {
 
-	/**
-	 * The XIRQL query string.
-	 */
-	private String xirql;
+    /**
+     * The XIRQL query string.
+     */
+    private String xirql;
 
-	
-	/**
-	 * Creates a new object.
-	 */
-	public XIRQLStringQuery() {
-		super();
-	}
 
-	/**
-	 * Creates a new object.
-	 *
-	 * @param queryID
-	 * @param xirql XIRQL query
-	 * @param numDocs
-	 */
-	public XIRQLStringQuery(String queryID,String xirql, int numDocs) {
-		super(queryID, numDocs);
-		setXIRQL(xirql);
-	}
+    /**
+     * Creates a new object.
+     */
+    public XIRQLStringQuery() {
+        super();
+    }
 
-	/**
-	 * Sets the XIRQL query string.
-	 * 
-	 * @param xirql XIRQL query string
-	 */
-	public void setXIRQL(String xirql) {
-		this.xirql = xirql;
-	}
+    /**
+     * Creates a new object.
+     *
+     * @param queryID
+     * @param xirql   XIRQL query
+     * @param numDocs
+     */
+    public XIRQLStringQuery(String queryID, String xirql, int numDocs) {
+        super(queryID, numDocs);
+        setXIRQL(xirql);
+    }
 
-	/**
-	 * Returns the XIRQL query string.
-	 * 
-	 * @return XIRQL query string
-	 */
-	public String getXIRQL() {
-		return xirql;
-	}
+    /**
+     * Returns the XIRQL query string.
+     *
+     * @return XIRQL query string
+     */
+    public String getXIRQL() {
+        return xirql;
+    }
 
-	/**
-	 * Returns the xirql.
-	 *
-	 * @return xirql.
-	 */
-	public String getXirql() {
-		return xirql;
-	}
-	/**
-	 * Sets the xirql.
-	 *
-	 * @param xirql xirql to set.
-	 */
-	public void setXirql(String xirql) {
-		this.xirql = xirql;
-	}
+    /**
+     * Sets the XIRQL query string.
+     *
+     * @param xirql XIRQL query string
+     */
+    public void setXIRQL(String xirql) {
+        this.xirql = xirql;
+    }
+
+    /**
+     * Returns the xirql.
+     *
+     * @return xirql.
+     */
+    public String getXirql() {
+        return xirql;
+    }
+
+    /**
+     * Sets the xirql.
+     *
+     * @param xirql xirql to set.
+     */
+    public void setXirql(String xirql) {
+        this.xirql = xirql;
+    }
 }

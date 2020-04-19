@@ -13,7 +13,7 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: FileISOWriter.java,v 1.6 2005/03/14 17:33:13 nottelma Exp $
 package de.unidu.is.util;
 
@@ -24,35 +24,35 @@ import java.io.UnsupportedEncodingException;
 
 /**
  * A file writer using using the ISO-8859-1 encoding.
- * 
+ *
  * @author Henrik Nottelmann
- * @since 2004-01-30
  * @version $Revision: 1.6 $, $Date: 2005/03/14 17:33:13 $
+ * @since 2004-01-30
  */
 public class FileISOWriter extends ISOWriter {
 
-	/**
-	 * Creates a new writer for the given file using the ISO-8859-1 encoding.
-	 * 
-	 * @param filename file name
-	 * @throws java.io.UnsupportedEncodingException
-	 * @throws java.io.FileNotFoundException
-	 */
-	public FileISOWriter(String filename)
-		throws UnsupportedEncodingException, FileNotFoundException {
-		this(new File(filename));
-	}
+    /**
+     * Creates a new writer for the given file using the ISO-8859-1 encoding.
+     *
+     * @param filename file name
+     * @throws java.io.UnsupportedEncodingException
+     * @throws java.io.FileNotFoundException
+     */
+    public FileISOWriter(String filename)
+            throws UnsupportedEncodingException, FileNotFoundException {
+        this(new File(filename));
+    }
 
-	/**
-	 * Creates a new writer for the given file using the ISO-8859-1 encoding.
-	 * 
-	 * @param file file
-	 * @throws java.io.UnsupportedEncodingException
-	 * @throws java.io.FileNotFoundException
-	 */
-	public FileISOWriter(File file)
-		throws UnsupportedEncodingException, FileNotFoundException {
-		super(new FileOutputStream(file));
-	}
+    /**
+     * Creates a new writer for the given file using the ISO-8859-1 encoding.
+     *
+     * @param file file
+     * @throws java.io.UnsupportedEncodingException
+     * @throws java.io.FileNotFoundException
+     */
+    public FileISOWriter(File file)
+            throws UnsupportedEncodingException, FileNotFoundException {
+        super(new FileOutputStream(file));
+    }
 
 }

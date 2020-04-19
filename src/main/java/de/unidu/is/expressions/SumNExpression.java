@@ -13,7 +13,7 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: SumNExpression.java,v 1.4 2005/02/21 17:29:18 huesselbeck Exp $
 package de.unidu.is.expressions;
 
@@ -22,20 +22,20 @@ import java.util.List;
 /**
  * An expression for the sum of a list of arguments, i.e.
  * arg1+arg2+arg3+...
- * 
+ *
  * @author Henrik Nottelmann
- * @since 2003-10-27
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:18 $
+ * @since 2003-10-27
  */
 public class SumNExpression extends ArgNExpression {
 
-	/**
-	 * Creates a new expression object.
-	 * 
-	 * @param args list of arguments of this expression
-	 */
-	public SumNExpression(List args) {
-		super("+",args);
-	}
+    /**
+     * Creates a new expression object.
+     *
+     * @param args list of arguments of this expression
+     */
+    public SumNExpression(List args) {
+        super("+", args);
+    }
 
 }

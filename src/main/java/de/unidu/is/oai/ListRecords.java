@@ -13,7 +13,7 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: ListRecords.java,v 1.5 2005/03/14 17:33:13 nottelma Exp $
 
 /*
@@ -51,62 +51,61 @@ specific language governing permissions and limitations under the License.
  */
 package de.unidu.is.oai;
 
+import org.apache.log4j.Category;
+
 import java.util.Collection;
 import java.util.LinkedList;
-
-import org.apache.log4j.Category;
 
 /**
  * @author fischer
  * @version $Revision: 1.5 $
- *
  */
 public class ListRecords extends OAIListRequest {
 
-	private static Category logger =
-		Category.getInstance(ListRecords.class.getName());
+    private static final Category logger =
+            Category.getInstance(ListRecords.class.getName());
 
-	private Collection recordIds = new LinkedList();
+    private final Collection recordIds = new LinkedList();
 
-	/**
-	 * @param url
-	 * @param userAgent
-	 * @param fromEmail
-	 * @param prefix
-	 */
-	public ListRecords(
-		String url,
-		String userAgent,
-		String fromEmail,
-		String prefix)
-		throws OAIException {
-		super(url, userAgent, fromEmail, "ListRecords");
-		setModifiers("&metadataPrefix=" + prefix);
-		// TODO add Sets
-		doRequest();
-		// no further parsing
-	}
+    /**
+     * @param url
+     * @param userAgent
+     * @param fromEmail
+     * @param prefix
+     */
+    public ListRecords(
+            String url,
+            String userAgent,
+            String fromEmail,
+            String prefix)
+            throws OAIException {
+        super(url, userAgent, fromEmail, "ListRecords");
+        setModifiers("&metadataPrefix=" + prefix);
+        // TODO add Sets
+        doRequest();
+        // no further parsing
+    }
 
-	/**
-	 * @param url
-	 * @param userAgent
-	 * @param fromEmail
-	 * @param prefix
-	 * @param resumptionToken
-	 */
-	public ListRecords(
-		String url,
-		String userAgent,
-		String fromEmail,
-		String prefix,
-		String resumptionToken)
-		throws OAIException {
-		super(url, userAgent, fromEmail, "ListRecords", resumptionToken);
-		setModifiers("&metadataPrefix=" + prefix);
-		// TODO add Sets
-		doRequest();
-		// no further parsing
-	}
+    /**
+     * @param url
+     * @param userAgent
+     * @param fromEmail
+     * @param prefix
+     * @param resumptionToken
+     */
+    public ListRecords(
+            String url,
+            String userAgent,
+            String fromEmail,
+            String prefix,
+            String resumptionToken)
+            throws OAIException {
+        super(url, userAgent, fromEmail, "ListRecords", resumptionToken);
+        setModifiers("&metadataPrefix=" + prefix);
+        // TODO add Sets
+        doRequest();
+        // no further parsing
+    }
 
     /*
 	protected void doListRecords() throws OAIException {
@@ -166,5 +165,5 @@ public class ListRecords extends OAIListRequest {
 	}
 
 	*/
-	
+
 }

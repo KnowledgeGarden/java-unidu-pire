@@ -16,353 +16,324 @@
 // $Id: Schema.java,v 1.17 2005/03/02 10:42:42 nottelma Exp $
 package de.unidu.is.retrieval;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-import javax.xml.transform.TransformerException;
-
+import de.unidu.is.util.StringUtilities;
 import org.apache.xpath.XPathAPI;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.traversal.NodeIterator;
 
-import de.unidu.is.util.StringUtilities;
+import javax.xml.transform.TransformerException;
+import java.util.*;
 
 /**
  * A schema definition. A schema consists of a list of attributes, which are
  * extracted from the XML document using XPath expressions (similar to the HyREX
  * DDL file).
- * 
+ *
  * @author Henrik Nottelmann
- * @since 2004-01-03
  * @version $Revision: 1.17 $, $Date: 2005/03/02 10:42:42 $
+ * @since 2004-01-03
  */
 public class Schema {
 
-	/**
-	 * The schema name.
-	 */
-	protected String schemaName;
+    /**
+     * A mapping from XPath expressions (as strings) onto attribute names (as
+     * strings). This is only used if <code>useXPathForQuery<code>
+     * equals false.
+     */
+    private final Map xpathToAliases;
+    /**
+     * A mapping from an attribute names onto XPath expressions (as strings) (as
+     * strings). This is only used if <code>useXPathForQuery<code>
+     * equals false.
+     */
+    private final Map aliasesToXPaths;
+    /**
+     * The schema name.
+     */
+    protected String schemaName;
+    /**
+     * The root element of the schema.
+     */
+    protected SchemaElement rootElement;
+    /**
+     * A flag specifying if an XPath expression is used in the query, or if
+     * attributes are used.
+     */
+    protected boolean useXPathForQuery;
 
-	/**
-	 * The root element of the schema.
-	 */
-	protected SchemaElement rootElement;
+    /**
+     * Creates a new, empty schema instance.
+     */
+    public Schema() {
+        this(null);
+    }
 
-	/**
-	 * A flag specifying if an XPath expression is used in the query, or if
-	 * attributes are used.
-	 */
-	protected boolean useXPathForQuery;
+    /**
+     * Creates a new, empty schema instance.
+     *
+     * @param schemaName schema name
+     */
+    public Schema(String schemaName) {
+        this.schemaName = schemaName;
+        xpathToAliases = new HashMap();
+        aliasesToXPaths = new HashMap();
+        useXPathForQuery = true;
+    }
 
-	/**
-	 * A mapping from XPath expressions (as strings) onto attribute names (as
-	 * strings). This is only used if <code>useXPathForQuery<code>
-	 * equals false.
-	 */
-	private Map xpathToAliases;
+    /**
+     * Returns the schema name.
+     *
+     * @return schema name
+     */
+    public String getSchemaName() {
+        return schemaName;
+    }
 
-	/**
-	 * A mapping from an attribute names onto XPath expressions (as strings) (as
-	 * strings). This is only used if <code>useXPathForQuery<code>
-	 * equals false.
-	 */
-	private Map aliasesToXPaths;
+    /**
+     * Sets the schema name.
+     *
+     * @param schemaName schema name
+     */
+    public void setSchemaName(String schemaName) {
+        this.schemaName = schemaName;
+    }
 
-	/**
-	 * Creates a new, empty schema instance.
-	 */
-	public Schema() {
-		this(null);
-	}
+    /**
+     * Returns the root schema element.
+     *
+     * @return root schema element
+     */
+    public SchemaElement getRootElement() {
+        return rootElement;
+    }
 
-	/**
-	 * Creates a new, empty schema instance.
-	 * 
-	 * @param schemaName
-	 *                   schema name
-	 */
-	public Schema(String schemaName) {
-		this.schemaName = schemaName;
-		xpathToAliases = new HashMap();
-		aliasesToXPaths = new HashMap();
-		useXPathForQuery = true;
-	}
+    /**
+     * Sets the root schema element.
+     *
+     * @param element new root schema element
+     */
+    public void setRootElement(SchemaElement element) {
+        rootElement = element;
+    }
 
-	/**
-	 * Returns the schema name.
-	 * 
-	 * @return schema name
-	 */
-	public String getSchemaName() {
-		return schemaName;
-	}
+    /**
+     * Returns true iff XPath expressions are used in the query instead of
+     * attributes.
+     *
+     * @return true iff XPath expressions are used in the query instead of
+     * attributes
+     */
+    public boolean usesXPathForQuery() {
+        return useXPathForQuery;
+    }
 
-	/**
-	 * Sets the schema name.
-	 * 
-	 * @param schemaName
-	 *                   schema name
-	 */
-	public void setSchemaName(String schemaName) {
-		this.schemaName = schemaName;
-	}
+    /**
+     * Specifies if XPath expressions are used in the query instead of
+     * attributes.
+     *
+     * @param b if true, XPath expressions are used in the query
+     */
+    public void setUseXPathForQuery(boolean b) {
+        useXPathForQuery = b;
+    }
 
-	/**
-	 * Returns the root schema element.
-	 * 
-	 * @return root schema element
-	 */
-	public SchemaElement getRootElement() {
-		return rootElement;
-	}
+    /**
+     * Returns the schema element for the specified path (XPath expression or
+     * alias).
+     *
+     * @param path path (XPath expression or alias)
+     * @return corresponding schema element
+     */
+    public SchemaElement getElement(String path) {
+        if (rootElement == null)
+            return null;
+        return rootElement.getElement(getXPath(path));
+    }
 
-	/**
-	 * Sets the root schema element.
-	 * 
-	 * @param element
-	 *                   new root schema element
-	 */
-	public void setRootElement(SchemaElement element) {
-		rootElement = element;
-	}
+    /**
+     * Returns a list with the XPath expressions.
+     *
+     * @return list with the XPath expressions (as strings)
+     */
+    public List getXPaths() {
+        return rootElement == null ? null : rootElement.getXPaths();
+    }
 
-	/**
-	 * Returns true iff XPath expressions are used in the query instead of
-	 * attributes.
-	 * 
-	 * @return true iff XPath expressions are used in the query instead of
-	 *               attributes
-	 */
-	public boolean usesXPathForQuery() {
-		return useXPathForQuery;
-	}
+    /**
+     * Returns a list with all aliases.
+     *
+     * @return list with the aliases (as strings)
+     */
+    public List getAliases() {
+        List l = new ArrayList(aliasesToXPaths.keySet());
+        Collections.sort(l);
+        return l;
+    }
 
-	/**
-	 * Specifies if XPath expressions are used in the query instead of
-	 * attributes.
-	 * 
-	 * @param b
-	 *                   if true, XPath expressions are used in the query
-	 */
-	public void setUseXPathForQuery(boolean b) {
-		useXPathForQuery = b;
-	}
+    /**
+     * Returns the unified path for queries. If XPath expressions are used in
+     * queries, then it is an XPath expression, otherwise it is an alias.
+     *
+     * @param path path (XPath expression or alias)
+     * @return unified path
+     */
+    public String getPath(String path) {
+        return useXPathForQuery ? getXPath(path) : getAlias(path);
+    }
 
-	/**
-	 * Returns the schema element for the specified path (XPath expression or
-	 * alias).
-	 * 
-	 * @param path
-	 *                   path (XPath expression or alias)
-	 * @return corresponding schema element
-	 */
-	public SchemaElement getElement(String path) {
-		if (rootElement == null)
-			return null;
-		return rootElement.getElement(getXPath(path));
-	}
+    /**
+     * Unifies the path in the specified query condition. If XPath expressions
+     * are used in queries, then it is an XPath expression, otherwise it is an
+     * alias.
+     *
+     * @param condition query condition
+     */
+    public void unifyPathForCondition(QueryCondition condition) {
+        condition.setPath(getPath(condition.getPath()));
+    }
 
-	/**
-	 * Returns a list with the XPath expressions.
-	 * 
-	 * @return list with the XPath expressions (as strings)
-	 */
-	public List getXPaths() {
-		return rootElement == null ? null : rootElement.getXPaths();
-	}
+    /**
+     * Returns the alias for the specified path.
+     *
+     * @param path path (XPath expression or alias)
+     * @return alias
+     */
+    public String getAlias(String path) {
+        if (!path.startsWith("/"))
+            return path;
+        List l = getAliasesForXPath(path);
+        if (l == null || l.isEmpty())
+            return null;
+        return (String) l.get(0);
+    }
 
-	/**
-	 * Returns a list with all aliases.
-	 * 
-	 * @return list with the aliases (as strings)
-	 */
-	public List getAliases() {
-		List l = new ArrayList();
-		l.addAll(aliasesToXPaths.keySet());
-		Collections.sort(l);
-		return l;
-	}
+    /**
+     * Returns the aliases for the specified path.
+     *
+     * @param path XPath expression)
+     * @return aliases
+     */
+    public List getAliasesForXPath(String path) {
+        return (List) xpathToAliases.get(path);
+    }
 
-	/**
-	 * Returns the unified path for queries. If XPath expressions are used in
-	 * queries, then it is an XPath expression, otherwise it is an alias.
-	 * 
-	 * @param path
-	 *                   path (XPath expression or alias)
-	 * @return unified path
-	 */
-	public String getPath(String path) {
-		return useXPathForQuery ? getXPath(path) : getAlias(path);
-	}
+    /**
+     * Returns the XPath expression for the specified path.
+     *
+     * @param alias path (XPath expression or alias)
+     * @return XPath expression
+     */
+    public String getXPath(String alias) {
+        if (alias.startsWith("/"))
+            return alias;
+        List l = getXPathsForAlias(alias);
+        if (l == null || l.isEmpty())
+            return null;
+        return (String) l.get(0);
+    }
 
-	/**
-	 * Unifies the path in the specified query condition. If XPath expressions
-	 * are used in queries, then it is an XPath expression, otherwise it is an
-	 * alias.
-	 * 
-	 * @param condition
-	 *                   query condition
-	 */
-	public void unifyPathForCondition(QueryCondition condition) {
-		condition.setPath(getPath(condition.getPath()));
-	}
+    /**
+     * Returns the XPath expressions for the specified path.
+     *
+     * @param alias alias
+     * @return XPath expressions
+     */
+    public List getXPathsForAlias(String alias) {
+        return (List) aliasesToXPaths.get(alias);
+    }
 
-	/**
-	 * Returns the alias for the specified path.
-	 * 
-	 * @param path
-	 *                   path (XPath expression or alias)
-	 * @return alias
-	 */
-	public String getAlias(String path) {
-		if (!path.startsWith("/"))
-			return path;
-		List l = getAliasesForXPath(path);
-		if (l == null || l.isEmpty())
-			return null;
-		return (String) l.get(0);
-	}
+    /**
+     * Adds an alias.
+     *
+     * @param xpath XPath expression
+     * @param alias alias for the specified XPath expression
+     */
+    public void addAlias(String xpath, String alias) {
+        List l1 = getXPathsForAlias(xpath);
+        if (l1 == null) {
+            l1 = new ArrayList();
+            xpathToAliases.put(xpath, l1);
+        }
+        l1.add(alias);
+        List l2 = getXPathsForAlias(alias);
+        if (l2 == null) {
+            l2 = new ArrayList();
+            aliasesToXPaths.put(alias, l2);
+        }
+        l2.add(xpath);
+    }
 
-	/**
-	 * Returns the aliases for the specified path.
-	 * 
-	 * @param path
-	 *                   XPath expression)
-	 * @return aliases
-	 */
-	public List getAliasesForXPath(String path) {
-		return (List) xpathToAliases.get(path);
-	}
+    /**
+     * Adds standard aliases (use converted XPaths).
+     */
+    public void addAliases() {
+        if (useXPathForQuery) {
+            for (Object o : getXPaths()) {
+                String xpath = (String) o;
+                String alias = convPath(xpath);
+                addAlias(xpath, alias);
+            }
+        }
+    }
 
-	/**
-	 * Returns the XPath expression for the specified path.
-	 * 
-	 * @param alias
-	 *                   path (XPath expression or alias)
-	 * @return XPath expression
-	 */
-	public String getXPath(String alias) {
-		if (alias.startsWith("/"))
-			return alias;
-		List l = getXPathsForAlias(alias);
-		if (l == null || l.isEmpty())
-			return null;
-		return (String) l.get(0);
-	}
+    /**
+     * Removes all aliases.
+     */
+    public void clearAliases() {
+        aliasesToXPaths.clear();
+        xpathToAliases.clear();
+    }
 
-	/**
-	 * Returns the XPath expressions for the specified path.
-	 * 
-	 * @param alias
-	 *                   alias
-	 * @return XPath expressions
-	 */
-	public List getXPathsForAlias(String alias) {
-		return (List) aliasesToXPaths.get(alias);
-	}
+    /**
+     * Converts a XPath path by removing the first element name and "/text()",
+     * transforming "/" into "__", "-" into "_" and "@" into "at":
+     *
+     * @param path XPath
+     * @return converted path
+     */
+    public static String convPath(String path) {
+        int h = path.indexOf('/', 1);
+        if (h != -1) {
+            path = path.substring(h + 1);
+        }
+        path = StringUtilities.replace(path, "-", "_");
+        path = StringUtilities.replace(path, "/text()", "");
+        path = StringUtilities.replace(path, "/", "__");
+        path = StringUtilities.replace(path, "@", "at");
+        return path;
+    }
 
-	/**
-	 * Adds an alias.
-	 * 
-	 * @param xpath
-	 *                   XPath expression
-	 * @param alias
-	 *                   alias for the specified XPath expression
-	 */
-	public void addAlias(String xpath, String alias) {
-		List l1 = getXPathsForAlias(xpath);
-		if (l1 == null) {
-			l1 = new ArrayList();
-			xpathToAliases.put(xpath, l1);
-		}
-		l1.add(alias);
-		List l2 = getXPathsForAlias(alias);
-		if (l2 == null) {
-			l2 = new ArrayList();
-			aliasesToXPaths.put(alias, l2);
-		}
-		l2.add(xpath);
-	}
+    /**
+     * Extract all values from the document for the given attribute.
+     *
+     * @param document XML document
+     * @param att      attribute (XPath or alias)
+     * @return list with all values (as strings)
+     */
+    public List extractValues(Document document, String att) {
+        String xpath = getXPath(att);
+        List list = new LinkedList();
+        try {
+            NodeIterator nodeIt = XPathAPI.selectNodeIterator(document, xpath);
+            for (Node node; (node = nodeIt.nextNode()) != null; )
+                list.add(node.getNodeValue());
+        } catch (TransformerException e) {
+            de.unidu.is.util.Log.error(e);
+        }
+        return list;
+    }
 
-	/**
-	 * Adds standard aliases (use converted XPaths).
-	 */
-	public void addAliases() {
-		if (useXPathForQuery) {
-			for (Iterator it = getXPaths().iterator(); it.hasNext();) {
-				String xpath = (String) it.next();
-				String alias = convPath(xpath);
-				addAlias(xpath, alias);
-			}
-		}
-	}
-
-	/**
-	 * Removes all aliases.
-	 */
-	public void clearAliases() {
-		aliasesToXPaths.clear();
-		xpathToAliases.clear();
-	}
-
-	/**
-	 * Converts a XPath path by removing the first element name and "/text()",
-	 * transforming "/" into "__", "-" into "_" and "@" into "at":
-	 * 
-	 * @param path
-	 *                   XPath
-	 * @return converted path
-	 */
-	public String convPath(String path) {
-		int h = path.indexOf("/", 1);
-		if (h != -1) {
-			path = path.substring(h + 1);
-		}
-		path = StringUtilities.replace(path, "-", "_");
-		path = StringUtilities.replace(path, "/text()", "");
-		path = StringUtilities.replace(path, "/", "__");
-		path = StringUtilities.replace(path, "@", "at");
-		return path;
-	}
-
-	/**
-	 * Extract all values from the document for the given attribute.
-	 * 
-	 * @param document
-	 *                   XML document
-	 * @param att
-	 *                   attribute (XPath or alias)
-	 * @return list with all values (as strings)
-	 */
-	public List extractValues(Document document, String att) {
-		String xpath = getXPath(att);
-		List list = new LinkedList();
-		try {
-			NodeIterator nodeIt = XPathAPI.selectNodeIterator(document, xpath);
-			for (Node node; (node = nodeIt.nextNode()) != null;)
-				list.add(node.getNodeValue());
-		} catch (TransformerException e) {
-			de.unidu.is.util.Log.error(e);
-		}
-		return list;
-	}
-
-	/**
-	 * Returns a hierarchical view of this schema.
-	 * 
-	 * @return hierarchical view of this schema
-	 */
-	public String getHierarchicalView() {
-		StringBuffer buf = new StringBuffer(1000);
-		buf.append("Schema: ").append(getSchemaName()).append("\n\n");
-		getRootElement().appendHierarchicalView(buf, 0);
-		return buf.toString();
-	}
+    /**
+     * Returns a hierarchical view of this schema.
+     *
+     * @return hierarchical view of this schema
+     */
+    public String getHierarchicalView() {
+        StringBuffer buf = new StringBuffer(1000);
+        buf.append("Schema: ").append(getSchemaName()).append("\n\n");
+        getRootElement().appendHierarchicalView(buf, 0);
+        return buf.toString();
+    }
 
 }

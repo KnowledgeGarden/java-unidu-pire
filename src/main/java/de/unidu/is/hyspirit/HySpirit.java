@@ -20,24 +20,23 @@ package de.unidu.is.hyspirit;
  * An interface definition for connecting to the HySpirit inference engine for
  * pDatalog built by our group (the version implemented in the Beta
  * object-oriented programming language).
- * 
+ *
  * @author Henrik Nottelmann
  * @version $Revision: 1.6 $, $Date: 2005/02/28 22:27:55 $
  */
 public interface HySpirit {
 
-	/**
-	 * Sends text (facts, rules, queries etc.) to HySpirit, and receives the result.
-	 * 
-	 * @param text text to be sent to HySpirit
-	 * @return HySpirit answer
-	 */
-	public String send(String text);
+    /**
+     * Sends text (facts, rules, queries etc.) to HySpirit, and receives the result.
+     *
+     * @param text text to be sent to HySpirit
+     * @return HySpirit answer
+     */
+    String send(String text);
 
-	/**
-	 * Closes the connection.
-	 *
-	 */
-	public void close();
+    /**
+     * Closes the connection.
+     */
+    void close();
 
 }

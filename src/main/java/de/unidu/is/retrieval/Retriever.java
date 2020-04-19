@@ -13,109 +13,108 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: Retriever.java,v 1.5 2005/02/21 17:29:22 huesselbeck Exp $
 package de.unidu.is.retrieval;
 
-import java.util.List;
-
 import org.w3c.dom.Document;
 
+import java.util.List;
+
 /**
- * An interface for abstracting from different XML-based IR engines (e.g. the 
- * XML PIRE extension, HyREX). This interface only supports the 
+ * An interface for abstracting from different XML-based IR engines (e.g. the
+ * XML PIRE extension, HyREX). This interface only supports the
  * retrieval part.
- * 
+ *
  * @author Henrik Nottelmann
- * @since 2004-03-14
  * @version $Revision: 1.5 $, $Date: 2005/02/21 17:29:22 $
+ * @since 2004-03-14
  */
 public interface Retriever {
 
-	/**
-	 * Returns the schema used by this retriever.
-	 * 
-	 * @return schema used by this retriever
-	 */
-	public abstract Schema getSchema();
+    /**
+     * Returns the schema used by this retriever.
+     *
+     * @return schema used by this retriever
+     */
+    Schema getSchema();
 
-	/**
-	 * Returns result for the specified query.
-	 *
-	 * @param query XIRQL query
-	 * @return list of ProbDoc instances
-	 */
-	public abstract List getResult(Query query)
-		throws UnsupportedQueryException, IndexException;
+    /**
+     * Returns result for the specified query.
+     *
+     * @param query XIRQL query
+     * @return list of ProbDoc instances
+     */
+    List getResult(Query query)
+            throws UnsupportedQueryException, IndexException;
 
-	/**
-	 * Returns a summarised result for the specified query.
-	 *
-	 * @param query XIRQL query
-	 * @return list of XMLDoc instances
-	 */
-	public abstract List getResultSummaries(Query query)
-		throws UnsupportedQueryException, IndexException, DocumentNotFoundException;
+    /**
+     * Returns a summarised result for the specified query.
+     *
+     * @param query XIRQL query
+     * @return list of XMLDoc instances
+     */
+    List getResultSummaries(Query query)
+            throws UnsupportedQueryException, IndexException, DocumentNotFoundException;
 
-	/**
-	 * Returns a summary of the XML document.
-	 * 
-	 * @param docID document id
-	 * @return summary of  XML document
-	 */
-	public abstract Document getSummary(String docID)
-		throws DocumentNotFoundException;
+    /**
+     * Returns a summary of the XML document.
+     *
+     * @param docID document id
+     * @return summary of  XML document
+     */
+    Document getSummary(String docID)
+            throws DocumentNotFoundException;
 
-	/**
-	 * Returns a summary of the XML document.
-	 * 
-	 * @param doc document descriptor
-	 * @return summary of XML document
-	 */
-	public abstract Document getSummary(ProbDoc doc)
-		throws DocumentNotFoundException;
+    /**
+     * Returns a summary of the XML document.
+     *
+     * @param doc document descriptor
+     * @return summary of XML document
+     */
+    Document getSummary(ProbDoc doc)
+            throws DocumentNotFoundException;
 
-	/**
-	 * Returns summaries of the XML documents.
-	 * 
-	 * @param result list of ProbDoc instances
-	 * @return list of XMLDoc instances
-	 */
-	public abstract List getSummaries(List result)
-		throws DocumentNotFoundException;
+    /**
+     * Returns summaries of the XML documents.
+     *
+     * @param result list of ProbDoc instances
+     * @return list of XMLDoc instances
+     */
+    List getSummaries(List result)
+            throws DocumentNotFoundException;
 
-	/**
-	 * Returns the full XML document.
-	 * 
-	 * @param docID document id
-	 * @return full XML document
-	 */
-	public abstract Document getDocument(String docID)
-		throws DocumentNotFoundException;
+    /**
+     * Returns the full XML document.
+     *
+     * @param docID document id
+     * @return full XML document
+     */
+    Document getDocument(String docID)
+            throws DocumentNotFoundException;
 
-	/**
-		* Returns the full XML document.
-		* 
-		* @param doc document descriptor
-		* @return full XML document
-		*/
-	public abstract Document getDocument(ProbDoc doc)
-		throws DocumentNotFoundException;
+    /**
+     * Returns the full XML document.
+     *
+     * @param doc document descriptor
+     * @return full XML document
+     */
+    Document getDocument(ProbDoc doc)
+            throws DocumentNotFoundException;
 
-	/**
-		* Returns the full XML documents.
-		* 
-		* @param result list of ProbDoc instances
-		* @return list of XMLDoc instances
-		*/
-	public abstract List getDocuments(List result)
-		throws DocumentNotFoundException;
+    /**
+     * Returns the full XML documents.
+     *
+     * @param result list of ProbDoc instances
+     * @return list of XMLDoc instances
+     */
+    List getDocuments(List result)
+            throws DocumentNotFoundException;
 
-	/**
-	 * Closes the retriever, and optionally frees used system resources 
-	 * (e.g. closes a network connection).
-	 * 
-	 */
-	public abstract void close() throws IndexException;
+    /**
+     * Closes the retriever, and optionally frees used system resources
+     * (e.g. closes a network connection).
+     */
+    void close() throws IndexException;
 
 }

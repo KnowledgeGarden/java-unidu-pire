@@ -22,186 +22,182 @@ import java.util.Set;
 
 /**
  * A query node representating a Boolean connector.
- * 
+ *
  * @author Henrik Nottelmann
- * @since 2004-05-22
  * @version $Revision: 1.6 $, $Date: 2005/02/28 22:27:55 $
+ * @since 2004-05-22
  */
 public abstract class BooleanQueryNode implements QueryNode {
 
-	/**
-	 * Set of children nodes (QueryNode instances).
-	 */
-	protected Set children;
+    /**
+     * Set of children nodes (QueryNode instances).
+     */
+    protected final Set children;
 
-	/**
-	 * Creates a new object.
-	 */
-	public BooleanQueryNode() {
-		children = new LinkedHashSet();
-	}
+    /**
+     * Creates a new object.
+     */
+    public BooleanQueryNode() {
+        children = new LinkedHashSet();
+    }
 
-	/**
-	 * Creates a new object.
-	 * 
-	 * @param children
-	 *                   children nodes
-	 */
-	public BooleanQueryNode(Set children) {
-		this();
-		setChildren(children);
-	}
+    /**
+     * Creates a new object.
+     *
+     * @param children children nodes
+     */
+    public BooleanQueryNode(Set children) {
+        this();
+        setChildren(children);
+    }
 
-	/**
-	 * Returns the children.
-	 * 
-	 * @return children nodes
-	 */
-	public Set getChildren() {
-		return children;
-	}
+    /**
+     * Returns the children.
+     *
+     * @return children nodes
+     */
+    public Set getChildren() {
+        return children;
+    }
 
-	/**
-	 * Sets the children.
-	 * 
-	 * @param list
-	 *                   children nodes
-	 */
-	public void setChildren(Set list) {
-		children.addAll(list);
-	}
+    /**
+     * Sets the children.
+     *
+     * @param list children nodes
+     */
+    public void setChildren(Set list) {
+        children.addAll(list);
+    }
 
-	/**
-	 * Adds the specified query node as a child.
-	 * 
-	 * @param node
-	 *                   new child node
-	 */
-	public void add(QueryNode node) {
-		children.add(node);
-	}
+    /**
+     * Adds the specified query node as a child.
+     *
+     * @param node new child node
+     */
+    public void add(QueryNode node) {
+        children.add(node);
+    }
 
-	/**
-	 * Returns a XIRQL representation of the connector represented by this node.
-	 * 
-	 * @return XIRQL representation of the connector
-	 */
-	protected abstract String getConnector();
+    /**
+     * Returns a XIRQL representation of the connector represented by this node.
+     *
+     * @return XIRQL representation of the connector
+     */
+    protected abstract String getConnector();
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	public String toString() {
-		StringBuffer buf = new StringBuffer();
-		String conn = " " + getConnector() + " ";
-		for (Iterator it = iterator(); it.hasNext();) {
-			QueryNode node = (QueryNode) it.next();
-			if (buf.length() > 0)
-				buf.append(conn);
-			buf.append(node);
-		}
-		return "(" + buf.toString() + ")";
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    public String toString() {
+        StringBuilder buf = new StringBuilder();
+        String conn = " " + getConnector() + " ";
+        for (Iterator it = iterator(); it.hasNext(); ) {
+            QueryNode node = (QueryNode) it.next();
+            if (buf.length() > 0)
+                buf.append(conn);
+            buf.append(node);
+        }
+        return "(" + buf + ")";
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.unidu.is.retrieval.QueryNode#toPrefix()
-	 */
-	public String toPrefix() {
-		StringBuffer buf = new StringBuffer();
-		for (Iterator it = iterator(); it.hasNext();) {
-			QueryNode node = (QueryNode) it.next();
-			if (buf.length() > 0)
-				buf.append(",");
-			buf.append(node.toPrefix());
-		}
-		return getConnector() + "[" + buf + "]";
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see de.unidu.is.retrieval.QueryNode#toPrefix()
+     */
+    public String toPrefix() {
+        StringBuilder buf = new StringBuilder();
+        for (Iterator it = iterator(); it.hasNext(); ) {
+            QueryNode node = (QueryNode) it.next();
+            if (buf.length() > 0)
+                buf.append(",");
+            buf.append(node.toPrefix());
+        }
+        return getConnector() + "[" + buf + "]";
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.unidu.is.retrieval.QueryNode#iterator()
-	 */
-	public Iterator iterator() {
-		return children.iterator();
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see de.unidu.is.retrieval.QueryNode#iterator()
+     */
+    public Iterator iterator() {
+        return children.iterator();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.unidu.is.retrieval.QueryNode#simplifiedNode()
-	 */
-	public QueryNode simplifiedNode() {
-		BooleanQueryNode qn = newNode();
-		for (Iterator iter = children.iterator(); iter.hasNext();) {
-			QueryNode node = (QueryNode) iter.next();
-			node = node.simplifiedNode();
-			if (sameClass(node)) {
-				for (Iterator iter2 = node.iterator(); iter2.hasNext();)
-					qn.add(((QueryNode) iter2.next()).simplifiedNode());
-			} else
-				qn.add(node);
-		}
-		return qn;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see de.unidu.is.retrieval.QueryNode#simplifiedNode()
+     */
+    public QueryNode simplifiedNode() {
+        BooleanQueryNode qn = newNode();
+        for (Object child : children) {
+            QueryNode node = (QueryNode) child;
+            node = node.simplifiedNode();
+            if (sameClass(node)) {
+                for (Iterator iter2 = node.iterator(); iter2.hasNext(); )
+                    qn.add(((QueryNode) iter2.next()).simplifiedNode());
+            } else
+                qn.add(node);
+        }
+        return qn;
+    }
 
-	/**
-	 * Returns true iff the specified query node represents the same class as
-	 * this node.
-	 * 
-	 * @param node
-	 *                   query node to compare
-	 * @return true iff the specified query node represents the same class as
-	 *               this node
-	 */
-	protected abstract boolean sameClass(QueryNode node);
+    /**
+     * Returns true iff the specified query node represents the same class as
+     * this node.
+     *
+     * @param node query node to compare
+     * @return true iff the specified query node represents the same class as
+     * this node
+     */
+    protected abstract boolean sameClass(QueryNode node);
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.unidu.is.retrieval.QueryNode#cloneNode()
-	 */
-	public QueryNode cloneNode() {
-		BooleanQueryNode node = newNode();
-		for (Iterator iter = children.iterator(); iter.hasNext();) {
-			QueryNode n = (QueryNode) iter.next();
-			node.add(n.cloneNode());
-		}
-		return node;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see de.unidu.is.retrieval.QueryNode#cloneNode()
+     */
+    public QueryNode cloneNode() {
+        BooleanQueryNode node = newNode();
+        for (Object child : children) {
+            QueryNode n = (QueryNode) child;
+            node.add(n.cloneNode());
+        }
+        return node;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	public boolean equals(Object obj) {
-		if (!(obj instanceof BooleanQueryNode))
-			return false;
-		BooleanQueryNode qn = (BooleanQueryNode) obj;
-		if (!sameClass(qn))
-			return false;
-		return children.equals(qn.children);
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    public boolean equals(Object obj) {
+        if (!(obj instanceof BooleanQueryNode))
+            return false;
+        BooleanQueryNode qn = (BooleanQueryNode) obj;
+        if (!sameClass(qn))
+            return false;
+        return children.equals(qn.children);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
-	public int hashCode() {
-		return getClass().hashCode() + children.hashCode();
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#hashCode()
+     */
+    public int hashCode() {
+        return getClass().hashCode() + children.hashCode();
+    }
 
-	/**
-	 * Returns a new, empty node of this type.
-	 * 
-	 * @return new, empty node of this type
-	 */
-	protected abstract BooleanQueryNode newNode();
+    /**
+     * Returns a new, empty node of this type.
+     *
+     * @return new, empty node of this type
+     */
+    protected abstract BooleanQueryNode newNode();
 
 }

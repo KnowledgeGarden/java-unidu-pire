@@ -13,20 +13,21 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: AsyncCallResponseListener.java,v 1.5 2005/02/21 17:29:29 huesselbeck Exp $
 
 package de.unidu.is.util;
 
-import java.util.*;
+import java.util.EventListener;
 
 /**
  * Interface for the Query Responses
+ *
  * @author Alexej
  * @version $Revision: 1.5 $, $Date: 2005/02/21 17:29:29 $
  */
-public interface AsyncCallResponseListener extends EventListener
-{
-  public void resultEvent(AsyncCallResponseEvent event);
-  public void faultEvent(AsyncCallResponseEvent event);
+public interface AsyncCallResponseListener extends EventListener {
+    void resultEvent(AsyncCallResponseEvent event);
+
+    void faultEvent(AsyncCallResponseEvent event);
 }

@@ -13,7 +13,7 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License. 
 */
 
- 
+
 // $Id: AsyncCallResponseEvent.java,v 1.6 2005/03/14 17:33:13 nottelma Exp $
 
 package de.unidu.is.util;
@@ -26,27 +26,23 @@ import java.util.EventObject;
  * @author Alexej
  * @version $Revision: 1.6 $, $Date: 2005/03/14 17:33:13 $
  */
-public class AsyncCallResponseEvent extends EventObject
-{
-  private Object response = null;
+public class AsyncCallResponseEvent extends EventObject {
+    private Object response = null;
 
-  public AsyncCallResponseEvent(Object source)
-  {
-    super(source);
-  }
+    public AsyncCallResponseEvent(Object source) {
+        super(source);
+    }
 
-  /**
-   * @param source the Name of the Class of the calling Object 
-   * @param response
-   */
-  public AsyncCallResponseEvent(Object source, Object response)
-  {
-    super(source);
-    this.response = response;
-  }
+    /**
+     * @param source   the Name of the Class of the calling Object
+     * @param response
+     */
+    public AsyncCallResponseEvent(Object source, Object response) {
+        super(source);
+        this.response = response;
+    }
 
-  public Object getResponse()
-  {
-    return response;
-  }    
+    public Object getResponse() {
+        return response;
+    }
 }
