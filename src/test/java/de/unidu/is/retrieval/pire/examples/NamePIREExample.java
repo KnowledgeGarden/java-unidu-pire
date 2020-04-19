@@ -18,6 +18,7 @@ package de.unidu.is.retrieval.pire.examples;
 
 import de.unidu.is.retrieval.pire.PIRE;
 import de.unidu.is.retrieval.pire.dt.NameDT;
+import junit.framework.TestCase;
 
 /**
  * An example for using names in PIRE.
@@ -25,9 +26,9 @@ import de.unidu.is.retrieval.pire.dt.NameDT;
  * @author Henrik Nottelmann
  * @version $Revision: 1.6 $, $Date: 2005/03/01 09:21:33 $
  */
-public class NamePIREExample {
+public class NamePIREExample extends TestCase {
 
-    public static void main(String[] args) {
+    public void test1() {
         PIRE ir = PIREExampleUtils.createPIRE();
 
         ir.initIndex();
@@ -43,7 +44,7 @@ public class NamePIREExample {
         ir.closeQuery(QUERYID);
 
         ir.removeIndex();
-        System.exit(0);
+
     }
 
 }

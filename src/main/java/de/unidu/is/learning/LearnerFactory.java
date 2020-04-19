@@ -48,8 +48,7 @@ public class LearnerFactory {
                     (classname == null || classname.length() == 0)
                             ? GnuplotLearner.class
                             : Class.forName(classname);
-            Learner learner = (Learner) cl.newInstance();
-            return learner;
+            return (Learner) cl.newInstance();
         } catch (Exception ex) {
             Log.error(ex);
         }

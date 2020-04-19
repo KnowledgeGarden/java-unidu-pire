@@ -20,6 +20,7 @@ package de.unidu.is.pdatalog.examples;
 
 import de.unidu.is.pdatalog.ds.Rule;
 import de.unidu.is.pdatalog.parser.Parser;
+import junit.framework.TestCase;
 
 /**
  * A simple class for testing the syntax.
@@ -28,9 +29,9 @@ import de.unidu.is.pdatalog.parser.Parser;
  * @version $Revision: 1.1 $, $Date: 2005/02/28 22:27:55 $
  * @since 2003-10-21
  */
-public class SyntaxCheck {
+public class SyntaxCheck extends TestCase {
 
-    public static void main(String[] args) {
+    public void test1() {
         String str;
 
         str = "dl(D,DL) :- docid(D) & sum(DL,TF,{tf(D,X,TF)}).";

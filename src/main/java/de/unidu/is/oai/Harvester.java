@@ -217,7 +217,7 @@ public class Harvester {
             }
             logger.info("Harvester finished");
         }
-        System.exit(0);
+
     }
 
     public void setFromEmail(String fromEmail) {

@@ -4,6 +4,7 @@ import de.unidu.is.pdatalog.*;
 import de.unidu.is.pdatalog.ds.Rule;
 import de.unidu.is.pdatalog.parser.Parser;
 import de.unidu.is.util.HSQLDBEmbeddedDB;
+import junit.framework.TestCase;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -16,9 +17,9 @@ import java.util.List;
  * @author Henrik Nottelmann
  * @version $Revision: 1.3 $, $Date: 2005/02/28 22:27:55 $
  */
-public class SimpleTest {
+public class SimpleTest extends TestCase {
 
-    public static void main(String[] args) {
+    public void test1() {
         RelationBase base = new RelationBase(new HSQLDBEmbeddedDB());
 
         EDBRelation bar = new EDBRelation(base, "bar", 2);

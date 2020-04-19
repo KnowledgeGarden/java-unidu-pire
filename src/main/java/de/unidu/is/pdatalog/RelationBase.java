@@ -115,10 +115,9 @@ public class RelationBase {
      * @return new list with modified arguments
      */
     private static List replaceAll(List list, Map binding) {
-        List newList = new ArrayList();
+        List newList = new ArrayList(list.size());
         for (Object o : list) {
-            Expression expression = (Expression) o;
-            newList.add(expression.substitute(binding));
+            newList.add(((Expression) o).substitute(binding));
         }
         return newList;
     }

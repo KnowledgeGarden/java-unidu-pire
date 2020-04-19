@@ -56,31 +56,31 @@ public class DB {
     /**
      * Logger.
      */
-    protected Logger logger;
+    protected final Logger logger;
     /**
      * Mapping from result sets to their connections, used for freeing them.
      */
-    protected Map result2conn;
+    protected final Map result2conn;
     /**
      * Mapping from result sets to their statements, used for closing them.
      */
-    protected Map result2stmt;
+    protected final Map result2stmt;
     /**
      * The database URI.
      */
-    protected String dbURI;
+    protected final String dbURI;
     /**
      * The database user.
      */
-    protected String dbUser;
+    protected final String dbUser;
     /**
      * The data source of this specific database.
      */
-    protected DataSource dataSource;
+    protected final DataSource dataSource;
     /**
      * SQL formatter.
      */
-    protected SQLFormatter formatter;
+    protected final SQLFormatter formatter;
 
     /**
      * Creates a new instance.

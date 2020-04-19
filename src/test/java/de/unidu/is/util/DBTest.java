@@ -15,12 +15,11 @@ specific language governing permissions and limitations under the License.
 
 
 // $Id: DBTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
-package test.de.unidu.is.util;
+package de.unidu.is.util;
 
 import de.unidu.is.util.DB;
 import de.unidu.is.util.HashPropertyMap;
 import de.unidu.is.util.PropertyMap;
-import junit.framework.TestCase;
 
 import java.sql.ResultSet;
 
@@ -29,16 +28,16 @@ import java.sql.ResultSet;
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:29 $
  * @since Jul 7, 2003
  */
-public class DBTest extends TestCase {
+public class DBTest  {
 
-    /**
-     * Constructor for DBTest.
-     *
-     * @param arg0
-     */
-    public DBTest(String arg0) {
-        super(arg0);
-    }
+//    /**
+//     * Constructor for DBTest.
+//     *
+//     * @param arg0
+//     */
+//    public DBTest(String arg0) {
+//        super(arg0);
+//    }
 
     public static void main(String[] args) throws Exception {
         PropertyMap map = new HashPropertyMap();
@@ -56,6 +55,6 @@ public class DBTest extends TestCase {
         }
         db.close(rs);
         System.out.println("FINISHED");
-        System.exit(0);
+
     }
 }

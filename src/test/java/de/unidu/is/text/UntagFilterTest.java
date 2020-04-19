@@ -14,30 +14,27 @@ specific language governing permissions and limitations under the License.
 */
 
 
-// $Id: WordSplitterFilterTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
-package test.de.unidu.is.text;
+// $Id: UntagFilterTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
+package de.unidu.is.text;
 
-import de.unidu.is.text.WordSplitterFilter;
-import de.unidu.is.util.CollectionUtilities;
+import de.unidu.is.text.UntagFilter;
 import junit.framework.TestCase;
-
-import java.util.List;
 
 /**
  * @author nottelma
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:29 $
  * @since Jul 8, 2003
  */
-public class WordSplitterFilterTest extends TestCase {
+public class UntagFilterTest extends TestCase {
 
-    private WordSplitterFilter filter;
+    private UntagFilter filter;
 
     /**
      * Constructor for SoundexFilterTest.
      *
      * @param arg0
      */
-    public WordSplitterFilterTest(String arg0) {
+    public UntagFilterTest(String arg0) {
         super(arg0);
     }
 
@@ -45,17 +42,19 @@ public class WordSplitterFilterTest extends TestCase {
      * @see TestCase#setUp()
      */
     protected void setUp() {
-        filter = new WordSplitterFilter(null);
+        filter = new UntagFilter(null);
     }
 
-    public void testRun() {
-        List list = CollectionUtilities.toList(filter.apply("The quick brown Fox jumps xy"));
-        assertEquals(list.size(), 5);
-        assertEquals(list.get(0), "The");
-        assertEquals(list.get(1), "quick");
-        assertEquals(list.get(2), "brown");
-        assertEquals(list.get(3), "Fox");
-        assertEquals(list.get(4), "jumps");
+    public void testRunPlain() {
+        assertEquals(filter.run("The quick brown fox"), "The quick brown fox");
+    }
+
+    public void testRunB() {
+        assertEquals(filter.run("The quick <b>brown</b> fox"), "The quick brown fox");
+    }
+
+    public void testRunAttribute() {
+        assertEquals(filter.run("The quick <a b=\"hallo\">brown</a> fox<br>"), "The quick brown fox");
     }
 
 }

@@ -34,18 +34,15 @@ public class SimpleLexer extends antlr.CharScanner implements SimpleParserTokenT
     }
 
     private static long[] mk_tokenSet_0() {
-        long[] data = {576460748008465920L, 9223372031620284414L, 0L, 0L};
-        return data;
+        return new long[]{576460748008465920L, 9223372031620284414L, 0L, 0L};
     }
 
     private static long[] mk_tokenSet_1() {
-        long[] data = {287948935534739456L, 576460745995190270L, 0L, 0L};
-        return data;
+        return new long[]{287948935534739456L, 576460745995190270L, 0L, 0L};
     }
 
     private static long[] mk_tokenSet_2() {
-        long[] data = {576460181072782848L, 9223372031620284414L, 0L, 0L};
-        return data;
+        return new long[]{576460181072782848L, 9223372031620284414L, 0L, 0L};
     }
 
     public Token nextToken() throws TokenStreamException {

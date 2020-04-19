@@ -256,10 +256,9 @@ public class Queries {
             for (int i = 0; i < tf; i++)
                 termBuf.append(term).append(" ");
         }
-        KeywordQuery query = new KeywordQuery(queryID
+        return new KeywordQuery(queryID
                 + (postfix == null ? "" : "-" + postfix), termBuf.toString()
                 .trim(), 100);
-        return query;
     }
 
     /**
@@ -293,9 +292,8 @@ public class Queries {
         }
         xirql.insert(0, "wsum(");
         xirql.append(")");
-        XIRQLQuery query = new XIRQLStringQuery(queryID
+        return new XIRQLStringQuery(queryID
                 + (postfix == null ? "" : "-" + postfix), xirql.toString(), 100);
-        return query;
     }
 
     /**

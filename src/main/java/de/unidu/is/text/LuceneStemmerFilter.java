@@ -596,8 +596,7 @@ class LuceneStemmerFilter extends AbstractSingleItemFilter {
     protected boolean stem(char[] wordBuffer, int offset, int wordLen) {
         reset();
         if (b.length < wordLen) {
-            char[] new_b = new char[wordLen + EXTRA];
-            b = new_b;
+            b = new char[wordLen + EXTRA];
         }
         if (wordLen >= 0) System.arraycopy(wordBuffer, offset, b, 0, wordLen);
         i = wordLen;

@@ -15,7 +15,7 @@ specific language governing permissions and limitations under the License.
 
 
 // $Id: HTMLFilterTest.java,v 1.5 2005/03/09 09:00:05 nottelma Exp $
-package test.de.unidu.is.text;
+package de.unidu.is.text;
 
 import de.unidu.is.text.HTMLFilter;
 import junit.framework.TestCase;

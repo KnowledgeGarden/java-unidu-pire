@@ -14,10 +14,10 @@ specific language governing permissions and limitations under the License.
 */
 
 
-// $Id: AbstractSingleItemFilterTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
-package test.de.unidu.is.text;
+// $Id: WordSplitterFilterTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
+package de.unidu.is.text;
 
-import de.unidu.is.text.AbstractSingleItemFilter;
+import de.unidu.is.text.WordSplitterFilter;
 import de.unidu.is.util.CollectionUtilities;
 import junit.framework.TestCase;
 
@@ -28,16 +28,16 @@ import java.util.List;
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:29 $
  * @since Jul 8, 2003
  */
-public class AbstractSingleItemFilterTest extends TestCase {
+public class WordSplitterFilterTest extends TestCase {
 
-    private AbstractSingleItemFilter filter;
+    private WordSplitterFilter filter;
 
     /**
-     * Constructor for AbstractSingleItemFilterTest.
+     * Constructor for SoundexFilterTest.
      *
      * @param arg0
      */
-    public AbstractSingleItemFilterTest(String arg0) {
+    public WordSplitterFilterTest(String arg0) {
         super(arg0);
     }
 
@@ -45,24 +45,17 @@ public class AbstractSingleItemFilterTest extends TestCase {
      * @see TestCase#setUp()
      */
     protected void setUp() {
-        filter = new AbstractSingleItemFilter(null) {
-            public Object run(Object value) {
-                if (value.equals("NULL"))
-                    return null;
-                return "-" + value + "-";
-            }
-        };
+        filter = new WordSplitterFilter(null);
     }
 
-    public void testFilter() {
-        List list = CollectionUtilities.toList(filter.apply("xyz"));
-        assertEquals(list.size(), 1);
-        assertEquals(list.get(0), "-xyz-");
-    }
-
-    public void testFilterNull() {
-        List list = CollectionUtilities.toList(filter.apply("NULL"));
-        assertEquals(list.size(), 0);
+    public void testRun() {
+        List list = CollectionUtilities.toList(filter.apply("The quick brown Fox jumps xy"));
+        assertEquals(list.size(), 5);
+        assertEquals(list.get(0), "The");
+        assertEquals(list.get(1), "quick");
+        assertEquals(list.get(2), "brown");
+        assertEquals(list.get(3), "Fox");
+        assertEquals(list.get(4), "jumps");
     }
 
 }

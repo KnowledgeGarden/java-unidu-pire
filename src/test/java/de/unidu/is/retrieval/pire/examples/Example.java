@@ -18,6 +18,7 @@ package de.unidu.is.retrieval.pire.examples;
 
 import de.unidu.is.retrieval.*;
 import de.unidu.is.util.StopWatch;
+import junit.framework.TestCase;
 
 /**
  * A simple example for the PIRE IR interface.
@@ -25,9 +26,9 @@ import de.unidu.is.util.StopWatch;
  * @author Henrik Nottelmann
  * @version $Revision: 1.7 $, $Date: 2005/03/01 09:21:33 $
  */
-public class Example {
+public class Example extends TestCase {
 
-    public static void main(String[] args) throws UnsupportedQueryException,
+    public void test1() throws UnsupportedQueryException,
             DocumentNotFoundException, DocumentNotStorableException,
             IndexException, DocumentMismatchException {
         // init index
@@ -49,7 +50,7 @@ public class Example {
         System.out.println(watch);
 
         ir.close();
-        System.exit(0);
+
     }
 
 }

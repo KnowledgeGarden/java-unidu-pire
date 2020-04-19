@@ -15,9 +15,7 @@ specific language governing permissions and limitations under the License.
 
 
 // $Id: FileSourceTest.java,v 1.5 2005/03/09 09:00:19 nottelma Exp $
-package test.de.unidu.is.gnuplot;
-
-import de.unidu.is.gnuplot.FileSource;
+package de.unidu.is.gnuplot;
 
 import java.io.File;
 

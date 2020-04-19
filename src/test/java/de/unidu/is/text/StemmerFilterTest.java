@@ -14,10 +14,10 @@ specific language governing permissions and limitations under the License.
 */
 
 
-// $Id: SoundexFilterTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
-package test.de.unidu.is.text;
+// $Id: StemmerFilterTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
+package de.unidu.is.text;
 
-import de.unidu.is.text.SoundexFilter;
+import de.unidu.is.text.StemmerFilter;
 import junit.framework.TestCase;
 
 /**
@@ -25,16 +25,16 @@ import junit.framework.TestCase;
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:29 $
  * @since Jul 8, 2003
  */
-public class SoundexFilterTest extends TestCase {
+public class StemmerFilterTest extends TestCase {
 
-    private SoundexFilter filter;
+    private StemmerFilter filter;
 
     /**
      * Constructor for SoundexFilterTest.
      *
      * @param arg0
      */
-    public SoundexFilterTest(String arg0) {
+    public StemmerFilterTest(String arg0) {
         super(arg0);
     }
 
@@ -42,11 +42,15 @@ public class SoundexFilterTest extends TestCase {
      * @see TestCase#setUp()
      */
     protected void setUp() {
-        filter = new SoundexFilter(null);
+        filter = new StemmerFilter(null);
     }
 
-    public void testRunHello() {
-        assertEquals(filter.run("HELLO"), filter.run("hallo"));
+    public void testRun() {
+        assertEquals(filter.run("jumps"), filter.run("jump"));
+    }
+
+    public void testRunIdemPotency() {
+        assertEquals(filter.run("jump"), filter.run("jump"));
     }
 
     public void testRunNotSame() {

@@ -15,7 +15,7 @@ specific language governing permissions and limitations under the License.
 
 
 // $Id: SourceTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
-package test.de.unidu.is.gnuplot;
+package de.unidu.is.gnuplot;
 
 import de.unidu.is.gnuplot.Source;
 import junit.framework.TestCase;

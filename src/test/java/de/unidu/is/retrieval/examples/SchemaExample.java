@@ -19,6 +19,7 @@ package de.unidu.is.retrieval.examples;
 
 import de.unidu.is.retrieval.Schema;
 import de.unidu.is.retrieval.SchemaElement;
+import junit.framework.TestCase;
 
 import java.util.Collections;
 
@@ -29,9 +30,9 @@ import java.util.Collections;
  * @version $Revision: 1.1 $, $Date: 2005/02/25 14:33:29 $
  * @since 2005-02-25
  */
-public class SchemaExample {
+public class SchemaExample extends TestCase {
 
-    public static void main(String[] args) {
+    public void test1() {
         SchemaElement a = new SchemaElement("a");
         SchemaElement b = new SchemaElement("b");
         SchemaElement c = new SchemaElement("c");

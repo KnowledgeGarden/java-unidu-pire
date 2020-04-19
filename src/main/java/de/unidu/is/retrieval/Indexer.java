@@ -246,7 +246,7 @@ public class Indexer {
             CommandLine line = parser.parse(options, args);
             if (line.hasOption("?")) {
                 showHelp(options);
-                System.exit(0);
+
             }
             quiet = line.hasOption("q");
             String logFile = line.getOptionValue("l");

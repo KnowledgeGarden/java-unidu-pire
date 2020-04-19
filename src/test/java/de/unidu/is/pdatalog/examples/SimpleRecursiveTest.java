@@ -4,6 +4,7 @@ import de.unidu.is.pdatalog.*;
 import de.unidu.is.pdatalog.ds.Rule;
 import de.unidu.is.pdatalog.parser.Parser;
 import de.unidu.is.util.HSQLDBEmbeddedDB;
+import junit.framework.TestCase;
 
 // $Id: SimpleRecursiveTest.java,v 1.3 2005/02/28 22:27:55 nottelma Exp $
 
@@ -13,9 +14,9 @@ import de.unidu.is.util.HSQLDBEmbeddedDB;
  * @author nottelma
  * @version $Revision: 1.3 $, $Date: 2005/02/28 22:27:55 $
  */
-public class SimpleRecursiveTest {
+public class SimpleRecursiveTest extends TestCase {
 
-    public static void main(String[] args) {
+    public void test1() {
         RelationBase base = new RelationBase(new HSQLDBEmbeddedDB());
 
         EDBRelation bar = new EDBRelation(base, "bar", 2);

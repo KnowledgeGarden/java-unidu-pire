@@ -15,7 +15,7 @@ specific language governing permissions and limitations under the License.
 
 
 // $Id: StringUtilitiesTest.java,v 1.5 2005/02/21 17:29:29 huesselbeck Exp $
-package test.de.unidu.is.util;
+package de.unidu.is.util;
 
 import de.unidu.is.util.CollectionUtilities;
 import de.unidu.is.util.StringUtilities;

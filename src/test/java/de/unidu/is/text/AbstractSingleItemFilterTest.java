@@ -14,10 +14,10 @@ specific language governing permissions and limitations under the License.
 */
 
 
-// $Id: ParserFilterTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
-package test.de.unidu.is.text;
+// $Id: AbstractSingleItemFilterTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
+package de.unidu.is.text;
 
-import de.unidu.is.text.ParserFilter;
+import de.unidu.is.text.AbstractSingleItemFilter;
 import de.unidu.is.util.CollectionUtilities;
 import junit.framework.TestCase;
 
@@ -28,16 +28,16 @@ import java.util.List;
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:29 $
  * @since Jul 8, 2003
  */
-public class ParserFilterTest extends TestCase {
+public class AbstractSingleItemFilterTest extends TestCase {
 
-    private ParserFilter filter;
+    private AbstractSingleItemFilter filter;
 
     /**
-     * Constructor for SoundexFilterTest.
+     * Constructor for AbstractSingleItemFilterTest.
      *
      * @param arg0
      */
-    public ParserFilterTest(String arg0) {
+    public AbstractSingleItemFilterTest(String arg0) {
         super(arg0);
     }
 
@@ -45,16 +45,24 @@ public class ParserFilterTest extends TestCase {
      * @see TestCase#setUp()
      */
     protected void setUp() {
-        filter = new ParserFilter();
+        filter = new AbstractSingleItemFilter(null) {
+            public Object run(Object value) {
+                if (value.equals("NULL"))
+                    return null;
+                return "-" + value + "-";
+            }
+        };
     }
 
-    public void testRun() {
-        List list = CollectionUtilities.toList(filter.apply("The quick brown Fox jumps xy"));
-        assertEquals(4, list.size());
-        assertEquals(list.get(0), "quick");
-        assertEquals(list.get(1), "brown");
-        assertEquals(list.get(2), "fox");
-        assertEquals(list.get(3), "jump");
+    public void testFilter() {
+        List list = CollectionUtilities.toList(filter.apply("xyz"));
+        assertEquals(list.size(), 1);
+        assertEquals(list.get(0), "-xyz-");
+    }
+
+    public void testFilterNull() {
+        List list = CollectionUtilities.toList(filter.apply("NULL"));
+        assertEquals(list.size(), 0);
     }
 
 }

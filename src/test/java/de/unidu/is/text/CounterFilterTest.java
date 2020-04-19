@@ -15,7 +15,7 @@ specific language governing permissions and limitations under the License.
 
 
 // $Id: CounterFilterTest.java,v 1.5 2005/02/21 17:29:29 huesselbeck Exp $
-package test.de.unidu.is.text;
+package de.unidu.is.text;
 
 import de.unidu.is.text.CounterFilter;
 import de.unidu.is.text.Filter;

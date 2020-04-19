@@ -359,7 +359,7 @@ public class HyREXClient {
      * Sends a command to HyREX and ignores the result.
      */
     public void commandIgnoreResult(String cmd) throws IOException {
-        Vector res = new Vector();
+        //Vector res = new Vector();
         out.println(cmd.trim());
         out.flush();
         String line = in.readLine();

@@ -24,8 +24,8 @@ import de.unidu.is.sql.DBColumnExpression;
 import de.unidu.is.sql.SQL;
 import de.unidu.is.sql.SQLFormatter;
 import de.unidu.is.sql.SQLFormatterFactory;
-import de.unidu.is.util.DB;
 import de.unidu.is.util.HSQLDBEmbeddedDB;
+import junit.framework.TestCase;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -41,12 +41,11 @@ import java.util.List;
  * @version $Revision: 1.1 $, $Date: 2005/03/01 09:34:11 $
  * @since 2003-11-26
  */
-public class Example {
+public class Example extends TestCase {
 
-    public static void main(String[] args) {
-        DB db = new HSQLDBEmbeddedDB();
-        SQLFormatter formatter = SQLFormatterFactory.newFormatter(
-                db);
+    public void test1() {
+        SQLFormatter formatter = SQLFormatterFactory.newFormatter(new HSQLDBEmbeddedDB());
+
         final String TABLE = "de_unidu_is_sql_example_"
                 + System.currentTimeMillis();
 
@@ -228,7 +227,7 @@ public class Example {
         System.out.println("\n");
 
         formatter.remove(TABLE);
-        System.exit(0);
+
     }
 
 }

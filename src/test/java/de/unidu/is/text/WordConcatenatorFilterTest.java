@@ -15,7 +15,7 @@ specific language governing permissions and limitations under the License.
 
 
 // $Id: WordConcatenatorFilterTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
-package test.de.unidu.is.text;
+package de.unidu.is.text;
 
 import de.unidu.is.text.WordConcatenatorFilter;
 import de.unidu.is.text.WordSplitterFilter;

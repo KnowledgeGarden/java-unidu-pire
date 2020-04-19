@@ -540,8 +540,7 @@ public class Lemur {
      * @return file name for the evaluation results
      */
     public File getResultCORIFile(String topicsName) {
-        File resultFile = new File(resultDir, "cori-" + topicsName + ".result");
-        return resultFile;
+        return new File(resultDir, "cori-" + topicsName + ".result");
     }
 
     // Auxilliary methods

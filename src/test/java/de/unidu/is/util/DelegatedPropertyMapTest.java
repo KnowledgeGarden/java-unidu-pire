@@ -15,7 +15,7 @@ specific language governing permissions and limitations under the License.
 
 
 // $Id: DelegatedPropertyMapTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
-package test.de.unidu.is.util;
+package de.unidu.is.util;
 
 import de.unidu.is.util.DelegatedPropertyMap;
 import junit.framework.TestCase;

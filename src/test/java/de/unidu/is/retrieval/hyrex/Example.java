@@ -20,6 +20,7 @@ package de.unidu.is.retrieval.hyrex;
 import de.unidu.is.retrieval.*;
 import de.unidu.is.util.StopWatch;
 import de.unidu.is.util.XMLUtilities;
+import junit.framework.TestCase;
 import org.w3c.dom.Document;
 
 import java.util.List;
@@ -32,9 +33,9 @@ import java.util.List;
  * @version $Revision: 1.9 $, $Date: 2005/02/28 22:27:56 $
  * @since 2004-01-04
  */
-public class Example {
+public class Example extends TestCase {
 
-    public static void main(String[] args) throws UnsupportedQueryException, IndexException, DocumentNotFoundException {
+    public void test1() throws IndexException, UnsupportedQueryException, DocumentNotFoundException {
         StopWatch watch = new StopWatch();
         Retriever ir =
                 new HyREXRetriever(
@@ -57,7 +58,7 @@ public class Example {
         watch.stop();
         System.out.println(watch);
         ir.close();
-        System.exit(0);
+
     }
 
 }

@@ -79,6 +79,5 @@ public class Test {
         System.out.println(watch);
 
         System.out.println("THE END");
-        System.exit(0);
     }
 }

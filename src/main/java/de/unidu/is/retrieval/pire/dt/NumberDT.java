@@ -250,7 +250,7 @@ public class NumberDT extends AbstractDT {
             } else
                 pred += "t";
 
-            List body = new ArrayList();
+            List body = new ArrayList(2);
             body.add(
                     new Literal(
                             index.convert(Index.WEIGHT_RELATION),

@@ -15,10 +15,8 @@ specific language governing permissions and limitations under the License.
 
 
 // $Id: NormalDistributionSourceTest.java,v 1.6 2005/03/18 22:49:31 nottelma Exp $
-package test.de.unidu.is.gnuplot;
+package de.unidu.is.gnuplot;
 
-import de.unidu.is.gnuplot.GnuplotCall;
-import de.unidu.is.gnuplot.NormalDistributionSource;
 import de.unidu.is.statistics.NormalDistribution;
 
 import java.io.BufferedReader;

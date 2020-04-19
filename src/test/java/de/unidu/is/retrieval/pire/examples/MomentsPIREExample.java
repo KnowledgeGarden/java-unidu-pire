@@ -18,6 +18,7 @@ package de.unidu.is.retrieval.pire.examples;
 
 import de.unidu.is.retrieval.pire.PIRE;
 import de.unidu.is.statistics.Moments;
+import junit.framework.TestCase;
 
 /**
  * An example for computing moments with PIRE.
@@ -26,9 +27,9 @@ import de.unidu.is.statistics.Moments;
  * @version $Revision: 1.2 $, $Date: 2005/03/19 16:12:57 $
  * @since 01-Mar-2005
  */
-public class MomentsPIREExample {
+public class MomentsPIREExample extends TestCase {
 
-    public static void main(String[] args) {
+    public void test1() {
         PIRE ir = PIREExampleUtils.createPIRE();
         PIREExampleUtils.indexDocuments(ir);
         ir.computeMoments();
@@ -43,7 +44,7 @@ public class MomentsPIREExample {
         ir.closeQuery(QUERYID);
 
         ir.removeIndex();
-        System.exit(0);
+
     }
 
 }

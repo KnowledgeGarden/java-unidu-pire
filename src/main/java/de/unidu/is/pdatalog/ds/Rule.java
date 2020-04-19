@@ -85,7 +85,7 @@ public class Rule {
      */
     public Rule(Literal head, Literal body, Expression mapping) {
         this.head = head;
-        this.body = new ArrayList();
+        this.body = new ArrayList(1);
         this.body.add(body);
         this.mapping = mapping;
     }
@@ -132,8 +132,9 @@ public class Rule {
     public Rule(Rule rule) {
         this.optimizable = rule.optimizable;
         this.head = rule.head == null ? null : new Literal(rule.head);
-        this.body = new ArrayList();
-        for (int i = 0; i < rule.body.size(); i++)
+        int s = rule.body.size();
+        this.body = new ArrayList(s);
+        for (int i = 0; i < s; i++)
             body.add(new Literal((Literal) rule.body.get(i)));
         this.mapping = rule.mapping;
     }
@@ -198,15 +199,15 @@ public class Rule {
         return (Literal) body.get(num);
     }
 
-    /**
-     * Sets (replaces) the body literal at the specified index.
-     *
-     * @param num     the index
-     * @param literal body literal at the specified index
-     */
-    public void setLiteral(int num, Literal literal) {
-        body.set(num, literal);
-    }
+//    /**
+//     * Sets (replaces) the body literal at the specified index.
+//     *
+//     * @param num     the index
+//     * @param literal body literal at the specified index
+//     */
+//    public void setLiteral(int num, Literal literal) {
+//        body.set(num, literal);
+//    }
 
     /**
      * Returns the number of body literals of this Rule.
@@ -229,7 +230,8 @@ public class Rule {
     public boolean contains(Literal literal) {
         if (head != null && head.equals(literal))
             return true;
-        for (int i = 0; i < literalCount(); i++)
+        int n = literalCount();
+        for (int i = 0; i < n; i++)
             if (literalAt(i).equals(literal))
                 return true;
         return false;
@@ -255,7 +257,8 @@ public class Rule {
      */
     public boolean containsExactlyInBody(Literal literal) {
         String l = literal.toString();
-        for (int i = 0; i < literalCount(); i++)
+        int n = literalCount();
+        for (int i = 0; i < n; i++)
             if (literalAt(i).toString().equals(l))
                 return true;
         return false;
@@ -299,7 +302,8 @@ public class Rule {
     public void putVariables(Set set) {
         if (head != null)
             head.putVariables(set);
-        for (int i = 0; i < literalCount(); i++)
+        int n = literalCount();
+        for (int i = 0; i < n; i++)
             literalAt(i).putVariables(set);
     }
 
@@ -312,7 +316,8 @@ public class Rule {
     public void putConstants(Set set) {
         if (head != null)
             head.putConstants(set);
-        for (int i = 0; i < literalCount(); i++)
+        int n = literalCount();
+        for (int i = 0; i < n; i++)
             literalAt(i).putConstants(set);
     }
 

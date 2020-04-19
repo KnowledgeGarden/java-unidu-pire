@@ -210,7 +210,7 @@ public class Literal {
      * @return set containing all variables (no constants)
      */
     public Set getVariables() {
-        Set set = new HashSet();
+        Set set = new HashSet(arguments.length);
         putVariables(set);
         return set;
     }
@@ -221,7 +221,7 @@ public class Literal {
      * @return set containing all constants (no variables)
      */
     public Set getConstants() {
-        Set set = new HashSet();
+        Set set = new HashSet(arguments.length);
         putConstants(set);
         return set;
     }
@@ -232,7 +232,7 @@ public class Literal {
      * @return set containing all arguments
      */
     public Set getAllArguments() {
-        Set set = new HashSet();
+        Set set = new HashSet(arguments.length);
         putAllArguments(set);
         return set;
     }

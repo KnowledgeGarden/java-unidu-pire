@@ -20,6 +20,7 @@ import de.unidu.is.retrieval.*;
 import de.unidu.is.util.AsyncCallResponseEvent;
 import de.unidu.is.util.AsyncCallResponseListener;
 import de.unidu.is.util.StopWatch;
+import junit.framework.TestCase;
 
 import java.util.HashSet;
 import java.util.List;
@@ -31,9 +32,9 @@ import java.util.Set;
  * @author Henrik Nottelmann
  * @version $Revision: 1.6 $, $Date: 2005/03/01 09:21:33 $
  */
-public class AsyncExample {
+public class AsyncExample extends TestCase {
 
-    public static void main(String[] args) throws
+    public void test1() throws
             DocumentNotFoundException, DocumentNotStorableException,
             IndexException, DocumentMismatchException {
         // init index
@@ -62,7 +63,7 @@ public class AsyncExample {
         System.out.println(watch);
 
         ir.close();
-        System.exit(0);
+
     }
 
 }

@@ -18,6 +18,7 @@ package de.unidu.is.retrieval.pire.examples;
 
 import de.unidu.is.retrieval.pire.PIRE;
 import de.unidu.is.util.StopWatch;
+import junit.framework.TestCase;
 
 /**
  * An example for using PIRE.
@@ -25,9 +26,9 @@ import de.unidu.is.util.StopWatch;
  * @author Henrik Nottelmann
  * @version $Revision: 1.6 $, $Date: 2005/03/01 09:21:33 $
  */
-public class PIREExample {
+public class PIREExample extends TestCase {
 
-    public static void main(String[] args) {
+    public void test1() {
         StopWatch watch = new StopWatch();
         watch.start();
         PIRE ir = PIREExampleUtils.createPIRE();
@@ -100,7 +101,7 @@ public class PIREExample {
         //		System.out.println();
 
         ir.removeIndex();
-        System.exit(0);
+
 
     }
 

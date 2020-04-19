@@ -14,27 +14,30 @@ specific language governing permissions and limitations under the License.
 */
 
 
-// $Id: StemmerFilterTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
-package test.de.unidu.is.text;
+// $Id: ParserFilterTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
+package de.unidu.is.text;
 
-import de.unidu.is.text.StemmerFilter;
+import de.unidu.is.text.ParserFilter;
+import de.unidu.is.util.CollectionUtilities;
 import junit.framework.TestCase;
+
+import java.util.List;
 
 /**
  * @author nottelma
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:29 $
  * @since Jul 8, 2003
  */
-public class StemmerFilterTest extends TestCase {
+public class ParserFilterTest extends TestCase {
 
-    private StemmerFilter filter;
+    private ParserFilter filter;
 
     /**
      * Constructor for SoundexFilterTest.
      *
      * @param arg0
      */
-    public StemmerFilterTest(String arg0) {
+    public ParserFilterTest(String arg0) {
         super(arg0);
     }
 
@@ -42,19 +45,16 @@ public class StemmerFilterTest extends TestCase {
      * @see TestCase#setUp()
      */
     protected void setUp() {
-        filter = new StemmerFilter(null);
+        filter = new ParserFilter();
     }
 
     public void testRun() {
-        assertEquals(filter.run("jumps"), filter.run("jump"));
-    }
-
-    public void testRunIdemPotency() {
-        assertEquals(filter.run("jump"), filter.run("jump"));
-    }
-
-    public void testRunNotSame() {
-        assertNotSame(filter.run("hello"), filter.run("world"));
+        List list = CollectionUtilities.toList(filter.apply("The quick brown Fox jumps xy"));
+        assertEquals(4, list.size());
+        assertEquals(list.get(0), "quick");
+        assertEquals(list.get(1), "brown");
+        assertEquals(list.get(2), "fox");
+        assertEquals(list.get(3), "jump");
     }
 
 }

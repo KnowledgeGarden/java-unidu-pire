@@ -20,6 +20,7 @@ package de.unidu.is.retrieval.examples;
 import de.unidu.is.retrieval.AndQueryNode;
 import de.unidu.is.retrieval.OrQueryNode;
 import de.unidu.is.retrieval.QueryCondition;
+import junit.framework.TestCase;
 
 /**
  * Example for using Boolean query nodes
@@ -28,9 +29,9 @@ import de.unidu.is.retrieval.QueryCondition;
  * @version $Revision: 1.1 $, $Date: 2005/02/25 14:33:29 $
  * @since 2005-02-25
  */
-public class QueryNodeExample {
+public class QueryNodeExample extends TestCase {
 
-    public static void main(String[] args) {
+    public void test1() {
         // (X or Y) and (X or (Z AND ZZ))
         // -> X OR (X AND Y) OR (X AND Z AND ZZ) OR (Y AND Z AND ZZ)
         QueryCondition x = new QueryCondition("/a/b", "bla", "x");

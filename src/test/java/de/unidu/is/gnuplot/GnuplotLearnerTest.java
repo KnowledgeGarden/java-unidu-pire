@@ -15,7 +15,7 @@ specific language governing permissions and limitations under the License.
 
 
 // $Id: GnuplotLearnerTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
-package test.de.unidu.is.gnuplot;
+package de.unidu.is.gnuplot;
 
 import de.unidu.is.learning.Learner;
 import de.unidu.is.learning.LearnerFactory;

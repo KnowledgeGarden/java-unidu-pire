@@ -117,8 +117,7 @@ public class SystemUtilities {
      * @return corresponding URL
      */
     public static URL getResourceURL(String relativePath) {
-        URL u = SystemUtilities.class.getResource("/" + relativePath);
-        return u;
+        return SystemUtilities.class.getResource("/" + relativePath);
 //		//relativePath = "/" + relativePath;
 //		System.out.println("SysUtil.getResURL "+relativePath);
 //		String x = "";

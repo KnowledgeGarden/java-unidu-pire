@@ -15,29 +15,28 @@ specific language governing permissions and limitations under the License.
 
 
 // $Id: DBPropertyMapTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
-package test.de.unidu.is.util;
+package de.unidu.is.util;
 
 import de.unidu.is.util.DB;
 import de.unidu.is.util.DBPropertyMap;
 import de.unidu.is.util.HashPropertyMap;
 import de.unidu.is.util.PropertyMap;
-import junit.framework.TestCase;
 
 /**
  * @author nottelma
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:29 $
  * @since Jul 8, 2003
  */
-public class DBPropertyMapTest extends TestCase {
+public class DBPropertyMapTest  {
 
-    /**
-     * Constructor for DBPropertyMapTest.
-     *
-     * @param arg0
-     */
-    public DBPropertyMapTest(String arg0) {
-        super(arg0);
-    }
+//    /**
+//     * Constructor for DBPropertyMapTest.
+//     *
+//     * @param arg0
+//     */
+//    public DBPropertyMapTest(String arg0) {
+//        super(arg0);
+//    }
 
 
     public static void main(String[] args) {
@@ -66,7 +65,7 @@ public class DBPropertyMapTest extends TestCase {
         System.out.println(dbMap.entrySet());
         System.out.println(dbMap.values());
         System.out.println(dbMap.containsValue("6888.02"));
-        System.exit(0);
+
     }
 
 }

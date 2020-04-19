@@ -22,7 +22,7 @@ specific language governing permissions and limitations under the License.
  * To change the template for this generated file go to
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
-package test.de.unidu.is.text;
+package de.unidu.is.text;
 
 import de.unidu.is.text.LowercaseFilter;
 import de.unidu.is.util.CollectionUtilities;

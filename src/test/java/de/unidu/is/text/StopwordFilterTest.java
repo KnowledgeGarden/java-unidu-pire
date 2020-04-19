@@ -14,10 +14,10 @@ specific language governing permissions and limitations under the License.
 */
 
 
-// $Id: UntagFilterTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
-package test.de.unidu.is.text;
+// $Id: StopwordFilterTest.java,v 1.4 2005/02/21 17:29:29 huesselbeck Exp $
+package de.unidu.is.text;
 
-import de.unidu.is.text.UntagFilter;
+import de.unidu.is.text.StopwordFilter;
 import junit.framework.TestCase;
 
 /**
@@ -25,16 +25,16 @@ import junit.framework.TestCase;
  * @version $Revision: 1.4 $, $Date: 2005/02/21 17:29:29 $
  * @since Jul 8, 2003
  */
-public class UntagFilterTest extends TestCase {
+public class StopwordFilterTest extends TestCase {
 
-    private UntagFilter filter;
+    private StopwordFilter filter;
 
     /**
      * Constructor for SoundexFilterTest.
      *
      * @param arg0
      */
-    public UntagFilterTest(String arg0) {
+    public StopwordFilterTest(String arg0) {
         super(arg0);
     }
 
@@ -42,19 +42,23 @@ public class UntagFilterTest extends TestCase {
      * @see TestCase#setUp()
      */
     protected void setUp() {
-        filter = new UntagFilter(null);
+        filter = new StopwordFilter(null);
     }
 
-    public void testRunPlain() {
-        assertEquals(filter.run("The quick brown fox"), "The quick brown fox");
+    public void testRunThe() {
+        assertNull(filter.run("the"));
     }
 
-    public void testRunB() {
-        assertEquals(filter.run("The quick <b>brown</b> fox"), "The quick brown fox");
+    public void testRunUppercase() {
+        assertEquals(filter.run("The"), "The");
     }
 
-    public void testRunAttribute() {
-        assertEquals(filter.run("The quick <a b=\"hallo\">brown</a> fox<br>"), "The quick brown fox");
+    public void testRunThere() {
+        assertNull(filter.run("there"));
+    }
+
+    public void testRunNoStopword() {
+        assertEquals(filter.run("fox"), "fox");
     }
 
 }

@@ -78,48 +78,39 @@ public class SimpleParser extends antlr.LLkParser implements SimpleParserTokenTy
     }
 
     private static long[] mk_tokenSet_0() {
-        long[] data = {2L, 0L};
-        return data;
+        return new long[]{2L, 0L};
     }
 
     private static long[] mk_tokenSet_1() {
-        long[] data = {32530432L, 0L};
-        return data;
+        return new long[]{32530432L, 0L};
     }
 
     private static long[] mk_tokenSet_2() {
-        long[] data = {722944L, 0L};
-        return data;
+        return new long[]{722944L, 0L};
     }
 
     private static long[] mk_tokenSet_3() {
-        long[] data = {755712L, 0L};
-        return data;
+        return new long[]{755712L, 0L};
     }
 
     private static long[] mk_tokenSet_4() {
-        long[] data = {131072L, 0L};
-        return data;
+        return new long[]{131072L, 0L};
     }
 
     private static long[] mk_tokenSet_5() {
-        long[] data = {32653312L, 0L};
-        return data;
+        return new long[]{32653312L, 0L};
     }
 
     private static long[] mk_tokenSet_6() {
-        long[] data = {16384L, 0L};
-        return data;
+        return new long[]{16384L, 0L};
     }
 
     private static long[] mk_tokenSet_7() {
-        long[] data = {3162112L, 0L};
-        return data;
+        return new long[]{3162112L, 0L};
     }
 
     private static long[] mk_tokenSet_8() {
-        long[] data = {32522240L, 0L};
-        return data;
+        return new long[]{32522240L, 0L};
     }
 
     public final void imaginaryTokenDefinitions() throws TokenStreamException {
