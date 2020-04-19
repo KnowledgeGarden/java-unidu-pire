@@ -19,9 +19,7 @@ package de.unidu.is.retrieval.pire.dt;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 import de.unidu.is.pdatalog.IDBRelation;
 import de.unidu.is.pdatalog.ds.Rule;
@@ -29,7 +27,7 @@ import de.unidu.is.pdatalog.parser.Parser;
 import de.unidu.is.retrieval.pire.Index;
 import de.unidu.is.text.CounterFilter;
 import de.unidu.is.text.Filter;
-import de.unidu.is.text.GermanStemmerFilter;
+//import de.unidu.is.text.GermanStemmerFilter;
 import de.unidu.is.text.LowercaseFilter;
 import de.unidu.is.text.StopwordFilter;
 import de.unidu.is.text.WordConcatenatorFilter;
@@ -216,8 +214,20 @@ public class TextGermanDT extends AbstractDT {
 
 		// operators "stemen", "stemen_tf", "stemen_tfidf"
 		wordSplitterFilter = new WordSplitterFilter(null);
-		Filter rawContainsQueryFilter = new GermanStemmerFilter(new StopwordFilter(
-				new LowercaseFilter(wordSplitterFilter),"stopwords_german"));
+//		Filter rawContainsQueryFilter = new GermanStemmerFilter(new StopwordFilter(
+//				new LowercaseFilter(wordSplitterFilter),"stopwords_german"));
+		Filter rawContainsQueryFilter = new Filter() {
+
+			@Override
+			public Iterator apply(Object seed) {
+				return Collections.emptyIterator(); //TODO
+			}
+
+			@Override
+			public Iterator apply(Iterator iterator) {
+				return Collections.emptyIterator(); //TODO
+			}
+		};
 		stemenQueryFilter = new WordConcatenatorFilter(rawContainsQueryFilter);
 		stemenFilter = new CounterFilter(rawContainsQueryFilter);
 

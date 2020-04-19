@@ -22,7 +22,7 @@ import java.awt.*;
 import javax.swing.*;
 /**
  * The default demo application to test the WOB FIOLA <i>Desktop</i> framework. <p> Run me. <br> <i>Test Me!</i>
- * @author André Schaefer
+ * @author Andr&#xFFFD; Schaefer
  * @see Desktop
  * @stereotype implementationClass
  * @version $Revision: 1.7 $

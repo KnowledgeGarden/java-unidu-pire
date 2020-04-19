@@ -207,42 +207,43 @@
 		    <artifactId>dtdparser</artifactId>
 		    <version>1.21</version>
 		</dependency>
-		<dependency>
-         	<groupId>antlr</groupId>
-         	<artifactId>antlr</artifactId>
-         	<scope>system</scope>
-         	<version>1.0</version>
-         	<systemPath>${project.basedir}/lib/antlr.jar</systemPath>
-      	</dependency>
-		<dependency>
-         	<groupId>de.izsoz</groupId>
-         	<artifactId>fiola</artifactId>
-         	<scope>system</scope>
-         	<version>1.0</version>
-         	<systemPath>${project.basedir}/lib/fiola.jar</systemPath>
-      	</dependency>
-      	<dependency>
-		    <groupId>hsqldb</groupId>
-		    <artifactId>hsqldb</artifactId>
-		    <version>1.0</version>
-		    <scope>system</scope>
-         	<systemPath>${project.basedir}/lib/hsqldb.jar</systemPath>
-		</dependency>
-      	
-		<dependency>
-         	<groupId>net.sf</groupId>
-         	<artifactId>snowball</artifactId>
-         	<scope>system</scope>
-         	<version>1.0</version>
-         	<systemPath>${project.basedir}/lib/snowball.jar</systemPath>
-      	</dependency>
-		<dependency>
-         	<groupId>resources</groupId>
-         	<artifactId>resources</artifactId>
-         	<scope>system</scope>
-         	<version>1.0</version>
-         	<systemPath>${project.basedir}/lib/resources.jar</systemPath>
-      	</dependency>
+        <!-- https://mvnrepository.com/artifact/antlr/antlr -->
+        <dependency>
+            <groupId>antlr</groupId>
+            <artifactId>antlr</artifactId>
+            <version>20030911</version>
+        </dependency>
+
+
+<!--		<dependency>-->
+<!--         	<groupId>de.izsoz</groupId>-->
+<!--         	<artifactId>fiola</artifactId>-->
+<!--         	<scope>system</scope>-->
+<!--         	<version>1.0</version>-->
+<!--         	<systemPath>${project.basedir}/lib/fiola.jar</systemPath>-->
+<!--      	</dependency>-->
+<!--      	<dependency>-->
+<!--		    <groupId>hsqldb</groupId>-->
+<!--		    <artifactId>hsqldb</artifactId>-->
+<!--		    <version>1.0</version>-->
+<!--		    <scope>system</scope>-->
+<!--         	<systemPath>${project.basedir}/lib/hsqldb.jar</systemPath>-->
+<!--		</dependency>-->
+<!--      	-->
+<!--		<dependency>-->
+<!--         	<groupId>net.sf</groupId>-->
+<!--         	<artifactId>snowball</artifactId>-->
+<!--         	<scope>system</scope>-->
+<!--         	<version>1.0</version>-->
+<!--         	<systemPath>${project.basedir}/lib/snowball.jar</systemPath>-->
+<!--      	</dependency>-->
+<!--		<dependency>-->
+<!--         	<groupId>resources</groupId>-->
+<!--         	<artifactId>resources</artifactId>-->
+<!--         	<scope>system</scope>-->
+<!--         	<version>1.0</version>-->
+<!--         	<systemPath>${project.basedir}/lib/resources.jar</systemPath>-->
+<!--      	</dependency>-->
 		<!-- https://mvnrepository.com/artifact/net.sf.jtidy/jtidy -->
 		<dependency>
 		    <groupId>net.sf.jtidy</groupId>
